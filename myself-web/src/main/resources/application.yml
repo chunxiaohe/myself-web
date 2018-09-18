@@ -1,0 +1,34 @@
+server:
+  tomcat:
+    max-threads: 800
+    min-spare-threads: 30
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      timeout:
+        1
+#运行环境
+spring:
+  profiles:
+    active: dev,test
+  freemarker:
+    cache: false
+    # jackson时间格式化
+  jackson:
+      time-zone: GMT+8
+      date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    static-path-pattern: /static
+    #throw-exception-if-no-handler-found: true #出现错误时, 直接抛出异常
+  resources:
+    add-mappings: true #不要为我们工程中的资源文件建立映射
+
+
+
+    
+com:
+  sipingsoft:
+    static-root: http://127.0.0.1:8080/static
+    web_root: http://127.0.0.1
+    
