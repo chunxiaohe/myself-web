@@ -8,9 +8,8 @@ public class Demo1 {
 
     private  Integer age;
 
-    private String dem;
 
-    private String nickName;
+    private String abc;
 
 
 }
