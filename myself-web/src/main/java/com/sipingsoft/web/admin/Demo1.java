@@ -10,6 +10,16 @@ public class Demo1 {
 
     private String dem;
 
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     public String getDem() {
         return dem;
     }
