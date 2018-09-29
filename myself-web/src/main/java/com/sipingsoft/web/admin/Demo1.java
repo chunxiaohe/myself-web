@@ -8,6 +8,16 @@ public class Demo1 {
 
     private  Integer age;
 
+    private String dem;
+
+    public String getDem() {
+        return dem;
+    }
+
+    public void setDem(String dem) {
+        this.dem = dem;
+    }
+
     public String getName() {
         return name;
     }
