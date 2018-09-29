@@ -8,6 +8,8 @@ public class Demo1 {
 
     private  Integer age;
 
+    private String nickName;
+
     public String getName() {
         return name;
     }
