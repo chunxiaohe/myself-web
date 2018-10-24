@@ -14,7 +14,7 @@ public class BackPageController {
 	 */
 	@GetMapping("page/background")
 	public String roleManager(){
-		return null;
+		return "web/blank_page";
 	}
 	
 	/**
