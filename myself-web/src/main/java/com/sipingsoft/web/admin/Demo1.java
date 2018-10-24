@@ -13,4 +13,6 @@ public class Demo1 {
 
     private String hechunxiao;
 
+    private String he;
+
 }
