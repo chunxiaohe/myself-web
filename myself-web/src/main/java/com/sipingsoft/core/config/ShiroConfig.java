@@ -26,11 +26,16 @@ import com.sipingsoft.core.shiro.ShiroSessionListener;
 import com.sipingsoft.core.shiro.UserRealm;
 
 
-
+/**
+ * shiro配置
+ * @author He Chunxiao
+ */
 @Configuration
 public class ShiroConfig {
 
-	//session管理器
+    /**
+     * session管理器
+     */
 	@Bean(name="sessionManager")
 	public SessionManager sessionManager(ShiroSessionListener listener){
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -46,43 +51,56 @@ public class ShiroConfig {
 		return sessionManager;
 	}
 
-	//cookie会话模板
+    /**
+     * cookie会话模板
+     */
 	@Bean(name="simpleCookie")
 	public SimpleCookie simpleCookie(){
 		SimpleCookie simpleCookie = new SimpleCookie();
 		simpleCookie.setHttpOnly(true);
 		//simpleCookie.setMaxAge(2592000);//30天(单位S)
-		simpleCookie.setMaxAge(-1);//关闭浏览器cookie失效
-		simpleCookie.setName("simpleCookie");//cookie的名字必须
+        //关闭浏览器cookie失效
+		simpleCookie.setMaxAge(-1);
+        //cookie的名字必须
+		simpleCookie.setName("simpleCookie");
 		return simpleCookie;
 	}
 
-	//rememberManager管理器
+    /**
+     * rememberManager管理器
+     */
 	@Bean(name="cookieRememberMeManager")
 	public CookieRememberMeManager cookieRememberMeManager( SimpleCookie simpleCookie){
 		CookieRememberMeManager cookieRememberMeManager= new CookieRememberMeManager();
 		cookieRememberMeManager.setCookie(simpleCookie);
-		String key = "4AvVhmFLUs0KTA3Kprsdag==";//加密rememberMe Cookie的密匙(必须是8的整数倍)
+        //加密rememberMe Cookie的密匙(必须是8的整数倍)
+		String key = "4AvVhmFLUs0KTA3Kprsdag==";
 		cookieRememberMeManager.setCipherKey(key.getBytes());
 		return cookieRememberMeManager;
 	}
 
-	//缓存使用EhCache
+    /**
+     * 缓存使用EhCache
+     */
 	@Bean(name="ehCacheManager")
 	public EhCacheManager ehCacheManager( ){
 		EhCacheManager ehCacheManager = new EhCacheManager();
 		ehCacheManager.setCacheManagerConfigFile("classpath:config/ShiroEhCacheConfig.xml");
 		return ehCacheManager;
 	}
-	
 
-	//配置核心安全事务管理器(注册各Manager)
+
+    /**
+     * 配置核心安全事务管理器(注册各Manager)
+     */
 	@Bean
 	public SecurityManager securityManager(UserRealm userRealm,SessionManager sessionManager,CookieRememberMeManager cookieRememberMeManager,
 			EhCacheManager ehCacheManager) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-		securityManager.setRealm(userRealm);//注册自定义的Realm
-		securityManager.setSessionManager(sessionManager);//注册sesionManager
+        //注册自定义的Realm
+		securityManager.setRealm(userRealm);
+        //注册sesionManager
+		securityManager.setSessionManager(sessionManager);
 		//securityManager.setCacheManager(cacheManager);
 		securityManager.setRememberMeManager(cookieRememberMeManager);
 		securityManager.setCacheManager(ehCacheManager);
@@ -95,15 +113,19 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 		factoryBean.setSecurityManager(securityManager);
 		factoryBean.setLoginUrl("/page/login");
-		factoryBean.setUnauthorizedUrl("/");//没有权限时跳转的地址
+        //没有权限时跳转的地址
+		factoryBean.setUnauthorizedUrl("/");
 
 		Map<String, String> filterMap = new LinkedHashMap<>();
 		//filterMap.put("/sysUser/add", "anon"); // 暂时写的
-		filterMap.put("/sys/login", "anon"); // 登陆方法
-		filterMap.put("/static/**", "anon");//静态资源不需要认证
+        // 登陆方法
+		filterMap.put("/sys/login", "anon");
+        //静态资源不需要认证
+		filterMap.put("/static/**", "anon");
 
 		//filterMap.put("/**", "authc");//表示需要身份验证通过才能访问
-		filterMap.put("/**", "user");//使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
+        //使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
+		filterMap.put("/**", "user");
 		factoryBean.setFilterChainDefinitionMap(filterMap);
 
 		return factoryBean;
@@ -118,7 +140,9 @@ public class ShiroConfig {
 		return new LifecycleBeanPostProcessor();
 	}
 
-	//扫描上下文
+    /**
+     * 扫描上下文
+     */
 	@Bean
 	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
 		DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
@@ -126,7 +150,9 @@ public class ShiroConfig {
 		return proxyCreator;
 	}
 
-	//加入注解的使用，不加入这个注解不生效
+    /**
+     * 加入注解的使用，不加入这个注解不生效
+     */
 	@Bean
 	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
 		AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();

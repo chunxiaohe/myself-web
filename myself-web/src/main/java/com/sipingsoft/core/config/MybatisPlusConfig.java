@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Created by siping-yx on 2018/6/13.
+ *
  */
 @EnableTransactionManagement
 @Configuration

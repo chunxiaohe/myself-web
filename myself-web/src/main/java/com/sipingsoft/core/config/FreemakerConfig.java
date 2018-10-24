@@ -10,6 +10,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sipingsoft.core.constants.CommonProperties;
 
+/**
+ * @author hechunxiao
+ */
 @Configuration
 public class FreemakerConfig {
 

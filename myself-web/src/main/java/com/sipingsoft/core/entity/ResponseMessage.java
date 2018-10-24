@@ -2,6 +2,11 @@ package com.sipingsoft.core.entity;
 
 import java.util.List;
 
+/**
+ * 返回信息
+ * @author He Chunxiao
+ * @param <T>
+ */
 public class ResponseMessage<T> {
 
 	private String message;

@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * 登录
+ * @author He Chunxiao
+ */
 @Controller
 public class LoginController {
 
 	@PostMapping("sys/login")
 	public String login(String username,String password,boolean rememberMe,RedirectAttributes model){
 		Subject subject = SecurityUtils.getSubject();
-		rememberMe = true;//记住我
+        //记住我
+		rememberMe = true;
 		UsernamePasswordToken token = new UsernamePasswordToken(username,password,rememberMe);
 		try {
 			subject.login(token);	

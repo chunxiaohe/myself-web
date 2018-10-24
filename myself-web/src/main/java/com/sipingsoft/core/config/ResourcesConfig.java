@@ -5,6 +5,9 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+/**
+ * @author hechunxiao
+ */
 @Configuration
 public class ResourcesConfig extends WebMvcConfigurationSupport {
     @Override
