@@ -1,26 +1,15 @@
-var vm = new Vue({
-	el:"#app",
-	data:{
-		menuList:[]
-	},
-	mounted(){
-		var that = this;
-		that.$nextTick(function(){
-			that.getMenuList();
-			that.openClick();
-		});
-	},
-	methods:{
-		getMenuList(){
-			$.get("/menu/getMyselfMenuList",function(re){
-				vm.menuList = re.data;
-			});
-		},
-		openClick(){
-			$(".menu").on('click','li',function(){
-				//var url= this.data("url-data");
-				//alert("url")
-			});
-		}
-	}
-})
+
+$(function () {
+    $("#page").click(function () {
+        $.get("page/background",function (re) {
+            $("#pageContent").empty();
+            $("#pageContent").append(re);
+        });
+    });
+    $("#page2").click(function () {
+        $.get("page2/background",function (re) {
+            $("#pageContent").empty();
+            $("#pageContent").append(re);
+        });
+    });
+});

@@ -14,8 +14,13 @@ public class BackPageController {
 	 */
 	@GetMapping("page/background")
 	public String roleManager(){
-		return "web/blank_page";
+		return "web/blankpage";
 	}
+
+    @GetMapping("page2/background")
+    public String roleManager2(){
+        return "web/inline_editors";
+    }
 	
 	/**
 	 * 

@@ -23,7 +23,7 @@ input, select, textarea {
     color: #767676;
 }
 
-a {
+a,li {
     color: #65CEA7;
 }
 
@@ -34,6 +34,7 @@ a:focus, a:active, a:hover {
     transition: all 0.3s;
     color: #353F4F;
 }
+
 
 h1, h2, h3, h4, h5 {
     font-family: 'Open Sans', sans-serif;
