@@ -41,12 +41,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 		List<SysMenuNode> menuList = rootMenu.stream().filter(s -> s.getParentId()==0).collect(Collectors.toList());
 		//获取子菜单
 		menuList.forEach(s ->s.setNodes(getMemuNodes(s.getMenuId(), rootMenu)));
-		return new ResponseMessage<>(menuList) ;
+		return new ResponseMessage<>(200,"菜单获取成功",menuList) ;
 	}
 	
 	public List<SysMenuNode> getMemuNodes(Integer id, List<SysMenuNode> rootMenu) {
         // 子菜单
-		List<SysMenuNode> childList = rootMenu.stream().filter(s ->id==s.getParentId()).collect(Collectors.toList());
+		List<SysMenuNode> childList = rootMenu.stream().filter(s ->id.equals(s.getParentId())).collect(Collectors.toList());
 		//把子菜单的子菜单再循环一遍
 		childList.forEach(s ->s.setNodes(getMemuNodes(s.getMenuId(), rootMenu)));
         /*List<SysMenuNode> childList = new ArrayList<>();

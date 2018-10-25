@@ -1,5 +1,7 @@
 package com.sipingsoft.core.entity;
 
+import com.sun.org.apache.bcel.internal.classfile.Code;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,8 @@ import java.util.List;
  * @param <T>
  */
 public class ResponseMessage<T> {
+
+    private Integer code;
 
 	private String message;
 	
@@ -24,13 +28,22 @@ public class ResponseMessage<T> {
 		this.data = data;
 	}
 
-	public ResponseMessage(String message, List<T> data) {
+	public ResponseMessage(Integer code, String message, List<T> data) {
 		super();
+		this.code = code;
 		this.message = message;
 		this.data = data;
 	}
 
-	public String getMessage() {
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
 		return message;
 	}
 
