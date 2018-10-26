@@ -37,10 +37,13 @@ var vm = new Vue({
                 }
                 $(this).addClass("active");
             })
+            //显示用户操作
+            $("#operation").click(function () {
+                $("#operation_list").toggle();
+            })
         },
         _initPage(){
             $.get("view/indexcontent",function (re) {
-                console.log(re);
                 $("#pageContent").empty();
                 $("#pageContent").append(re);
             })
