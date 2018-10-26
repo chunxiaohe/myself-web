@@ -8,7 +8,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="${staticRoot}/templateForPage/images/travel.png" type="image/png">
 
-    <title>AdminX</title>
+    <title>Travel</title>
 
     <!--icheck-->
     <link href="${staticRoot}/templateForPage/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
@@ -55,7 +55,7 @@
                     <a ><i :class=" menu.icon"></i><span>{{menu.name}}</span></a>
                     <ul class="sub-menu-list" >
                         <li v-for="submenu in menu.nodes" :data="submenu.url" style="cursor: pointer">
-                            <a > {{submenu.name}}</a>
+                            <a ><i :class="submenu.icon"></i> {{submenu.name}}</a>
                         </li>
                     </ul>
                 </li>
@@ -71,11 +71,6 @@
         <!--toggle button start-->
         <a class="toggle-btn"><i class="fa fa-bars"></i></a>
         <!--toggle button end-->
-        <!--search start-->
-        <form class="searchform" action="index.html" method="post">
-            <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
-        </form>
-        <!--search end-->
         <!--notification menu start -->
         <div class="menu-right">
             <ul class="notification-menu">

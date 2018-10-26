@@ -14,6 +14,8 @@ var vm = new Vue({
             });
             //点击展开子菜单/更新样式
             that.showsubmenu();
+            //初始化主页数据
+            that._initPage();
         })
     },
     methods:{
@@ -34,6 +36,13 @@ var vm = new Vue({
                     $(this).siblings().removeClass("active")
                 }
                 $(this).addClass("active");
+            })
+        },
+        _initPage(){
+            $.get("view/indexcontent",function (re) {
+                console.log(re);
+                $("#pageContent").empty();
+                $("#pageContent").append(re);
             })
         }
     }

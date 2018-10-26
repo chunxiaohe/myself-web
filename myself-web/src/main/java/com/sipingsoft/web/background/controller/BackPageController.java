@@ -12,9 +12,9 @@ public class BackPageController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("page/background")
+	@GetMapping("view/indexcontent")
 	public String roleManager(){
-		return "web/blankpage";
+		return PageUtil.INDEX_PAGE;
 	}
 
     @GetMapping("page2/background")
