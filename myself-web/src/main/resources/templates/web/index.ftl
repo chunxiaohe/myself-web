@@ -50,11 +50,11 @@
         <div class="left-side-inner">
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="/"><i class="fa fa-home"></i> <span>主页</span></a></li>
-                <li class="menu-list " v-for="menu in treeData">
+                <li class=""><a href="/"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li class="menu-list " v-for="menu in treeData" style="cursor: pointer">
                     <a ><i :class=" menu.icon"></i><span>{{menu.name}}</span></a>
                     <ul class="sub-menu-list" >
-                        <li v-for="submenu in menu.nodes" :data="submenu.url">
+                        <li v-for="submenu in menu.nodes" :data="submenu.url" style="cursor: pointer">
                             <a > {{submenu.name}}</a>
                         </li>
                     </ul>

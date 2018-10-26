@@ -6,8 +6,7 @@ server:
   servlet:
     context-path: /
     session:
-      timeout:
-        1
+      timeout: 1000
 #运行环境
 spring:
   profiles:
