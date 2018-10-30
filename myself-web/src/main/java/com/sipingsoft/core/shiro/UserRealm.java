@@ -2,6 +2,10 @@ package com.sipingsoft.core.shiro;
 
 import java.util.Set;
 
+import com.sipingsoft.core.util.EhcacheUtil;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,7 +17,8 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.cache.CacheManagerAware;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -25,58 +30,70 @@ import com.sipingsoft.web.sys.mapper.SysUserMapper;
 
 
 @Component
-public class UserRealm extends AuthorizingRealm{
+public class UserRealm extends AuthorizingRealm implements CacheManagerAware {
 
-	@Autowired
-	private SysUserMapper sysUserMapper;
-	@Autowired
-	private ShiroRelamService shiroReamService;
-	
-	/**
-	 *授权
-	 */
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("授权");
-		SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
-		Set<String> permissions = shiroReamService.findPermissions(sysUser.getUserId());
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.setStringPermissions(permissions);
-		return info;
-	}
+    @Autowired
+    private SysUserMapper sysUserMapper;
+    @Autowired
+    private ShiroRelamService shiroReamService;
 
-	/**
-	 * 认证
-	 */
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
-		UsernamePasswordToken token = (UsernamePasswordToken) authToken;
-		//String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
-		SysUser sysUser = new SysUser();
-		sysUser.setUsername(token.getUsername());
-		SysUser user = sysUserMapper.selectOne(sysUser);
-		if(user==null){
-			throw new UnknownAccountException("用户名或账号错误");
-		}
-		if(user.getStatus()!=1){
-			throw new LockedAccountException("账号已被锁定,请联系管理员");
-		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(),ByteSource.Util.bytes(user.getUsername()) ,super.getName()); 
-		return info;
-	}
+    /**
+     * 授权
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        //缓存中获取权限
+        Set<String> permissions = (Set<String>) EhcacheUtil.getInstance().getEhcacheInfo("authorizationCache", "permissions");
+        if (permissions == null || permissions.size() == 0) {
+            //无缓存
+            SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
+            permissions = shiroReamService.findPermissions(sysUser.getUserId());
+            //加入缓存
+            EhcacheUtil.getInstance().putEhcacheInfo("authorizationCache","permissions",permissions);
+        }
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.setStringPermissions(permissions);
+        return info;
+    }
+
+    /**
+     * 认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
+        SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", "user");
+        if (user == null) {
+            System.out.println("认证无缓存");
+            UsernamePasswordToken token = (UsernamePasswordToken) authToken;
+            //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
+            SysUser sysUser = new SysUser();
+            sysUser.setUsername(token.getUsername());
+            user = sysUserMapper.selectOne(sysUser);
+            if (user == null) {
+                throw new UnknownAccountException();
+            }
+            if (user.getStatus() != 1) {
+                //账号锁定
+                throw new LockedAccountException();
+            }
+            //加入缓存
+            EhcacheUtil.getInstance().putEhcacheInfo("authenticationCache", "user", user);
+        }
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getUsername()), super.getName());
+        return info;
+    }
 
 
-	/**
-	 * 密码加密
-	 */
-	@Override
-	public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
-		HashedCredentialsMatcher  hash = new HashedCredentialsMatcher();
-		hash.setHashAlgorithmName("MD5");//加密算法
-		hash.setHashIterations(1024);//加密次数
-		super.setCredentialsMatcher(hash);
-	}
-	
-	
-
+    /**
+     * 密码加密
+     */
+    @Override
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+        HashedCredentialsMatcher hash = new HashedCredentialsMatcher();
+        //加密算法
+        hash.setHashAlgorithmName("MD5");
+        //加密次数
+        hash.setHashIterations(1024);
+        super.setCredentialsMatcher(hash);
+    }
 }

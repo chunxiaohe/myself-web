@@ -103,9 +103,11 @@
 </section>
 </div>
 
+<!-- system js -->
 <script type="text/javascript" src="${staticRoot}/web/util/jquery/jquery-3.3.1.js"></script>
-<!-- my js -->
 <script type="text/javascript" src="${staticRoot}/web/util/vue/vue.js"></script>
+
+<!-- my js -->
 <script type="text/javascript" src="${staticRoot}/web/js/index.js"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false" dynamicConfig="false">
     <diskStore path="D:\ws"/>
 		<!-- maxElementsInMemory 最大缓存元素个数
 		eternal 缓存是否永久有效，一般都是false。
@@ -11,35 +14,55 @@
 		memoryStoreEvictionPolicy 清理规则，LRU最近最少使用 FIFO先进先出 -->
 
     <defaultCache
-    	maxElementsInMemory="10000"
+    	maxElementsInMemory="1000"
      	eternal="false"
-     	timeToIdleSeconds="120" 
-     	timeToLiveSeconds="120" 
-     	overflowToDisk="true" 
-     	maxElementsOnDisk="10000000" 
-     	diskPersistent="false" 
-     	diskExpiryThreadIntervalSeconds="120" 
-      	memoryStoreEvictionPolicy="LRU" 
+     	timeToIdleSeconds="600"
+     	timeToLiveSeconds="600"
+     	overflowToDisk="true"
+     	maxElementsOnDisk="10000000"
+     	diskPersistent="false"
+     	diskExpiryThreadIntervalSeconds="120"
+      	memoryStoreEvictionPolicy="LRU"
      />
-     
+
      <!-- 授权缓存 -->
-      <!-- <cache name="authorizationCache"
+     <cache name="authorizationCache"
            maxEntriesLocalHeap="2000"
            eternal="false"
-           timeToIdleSeconds="3600"
-           timeToLiveSeconds="0"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
            overflowToDisk="false"
            statistics="true">
-    </cache> -->
-    
+    </cache>
+
     <!-- 认证缓存 -->
     <cache name="authenticationCache"
            maxEntriesLocalHeap="2000"
            eternal="false"
-           timeToIdleSeconds="3600"
-           timeToLiveSeconds="0"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
            overflowToDisk="false"
            statistics="true">
-    </cache> 
+    </cache>
+
+    <!-- session缓存 -->
+    <cache name="activeSessionCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <!-- 菜单缓存 -->
+    <cache name="menuListCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           overflowToDisk="true"
+           statistics="true">
+    </cache>
     
 </ehcache>

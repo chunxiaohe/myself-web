@@ -1,5 +1,9 @@
 package com.sipingsoft.core.config;
 
+import com.sipingsoft.core.shiro.ShiroSessionDao;
+import com.sipingsoft.core.util.ApplicationContextUtil;
+import com.sipingsoft.core.util.EhcacheUtil;
+import net.sf.ehcache.CacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -17,7 +21,6 @@ import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionManager;
-//import org.apache.shiro.realm.AuthenticatingRealm;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,17 +40,21 @@ public class ShiroConfig {
      * session管理器
      */
 	@Bean(name="sessionManager")
-	public SessionManager sessionManager(ShiroSessionListener listener){
+	public SessionManager sessionManager(ShiroSessionListener listener, ShiroSessionDao sessionDao){
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 		//设置session过期时间(单位：毫秒)，默认为30分钟
 		sessionManager.setGlobalSessionTimeout(1*60*1000);
 		sessionManager.setSessionValidationSchedulerEnabled(true);
 		sessionManager.setSessionIdUrlRewritingEnabled(false);
-		Collection<SessionListener> listeners = new ArrayList<SessionListener>();
+		Collection<SessionListener> listeners = new ArrayList<>();
 		listeners.add(listener);
-		//sessionManager.setSessionListeners(listeners);//session监听器
-		//sessionManager.setSessionDAO(sessionDao);//session持久化
-		//sessionManager.setCacheManager(cacheManager);//session缓存
+        //session监听器
+		sessionManager.setSessionListeners(listeners);
+        //session持久化
+        //sessionDao.setActiveSessionsCacheName("activeSessionCache");
+		//sessionManager.setSessionDAO(sessionDao);
+        //session缓存
+		sessionManager.setCacheManager(ehCacheManager());
 		return sessionManager;
 	}
 
@@ -83,12 +90,11 @@ public class ShiroConfig {
      * 缓存使用EhCache
      */
 	@Bean(name="ehCacheManager")
-	public EhCacheManager ehCacheManager( ){
+	public EhCacheManager ehCacheManager(){
 		EhCacheManager ehCacheManager = new EhCacheManager();
 		ehCacheManager.setCacheManagerConfigFile("classpath:config/ShiroEhCacheConfig.xml");
 		return ehCacheManager;
 	}
-
 
     /**
      * 配置核心安全事务管理器(注册各Manager)
@@ -101,7 +107,8 @@ public class ShiroConfig {
 		securityManager.setRealm(userRealm);
         //注册sesionManager
 		securityManager.setSessionManager(sessionManager);
-		//securityManager.setCacheManager(cacheManager);
+		//注册缓存manager
+		securityManager.setCacheManager(ehCacheManager());
 		securityManager.setRememberMeManager(cookieRememberMeManager);
 		securityManager.setCacheManager(ehCacheManager);
 		return securityManager;
@@ -161,5 +168,17 @@ public class ShiroConfig {
 	}
 
 
+	@Bean(name="applicationContextUtil")
+    public ApplicationContextUtil applicationContextUtil(){
+	    ApplicationContextUtil applicationContextUtil = new ApplicationContextUtil();
+	    return applicationContextUtil;
+    }
+
+    /*@Bean(name="ehcacheUtil")
+    public EhcacheUtil EhcacheUtil(){
+        System.out.println("ehcacheUtil的bean");
+        EhcacheUtil ehcacheUtil = new EhcacheUtil();
+        return ehcacheUtil;
+    }*/
 
 }

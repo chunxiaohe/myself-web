@@ -83,6 +83,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+            <!-- optional 必须设置为true 热部署才生效 -->
 			<optional>true</optional>
 		</dependency>
 		<!-- 热部署 -->
@@ -98,11 +99,11 @@
 			<version>${shiro.version}</version>
 		</dependency>
 		<!-- shiro -->
-		<!--redis -->
-		<dependency>
+		<!--redis 缓存-->
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
+		</dependency>-->
 		<!-- redis -->
 		<!-- 缓存 -->
 		 <dependency>
@@ -111,6 +112,7 @@
 			<version>1.2.2</version>
 		</dependency> 
 		<!-- 缓存 -->
+
 	</dependencies>
 
 	<build>

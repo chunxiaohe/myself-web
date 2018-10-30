@@ -25,17 +25,19 @@ public class LoginController {
 	public String login(String username,String password,boolean rememberMe,RedirectAttributes model){
 		Subject subject = SecurityUtils.getSubject();
         //记住我
-		rememberMe = true;
+		rememberMe = false;
 		UsernamePasswordToken token = new UsernamePasswordToken(username,password,rememberMe);
 		try {
 			subject.login(token);	
 			return "redirect:/";
 		} catch (UnknownAccountException e) {
+		    //账号不存在
 			model.addAttribute("errorMsg", "账号不存在");
 		}catch (IncorrectCredentialsException e) {
-			model.addAttribute("errorMsg", "账号或密码错误");
+            //密码错误
+			model.addAttribute("errorMsg", "密码错误");
 		}catch (LockedAccountException e) {
-			model.addAttribute("errorMsg", "账号已被锁定");
+			model.addAttribute("errorMsg", "账号已被禁用");
 		}catch (AuthenticationException e) {
 			model.addAttribute("errorMsg","账号或密码错误");
 		}

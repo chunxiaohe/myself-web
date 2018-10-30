@@ -1,8 +1,9 @@
 package com.sipingsoft.web.sys.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SysMenuNode {
+public class SysMenuNode implements Serializable {
 
 	private Integer menuId;
 	private String name;
