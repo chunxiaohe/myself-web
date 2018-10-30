@@ -168,17 +168,14 @@ public class ShiroConfig {
 	}
 
 
+    /**
+     * 普通类使用javabean的工具实例
+     * @return
+     */
 	@Bean(name="applicationContextUtil")
     public ApplicationContextUtil applicationContextUtil(){
 	    ApplicationContextUtil applicationContextUtil = new ApplicationContextUtil();
 	    return applicationContextUtil;
     }
-
-    /*@Bean(name="ehcacheUtil")
-    public EhcacheUtil EhcacheUtil(){
-        System.out.println("ehcacheUtil的bean");
-        EhcacheUtil ehcacheUtil = new EhcacheUtil();
-        return ehcacheUtil;
-    }*/
 
 }
