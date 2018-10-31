@@ -35,7 +35,6 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         //从缓存中获取数据
         List<SysMenuNode> menuList =  (List<SysMenuNode>)EhcacheUtil.getInstance().getEhcacheInfo("menuListCache","menuList");
         if(menuList == null || menuList.size()==0){
-            System.out.println("没有缓存");
             //没有缓存从数据库中获取
             SysUser sysUser = ShiroUtils.getLoginUser();
             Integer userId = sysUser.getUserId().intValue();
@@ -47,8 +46,6 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             menuList.forEach(s -> s.setNodes(getMemuNodes(s.getMenuId(), rootMenu)));
             //放入缓存
             EhcacheUtil.getInstance().putEhcacheInfo("menuListCache","menuList", menuList);
-        }else{
-            System.out.println("有缓存");
         }
         return new ResponseMessage<>(200, "菜单获取成功", menuList);
     }

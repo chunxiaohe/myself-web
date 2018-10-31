@@ -43,7 +43,7 @@ public class ShiroConfig {
 	public SessionManager sessionManager(ShiroSessionListener listener, ShiroSessionDao sessionDao){
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 		//设置session过期时间(单位：毫秒)，默认为30分钟
-		sessionManager.setGlobalSessionTimeout(1*60*1000);
+		sessionManager.setGlobalSessionTimeout(30*60*1000);
 		sessionManager.setSessionValidationSchedulerEnabled(true);
 		sessionManager.setSessionIdUrlRewritingEnabled(false);
 		Collection<SessionListener> listeners = new ArrayList<>();
@@ -65,9 +65,8 @@ public class ShiroConfig {
 	public SimpleCookie simpleCookie(){
 		SimpleCookie simpleCookie = new SimpleCookie();
 		simpleCookie.setHttpOnly(true);
-		//simpleCookie.setMaxAge(2592000);//30天(单位S)
-        //关闭浏览器cookie失效
-		simpleCookie.setMaxAge(-1);
+        //设置cookie过期时间(单位S)  默认 -1  表示关闭浏览器时失效
+		simpleCookie.setMaxAge(2592000);
         //cookie的名字必须
 		simpleCookie.setName("simpleCookie");
 		return simpleCookie;

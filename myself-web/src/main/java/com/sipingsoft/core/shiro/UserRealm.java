@@ -3,9 +3,6 @@ package com.sipingsoft.core.shiro;
 import java.util.Set;
 
 import com.sipingsoft.core.util.EhcacheUtil;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,9 +14,10 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.CacheManagerAware;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.CachingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +26,12 @@ import org.springframework.stereotype.Component;
 import com.sipingsoft.web.sys.entity.SysUser;
 import com.sipingsoft.web.sys.mapper.SysUserMapper;
 
-
+/**
+ *
+ * @author He Chunxiao
+ */
 @Component
-public class UserRealm extends AuthorizingRealm implements CacheManagerAware {
+public class UserRealm extends AuthorizingRealm  {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -63,7 +64,6 @@ public class UserRealm extends AuthorizingRealm implements CacheManagerAware {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
         SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", "user");
         if (user == null) {
-            System.out.println("认证无缓存");
             UsernamePasswordToken token = (UsernamePasswordToken) authToken;
             //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
             SysUser sysUser = new SysUser();
@@ -96,4 +96,5 @@ public class UserRealm extends AuthorizingRealm implements CacheManagerAware {
         hash.setHashIterations(1024);
         super.setCredentialsMatcher(hash);
     }
+
 }
