@@ -1,7 +1,5 @@
 package com.sipingsoft.core.entity;
 
-import com.sun.org.apache.bcel.internal.classfile.Code;
-
 import java.util.List;
 
 /**
