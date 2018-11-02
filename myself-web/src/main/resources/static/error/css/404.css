@@ -1,0 +1,11 @@
+/*-------------public--------------*/
+html{ width:100%; overFlow-x: hidden; OVERFLOW: scroll; }
+body{ margin:0px; padding:0px;}
+/*ul{ list-style:none; margin:0px; padding:0px;}*/
+.fl{ float:left;}
+.fr{ float:right;}
+.cl{ clear:both;}
+img{ border:0px;}
+
+.st{ width:728px; height:320px; text-align:center; margin: 0 auto;  margin-top: 70px;}
+.fh{ width: 728px; height: 89px; text-align: center; margin: 0 auto; margin-top: 15px;}

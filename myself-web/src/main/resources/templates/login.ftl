@@ -15,8 +15,8 @@
 </head>
 
 <body class="login-body">
-
-<div class="container">
+<input type="hidden" value="${staticRoot}" id="staticRoot">
+<div class="container" id="app">
 
     <form class="form-signin" method="post" action="/sys/login">
 
@@ -27,7 +27,10 @@
         <div class="login-wrap">
             <input type="text" name="username" class="form-control" placeholder="用户名" autofocus>
             <input type="password" name="password" class="form-control" placeholder="密码">
-
+            <input type="text" name="code" class="form-control" placeholder="验证码" style="width: 60%;float: left">
+            <img :src="pic" style="float: right;margin-top: 9px;margin-right: 15px;cursor: pointer">
+            <input type="hidden" :value="picName" name="picName" id="picName">
+            <input type="hidden" :value="randomNum" name="randomNum">
             <button class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>
             </button>
@@ -76,5 +79,6 @@
 </body>
 <script type="text/javascript" src="${staticRoot}/templateForPage/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="${staticRoot}/web/util/layui/layer.js"></script>
+<script type="text/javascript" src="${staticRoot}/web/util/vue/vue.js"></script>
 <script type="text/javascript" src="${staticRoot}/web/js/login.js"></script>
 </html>

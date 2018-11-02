@@ -2,8 +2,6 @@ package com.sipingsoft.core.config;
 
 import com.sipingsoft.core.shiro.ShiroSessionDao;
 import com.sipingsoft.core.util.ApplicationContextUtil;
-import com.sipingsoft.core.util.EhcacheUtil;
-import net.sf.ehcache.CacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -59,13 +57,13 @@ public class ShiroConfig {
 	}
 
     /**
-     * cookie会话模板
+     * cookie会话模板(使用记住我之后  cookie存放)
      */
 	@Bean(name="simpleCookie")
 	public SimpleCookie simpleCookie(){
 		SimpleCookie simpleCookie = new SimpleCookie();
 		simpleCookie.setHttpOnly(true);
-        //设置cookie过期时间(单位S)  默认 -1  表示关闭浏览器时失效
+        //设置cookie过期时间(单位S) 30天 默认 -1  表示关闭浏览器时失效
 		simpleCookie.setMaxAge(2592000);
         //cookie的名字必须
 		simpleCookie.setName("simpleCookie");
@@ -128,10 +126,13 @@ public class ShiroConfig {
 		filterMap.put("/sys/login", "anon");
         //静态资源不需要认证
 		filterMap.put("/static/**", "anon");
+        //验证码不拦截
+		filterMap.put("/login/createCode/**","anon");
 
-		//filterMap.put("/**", "authc");//表示需要身份验证通过才能访问
+        //表示需要身份验证通过才能访问
+		filterMap.put("/**", "authc");
         //使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
-		filterMap.put("/**", "user");
+		//filterMap.put("/**", "user");
 		factoryBean.setFilterChainDefinitionMap(filterMap);
 
 		return factoryBean;

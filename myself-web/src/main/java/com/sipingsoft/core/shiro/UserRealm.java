@@ -14,10 +14,7 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.CacheManagerAware;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.CachingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +45,8 @@ public class UserRealm extends AuthorizingRealm  {
         if (permissions == null || permissions.size() == 0) {
             //无缓存
             SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
-            permissions = shiroReamService.findPermissions(sysUser.getUserId());
+            permissions = shiroReamService.findPermissions(sysUser.getUserId().intValue());
+            permissions.forEach(s -> System.out.println(s));
             //加入缓存
             EhcacheUtil.getInstance().putEhcacheInfo("authorizationCache","permissions",permissions);
         }
@@ -58,7 +56,7 @@ public class UserRealm extends AuthorizingRealm  {
     }
 
     /**
-     * 认证
+     * 登录
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {

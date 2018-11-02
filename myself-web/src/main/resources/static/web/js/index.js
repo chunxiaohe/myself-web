@@ -1,7 +1,8 @@
 var vm = new Vue({
     el:"#app",
     data:{
-        treeData:[]
+        treeData:[],
+        currentPage:"view/indexcontent"
     },
     mounted(){
         var that = this;
@@ -15,11 +16,12 @@ var vm = new Vue({
             //点击展开子菜单/更新样式
             that.showsubmenu();
             //初始化主页数据
-            that._initPage();
+            //that._initPage();
         })
     },
     methods:{
         showsubmenu(){
+            var that = this;
             $(".left-side-inner").on('click','.menu-list a',function(){
                 if($(this).parent().siblings().hasClass("nav-active")){
                     $(this).parent().siblings().removeClass("nav-active");
@@ -36,18 +38,24 @@ var vm = new Vue({
                     $(this).siblings().removeClass("active")
                 }
                 $(this).addClass("active");
+                that._initPage($(this).attr("data"));
             })
             //显示用户操作
             $("#operation").click(function () {
                 $("#operation_list").toggle();
             })
+
         },
-        _initPage(){
-            $.get("view/indexcontent",function (re) {
+        /*_initPage(url){
+            console.log(url);
+            if(url==null){
+                url = "view/indexcontent";
+            }
+            $.get(url,function (re) {
                 $("#pageContent").empty();
                 $("#pageContent").append(re);
             })
-        }
+        }*/
     }
 
 })

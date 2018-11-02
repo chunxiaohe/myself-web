@@ -8,24 +8,32 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="${staticRoot}/templateForPage/images/travel.png" type="image/png">
 
-    <title>AdminX</title>
-
-    <!--icheck-->
-    <link href="${staticRoot}/templateForPage/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="${staticRoot}/templateForPage/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="${staticRoot}/templateForPage/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="${staticRoot}/templateForPage/js/iCheck/skins/square/blue.css" rel="stylesheet">
-
-    <!--dashboard calendar-->
-    <link href="${staticRoot}/templateForPage/css/clndr.css" rel="stylesheet">
-
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="${staticRoot}/templateForPage/js/morris-chart/morris.css">
+    <title>Travel</title>
 
     <!--common-->
     <link href="${staticRoot}/templateForPage/css/style.css" rel="stylesheet">
     <link href="${staticRoot}/templateForPage/css/style-responsive.css" rel="stylesheet">
+    <style >
+        .m-r-b{
+            position: fixed;
+            left: 240px;
+            top: 24px;
 
+            width: 100%;
+            height: 100%;
+            margin-top: 24px;
+        }
+        #pageContent{
+            /*margin-left: 240px;
+            background: #eff0f4;
+            min-height: 850px;
+            top: 600px;
+            width: 100%;*/
+            width: 100%;
+            height: 800px;
+
+        }
+    </style>
 </head>
 
 <body class="sticky-header">
@@ -96,9 +104,12 @@
     <!-- header section end-->
 
     <!-- main content start-->
-    <div id="pageContent">
-
+    <div class="m-r-b">
+       <iframe :src="currentPage" frameborder="0" id="pageContent">
+        </iframe>
     </div>
+
+
     <!-- main content end-->
 </section>
 </div>

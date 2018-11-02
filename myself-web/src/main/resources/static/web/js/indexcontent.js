@@ -72,3 +72,27 @@ var option = {
 
 // 使用刚指定的配置项和数据显示图表。
 myChart.setOption(option);
+/*
+
+var vm = new Vue({
+    el:"#app1",
+    mounted(){
+        var that = this;
+        that.$nextTick(function () {
+            that.addRole();
+        });
+    },
+    methods:{
+        addRole(){
+            $("#addRole").click(function () {
+                $.post("/page/backend/addRole",function (re) {
+                    console.log(re);
+                    if (re.code==200){
+                        console.log(re.message)
+                        layer.msg(re.message,{icon:2,time:2000});
+                    }
+                })
+            });
+        }
+    }
+});*/
