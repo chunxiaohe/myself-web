@@ -45,6 +45,7 @@ var vm = new Vue({
                 $("#operation_list").toggle();
             })
 
+
         },
         /*_initPage(url){
             console.log(url);

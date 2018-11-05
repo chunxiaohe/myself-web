@@ -47,13 +47,12 @@ public class LoginController {
     public String login(String username, String password,String code,String picName,String randomNum,  RedirectAttributes model,ShiroHttpServletRequest request) {
         //对比验证码
 
-        System.out.println(username+":"+password+":"+code+":"+picName+":"+randomNum);
         Subject subject = SecurityUtils.getSubject();
-        System.out.println(request.getSession().getAttribute("randomCode"));
         //记住我
         //rememberMe = true;
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
+            subject.login(token);
             if(code==null ){
                 throw new RandomCodeException();
             }else{
@@ -62,7 +61,6 @@ public class LoginController {
                     throw new RandomCodeException();
                 }
             }
-            subject.login(token);
             //删除验证码图片
             String path = ResourceUtils.getURL("classpath:").getPath()+"/static/codeImage/"+picName;
             File file = new File(path);
