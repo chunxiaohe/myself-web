@@ -91,7 +91,7 @@ public class SecuritryCodeUtil {
         //map.put("codePic",bufferedImage);
         //存放图片
         Random r = new Random();
-        Integer randomNum =  r.nextInt(1000);
+        Integer randomNum =  r.nextInt(10000);
         String picName = System.currentTimeMillis()+randomNum +".jpg";
         String path = ResourceUtils.getURL("classpath:").getPath()+"/static/codeImage/"+ picName;
         File file = new File(ResourceUtils.getURL("classpath:").getPath()+"/static/codeImage/");
