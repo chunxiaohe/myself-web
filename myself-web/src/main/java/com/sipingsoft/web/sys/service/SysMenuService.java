@@ -16,4 +16,10 @@ import com.baomidou.mybatisplus.service.IService;
 public interface SysMenuService extends IService<SysMenu> {
 
 	ResponseMessage<SysMenuNode> getMenuList();
+
+    /**
+     *
+    统一异常异常测试
+     */
+	String errMsg( Integer id);
 }

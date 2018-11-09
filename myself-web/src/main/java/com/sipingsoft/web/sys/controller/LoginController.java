@@ -46,7 +46,6 @@ public class LoginController {
     @PostMapping("sys/login")
     public String login(String username, String password,String code,String picName,String randomNum,  RedirectAttributes model,ShiroHttpServletRequest request) {
         //对比验证码
-
         Subject subject = SecurityUtils.getSubject();
         //记住我
         //rememberMe = true;

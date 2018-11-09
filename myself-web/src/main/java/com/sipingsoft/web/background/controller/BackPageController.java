@@ -1,10 +1,13 @@
 package com.sipingsoft.web.background.controller;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.sipingsoft.web.sys.service.SysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sipingsoft.core.util.PageUtil;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 页面跳转controller
@@ -35,16 +38,5 @@ public class BackPageController {
 	public String userManager(){
 		return PageUtil.USER_MANAGER_PAGE;
 	}
-
-    /**
-     * 404页面
-     * @return
-     */
-	@GetMapping("/page/backend/404-page")
-    public String error404(){
-	    return PageUtil.ERROR_404;
-    }
-
-
 
 }

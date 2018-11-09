@@ -1,6 +1,7 @@
 package com.sipingsoft.web.sys.service.impl;
 
 import com.sipingsoft.core.entity.ResponseMessage;
+import com.sipingsoft.core.exception.WithaleafException;
 import com.sipingsoft.core.shiro.ShiroUtils;
 import com.sipingsoft.core.util.EhcacheUtil;
 import com.sipingsoft.web.sys.entity.SysMenu;
@@ -62,4 +63,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return childList;
     }
 
+    @Override
+    public String errMsg(Integer id) {
+        if (id ==1){
+            throw new WithaleafException(500,"withaleaf异常");
+        }else{
+
+        return "没有异常";
+        }
+    }
 }

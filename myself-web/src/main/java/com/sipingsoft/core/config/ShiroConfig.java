@@ -20,6 +20,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,8 +31,10 @@ import com.sipingsoft.core.shiro.UserRealm;
 /**
  * shiro配置
  * @author He Chunxiao
+ * 官方推荐SpringBoot项目采用SpringBootConfiguration 代替Configuration注解
  */
-@Configuration
+//@Configuration
+@SpringBootConfiguration
 public class ShiroConfig {
 
     /**
@@ -126,6 +129,7 @@ public class ShiroConfig {
 		filterMap.put("/sys/login", "anon");
         //静态资源不需要认证
 		filterMap.put("/static/**", "anon");
+		filterMap.put("/wechat/**","anon");
         //验证码不拦截
 		filterMap.put("/login/createCode/**","anon");
 
