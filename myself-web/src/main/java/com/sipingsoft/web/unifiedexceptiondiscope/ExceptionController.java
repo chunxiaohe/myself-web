@@ -24,12 +24,12 @@ public class ExceptionController {
 
     /**
      * 统一错误处理测试
-     * @return
+     * @return 错误提示消息
      */
     @ExceptionHandler(WithaleafException.class)
     @ResponseBody
     public Map<String, Object> withaleafExceptionDiscope( WithaleafException e) {
-        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>(3);
         map.put("code",e.getCode());
         map.put("errorMsg",e.getErrorMsg());
         return map;
