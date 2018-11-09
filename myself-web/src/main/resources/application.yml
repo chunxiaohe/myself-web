@@ -5,8 +5,8 @@ server:
   port: 8080
   servlet:
     context-path: /
-    session:
-      timeout: 1000
+#    session:
+#      timeout: 3000s  #springboot2.0 设置session过期时间的方法
 #运行环境
 spring:
   profiles:

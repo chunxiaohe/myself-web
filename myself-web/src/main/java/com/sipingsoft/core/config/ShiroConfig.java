@@ -123,6 +123,7 @@ public class ShiroConfig {
         //没有权限时跳转的地址
 		factoryBean.setUnauthorizedUrl("/");
 
+		//LinkedHashMap 为有序的
 		Map<String, String> filterMap = new LinkedHashMap<>();
 		//filterMap.put("/sysUser/add", "anon"); // 暂时写的
         // 登陆方法
@@ -133,10 +134,10 @@ public class ShiroConfig {
         //验证码不拦截
 		filterMap.put("/login/createCode/**","anon");
 
-        //表示需要身份验证通过才能访问
-		filterMap.put("/**", "authc");
         //使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
 		//filterMap.put("/**", "user");
+        //表示需要身份验证通过才能访问
+		filterMap.put("/**", "authc");
 		factoryBean.setFilterChainDefinitionMap(filterMap);
 
 		return factoryBean;
