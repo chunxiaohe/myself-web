@@ -27,8 +27,8 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(apiInterceptor).addPathPatterns("/page/wechat*/**","/wechat*/**")
-                .excludePathPatterns("");
+        registry.addInterceptor(apiInterceptor)
+                .addPathPatterns("/page/wechat*/**","/wechat*/**");
 
     }
 

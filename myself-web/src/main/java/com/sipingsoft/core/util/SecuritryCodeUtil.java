@@ -87,8 +87,6 @@ public class SecuritryCodeUtil {
         //存放验证码(将验证码存放在session中方便用户登录时在后台验证验证码)
         HttpSession httpSession =  request.getSession();
         httpSession.setAttribute("randomCode",randomCode);
-        //存放生成的验证码BufferedImage对象
-        //map.put("codePic",bufferedImage);
         //存放图片
         Random r = new Random();
         Integer randomNum =  r.nextInt(10000);
