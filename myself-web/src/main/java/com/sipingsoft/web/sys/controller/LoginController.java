@@ -40,7 +40,7 @@ public class LoginController {
      * @param password 密码
      * @param code 验证码
      * @param picName 验证码名称
-     * @param model
+     * @param model 提示信息模型
      * @return
      */
     @PostMapping("sys/login")
@@ -51,21 +51,10 @@ public class LoginController {
         //rememberMe = true;
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
+            //校验验证码
+            checkRandomCode(picName,code,request);
+            //校验用户名以及密码
             subject.login(token);
-            if(code==null ){
-                throw new RandomCodeException();
-            }else{
-                String sessionCode =  request.getSession().getAttribute("randomCode").toString();
-                if(!sessionCode.toUpperCase().equals(code.toUpperCase())){
-                    throw new RandomCodeException();
-                }
-            }
-            //删除验证码图片
-            String path = ResourceUtils.getURL("classpath:").getPath()+"/static/codeImage/"+picName;
-            File file = new File(path);
-            if (file.exists()&&file.isFile()){
-                file.delete();
-            }
             return "redirect:/";
         } catch (UnknownAccountException e) {
             //账号不存在
@@ -80,7 +69,7 @@ public class LoginController {
         } catch (RandomCodeException e){
             model.addAttribute("errorMsg","验证码错误");
         } catch (FileNotFoundException e){
-            model.addAttribute("errorMsg","系统异常");
+            model.addAttribute("errorMsg","系统异常,请刷新页面重试");
         }
         return "redirect:/page/login";
     }
@@ -121,6 +110,31 @@ public class LoginController {
             e.printStackTrace();
         }
         return new ResponseMessage(500,"验证码获取失败",null);
+    }
+
+    /**
+     * 验证校验码
+     * @param picName 校验码图片名称
+     * @param code  校验码
+     * @param request  请求对象
+     * @throws RandomCodeException 校验码错误异常
+     * @throws FileNotFoundException 文件不存在异常
+     */
+    private void checkRandomCode(String picName, String code, ShiroHttpServletRequest request ) throws RandomCodeException,FileNotFoundException{
+        if(code==null ){
+            throw new RandomCodeException();
+        }else{
+            String sessionCode =  request.getSession().getAttribute("randomCode").toString();
+            if(!sessionCode.toUpperCase().equals(code.toUpperCase())){
+                throw new RandomCodeException();
+            }
+        }
+        //删除验证码图片
+        String path = ResourceUtils.getURL("classpath:").getPath()+"/static/codeImage/"+picName;
+        File file = new File(path);
+        if (file.exists()&&file.isFile()){
+            file.delete();
+        }
     }
 
 }

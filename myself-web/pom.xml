@@ -61,12 +61,13 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
-		<!-- mysql -->
+		<!-- mysql start -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
+        <!-- mysql end -->
 		<!-- 阿里连接池 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

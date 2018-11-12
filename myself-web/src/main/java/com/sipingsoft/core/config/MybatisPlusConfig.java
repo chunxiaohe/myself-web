@@ -17,11 +17,15 @@ public class MybatisPlusConfig {
      * SQL执行效率插件,生产环境关闭
      */
     @Bean
-    @Profile({"dev","test"})// 设置 dev test 环境开启
+   /* @Profile({"dev","test"})// 设置 dev test 环境开启*/
     public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor();
     }
 
+    /**
+     * 分页拦截器
+     * @return
+     */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
