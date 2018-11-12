@@ -23,7 +23,7 @@ public class ExceptionController {
 
 
     /**
-     * 统一错误处理测试
+     * 统一错误处理
      * @return 错误提示消息
      */
     @ExceptionHandler(WithaleafException.class)
