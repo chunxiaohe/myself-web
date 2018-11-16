@@ -1,8 +1,8 @@
 package com.sipingsoft.core.shiro;
 
+import com.sipingsoft.back.entity.SysUser;
 import org.apache.shiro.SecurityUtils;
 
-import com.sipingsoft.web.sys.entity.SysUser;
 
 public class ShiroUtils {
 

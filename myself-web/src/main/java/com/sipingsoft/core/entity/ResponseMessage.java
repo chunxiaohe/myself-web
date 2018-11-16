@@ -33,6 +33,11 @@ public class ResponseMessage<T> {
 		this.data = data;
 	}
 
+    public ResponseMessage(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     public Integer getCode() {
         return code;
     }

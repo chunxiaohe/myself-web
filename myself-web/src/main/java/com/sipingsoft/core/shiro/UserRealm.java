@@ -2,6 +2,8 @@ package com.sipingsoft.core.shiro;
 
 import java.util.Set;
 
+import com.sipingsoft.back.entity.SysUser;
+import com.sipingsoft.back.mapper.SysUserMapper;
 import com.sipingsoft.core.util.EhcacheUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -20,8 +22,6 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sipingsoft.web.sys.entity.SysUser;
-import com.sipingsoft.web.sys.mapper.SysUserMapper;
 
 /**
  *

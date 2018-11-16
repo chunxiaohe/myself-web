@@ -7,9 +7,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * 项目启动类
+ * @author He Chunxiao
+ * @since 2018-08-05 16:34:25
+ */
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
-@MapperScan("com.sipingsoft.web.**.mapper")
+@MapperScan(value = {"com.sipingsoft.back.**.mapper","com.sipingsoft.blog.**.mapper"})
 @EnableScheduling
 public class MyselfWebApplication extends SpringBootServletInitializer{
 

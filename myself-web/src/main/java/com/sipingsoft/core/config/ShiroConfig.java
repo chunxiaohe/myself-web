@@ -33,7 +33,6 @@ import com.sipingsoft.core.shiro.UserRealm;
  * @author He Chunxiao
  * 官方推荐SpringBoot项目采用SpringBootConfiguration 代替Configuration注解
  */
-//@Configuration
 @SpringBootConfiguration
 public class ShiroConfig {
 
@@ -119,20 +118,25 @@ public class ShiroConfig {
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
 		ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 		factoryBean.setSecurityManager(securityManager);
-		factoryBean.setLoginUrl("/page/login");
+		//网站登录的主页
+		factoryBean.setLoginUrl("/blog/page/index");
         //没有权限时跳转的地址
 		factoryBean.setUnauthorizedUrl("/");
 
 		//LinkedHashMap 为有序的
 		Map<String, String> filterMap = new LinkedHashMap<>();
-		//filterMap.put("/sysUser/add", "anon"); // 暂时写的
-        // 登陆方法
-		filterMap.put("/sys/login", "anon");
         //静态资源不需要认证
 		filterMap.put("/static/**", "anon");
-		filterMap.put("/wechat/**","anon");
-        //验证码不拦截
-		filterMap.put("/login/createCode/**","anon");
+		//管理员登录页面不拦截
+        filterMap.put("/back/page/login","anon");
+        //登录页请求不拦截
+		filterMap.put("/back/login/**","anon");
+		//管理员登录请求不拦截
+		//filterMap.put("/back/sys/login","anon");
+		//filterMap.put("/back/login/checkCode","anon");
+        //博客请求不需要验证
+        filterMap.put("/blog/api/**","anon");
+        filterMap.put("/blog/page/**","anon");
 
         //使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
 		//filterMap.put("/**", "user");

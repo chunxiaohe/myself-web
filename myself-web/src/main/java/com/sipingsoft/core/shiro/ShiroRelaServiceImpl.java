@@ -2,7 +2,7 @@ package com.sipingsoft.core.shiro;
 
 import java.util.Set;
 
-import com.sipingsoft.web.sys.mapper.SysMenuMapper;
+import com.sipingsoft.back.mapper.SysMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

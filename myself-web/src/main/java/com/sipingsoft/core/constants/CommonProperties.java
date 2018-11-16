@@ -3,16 +3,25 @@ package com.sipingsoft.core.constants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * 配置文件 参数
+ * @author He Chunxiao
+ */
 @Component
 @ConfigurationProperties(prefix="com.sipingsoft")
 public class CommonProperties {
-	
-	private String staticRoot;//static根路径
 
-	private String webRoot;//根路径
+    /**
+     *static根路径
+     */
+	private String staticRoot;
+
+    /**
+     *根路径
+     */
+	private String webRoot;
 	
-	private boolean shiroRedisCache; // 是否开启redis缓存
-	
+
 	public String getStaticRoot() {
 		return staticRoot;
 	}
@@ -21,13 +30,6 @@ public class CommonProperties {
 		this.staticRoot = staticRoot;
 	}
 
-	public boolean isShiroRedisCache() {
-		return shiroRedisCache;
-	}
-
-	public void setShiroRedisCache(boolean shiroRedisCache) {
-		this.shiroRedisCache = shiroRedisCache;
-	}
 
 	public String getWebRoot() {
 		return webRoot;
