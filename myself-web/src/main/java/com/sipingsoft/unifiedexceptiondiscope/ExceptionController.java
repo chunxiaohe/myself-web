@@ -42,7 +42,6 @@ public class ExceptionController {
     @ExceptionHandler(RandomCodeException.class)
     @ResponseBody
     public ResponseMessage codeException(RandomCodeException e){
-        System.out.println("验证码错误");
         return new ResponseMessage(500,e.getMessage());
     }
 
