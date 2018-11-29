@@ -29,7 +29,6 @@ var vm = new Vue({
         _getSecurityCode() {
             var picName = $("input[name='picName']").val();
             $.get("/back/login/createCode", {"picName":picName},function (re) {
-            console.log(re);
                 if (re.code == 200) {
                     var staticRoot = $("#staticRoot").val();
                     vm.picName = re.data[0].picName;

@@ -11,24 +11,8 @@
     <title>Travel</title>
 
     <!--common-->
-    <link href="${staticRoot}/templateForPage/css/style.css" rel="stylesheet">
-    <link href="${staticRoot}/templateForPage/css/style-responsive.css" rel="stylesheet">
-    <style >
-        .m-r-b{
-            position: fixed;
-            left: 240px;
-            top: 24px;
+    <link href="${staticRoot}/back/css/style.css" rel="stylesheet">
 
-            width: 100%;
-            height: 100%;
-            margin-top: 24px;
-        }
-        #pageContent{
-            width: 100%;
-            height: 800px;
-
-        }
-    </style>
 </head>
 
 <body class="sticky-header">
@@ -64,13 +48,13 @@
     <!-- header section start-->
     <div class="header-section">
         <!--toggle button start-->
-        <div>
-            <i class="fa fa-bars ip-city"></i>
-        </div>
-        <div class="ip-city"  >
+            <div>
+                <i class="fa fa-bars ip-city"></i>
+            </div>
+            <div class="ip-city"  >
                 <li >{{city}} &nbsp;</li>
                 <li > {{IP}}</li>
-        </div>
+            </div>
         <!--toggle button end-->
         <!--notification menu start -->
         <div class="menu-right">
@@ -110,14 +94,13 @@
         </iframe>
     </div>
 
-
     <!-- main content end-->
 </section>
 </div>
 
 <!-- system js -->
-<script type="text/javascript" src="${staticRoot}/back/util/jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/vue/vue.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
 <!-- 获取当前登录用户的ip以及所在城市 -->
 <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 

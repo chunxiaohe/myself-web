@@ -4,24 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--common-->
-    <link href="${staticRoot}/templateForPage/css/style.css" rel="stylesheet">
-   <#-- <link href="${staticRoot}/templateForPage/css/style-responsive.css" rel="stylesheet">-->
+    <link href="${staticRoot}/back/css/style.css" rel="stylesheet">
+    <!-- 滚动css -->
+    <link href="${staticRoot}/back/css/style_indexcontent_comment.css" rel="stylesheet">
 </head>
 <body>
 <body style="background: #EFF0F4;">
       <div id="app">
-
-
-        <!-- page heading start-->
-      <#--<div class="page-heading">
-            <ul class="breadcrumb">
-                <li>
-                    当前登录IP   {{IP}}
-                </li>
-                <li class="active"> {{city}} </li>
-            </ul>
-        </div>-->
-        <!-- page heading end-->
 
         <!--body wrapper start-->
         <div class="wrapper">
@@ -32,22 +21,22 @@
                         <div class="col-md-6 col-xs-12 col-sm-6">
                             <div class="panel purple">
                                 <div class="symbol">
-                                    <i class="fa fa-gavel"></i>
+                                    <i class="fa fa-male"></i>
                                 </div>
                                 <div class="state-value">
                                     <div class="value">230</div>
-                                    <div class="title">New Order</div>
+                                    <div class="title">昨日访问量</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12 col-sm-6">
                             <div class="panel red">
                                 <div class="symbol">
-                                    <i class="fa fa-tags"></i>
+                                    <i class="fa fa-female"></i>
                                 </div>
                                 <div class="state-value">
                                     <div class="value">3490</div>
-                                    <div class="title">Copy Sold</div>
+                                    <div class="title">今日访问量</div>
                                 </div>
                             </div>
                         </div>
@@ -56,11 +45,11 @@
                         <div class="col-md-6 col-xs-12 col-sm-6">
                             <div class="panel blue">
                                 <div class="symbol">
-                                    <i class="fa fa-money"></i>
+                                    <i class="fa fa-user"></i>
                                 </div>
                                 <div class="state-value">
-                                    <div class="value">22014</div>
-                                    <div class="title"> Total Revenue</div>
+                                    <div class="value">200</div>
+                                    <div class="title">本月访问量 </div>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +60,7 @@
                                 </div>
                                 <div class="state-value">
                                     <div class="value">390</div>
-                                    <div class="title"> Unique Visitors</div>
+                                    <div class="title"> 总访问量</div>
                                 </div>
                             </div>
                         </div>
@@ -102,158 +91,77 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8" style="width: 50%">
                     <div class="panel">
                         <div class="panel-body">
                             <div class="row revenue-states">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <h4>Monthly revenue report</h4>
-                                    <div class="icheck">
-                                        <div class="square-red single-row">
-                                            <div class="checkbox ">
-                                                <input type="checkbox" checked>
-                                                <label>Online</label>
-                                            </div>
-                                        </div>
-                                        <div class="square-blue single-row">
-                                            <div class="checkbox ">
-                                                <input type="checkbox">
-                                                <label>Offline </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <ul class="revenue-nav">
-                                        <li><a href="#">weekly</a></li>
-                                        <li><a href="#">monthly</a></li>
-                                        <li class="active"><a href="#">yearly</a></li>
-                                    </ul>
+                                    <h4>近七日访问量对比分析</h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="clearfix">
-                                        <div id="main-chart-legend" class="pull-right">
+                                    <div id="main-chart">
+                                        <div id="visitCompare" class="main-chart" >
                                         </div>
                                     </div>
 
-                                    <div id="main-chart">
-                                        <div id="main-chart-container" class="main-chart">
-                                        </div>
-                                    </div>
-                                    <ul class="revenue-short-info">
-                                        <li>
-                                            <h1 class="red">15%</h1>
-                                            <p>Server Load</p>
-                                        </li>
-                                        <li>
-                                            <h1 class="purple">30%</h1>
-                                            <p>Disk Space</p>
-                                        </li>
-                                        <li>
-                                            <h1 class="green">84%</h1>
-                                            <p>Transferred</p>
-                                        </li>
-                                        <li>
-                                            <h1 class="blue">28%</h1>
-                                            <p>Temperature</p>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8" style="width: 50%">
                     <div class="panel">
-                        <header class="panel-heading">
-                            goal progress
-                            <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-times"></a>
-                             </span>
-                        </header>
                         <div class="panel-body">
-                            <ul class="goal-progress">
-                                <li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user1.png" alt=""/>
-                                    </div>
-                                    <div class="details">
-                                        <div class="title">
-                                            <a href="#">John Doe</a> - Project Lead
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                                <span class="">70%</span>
+                            <div class="row revenue-states">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <h4>最新评论</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="main-chart">
+                                        <div id="visitCompareMap" class="main-chart" >
+                                            <div class="recordList" style="top: 10px;width: 100%;height: 100%">
+                                                <ul class="line">
+                                                    <li style="margin-top: 0px; "><a title="getElementsByTagName的简写方式" href="http://mrthink.net/javascrip-simple-getelementsbytagname/">getElementsByTagName的简写方式</a> 2010年06月24日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的鼠标划过切换效果" href="http://mrthink.net/script-mousechange-simple/">一个简单的鼠标划过切换效果</a> 2010年05月23日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="奇或偶数行高亮显示及鼠标划过高亮显示类" href="http://mrthink.net/javascript-tagnames-highlight/">奇或偶数行高亮显示及鼠标划过高亮显示类</a> 2010年05月05日 (5)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的纵横向动画效果类" href="http://mrthink.net/javascrip-dom-slide-simple/">一个简单的纵横向动画效果类</a> 2010年05月02日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="document.getElementById的简写方式" href="http://mrthink.net/javascript-getbyid-simplewrite/">document.getElementById的简写方式</a> 2010年04月18日 (1)</li>
+                                                    <li style="margin-top: 0px; "><a title="两种简单实现菜单高亮显示的JS类" href="http://mrthink.net/javascript-highlight-menu-twoway/">两种简单实现菜单高亮显示的JS类</a> 2010年04月17日 (10)</li>
+                                                    <li style="margin-top: 0px; "><a title="简易的点击展开/关闭效果(原生JS版和JQ版)" href="http://mrthink.net/js-jq-click-openclose/">简易的点击展开/关闭效果(原生JS版和JQ版)</a> 2010年08月02日 (6)</li>
+                                                    <li style="margin-top: 0px; "><a title="getElementsByTagName的简写方式" href="http://mrthink.net/javascrip-simple-getelementsbytagname/">getElementsByTagName的简写方式</a> 2010年06月24日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的鼠标划过切换效果" href="http://mrthink.net/script-mousechange-simple/">一个简单的鼠标划过切换效果</a> 2010年05月23日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="奇或偶数行高亮显示及鼠标划过高亮显示类" href="http://mrthink.net/javascript-tagnames-highlight/">奇或偶数行高亮显示及鼠标划过高亮显示类</a> 2010年05月05日 (5)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的纵横向动画效果类" href="http://mrthink.net/javascrip-dom-slide-simple/">一个简单的纵横向动画效果类</a> 2010年05月02日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="document.getElementById的简写方式" href="http://mrthink.net/javascript-getbyid-simplewrite/">document.getElementById的简写方式</a> 2010年04月18日 (1)</li>
+                                                    <li style="margin-top: 0px; "><a title="两种简单实现菜单高亮显示的JS类" href="http://mrthink.net/javascript-highlight-menu-twoway/">两种简单实现菜单高亮显示的JS类</a> 2010年04月17日 (10)</li>
+                                                    <li style="margin-top: 0px; "><a title="简易的点击展开/关闭效果(原生JS版和JQ版)" href="http://mrthink.net/js-jq-click-openclose/">简易的点击展开/关闭效果(原生JS版和JQ版)</a> 2010年08月02日 (6)</li>
+                                                    <li style="margin-top: 0px; "><a title="getElementsByTagName的简写方式" href="http://mrthink.net/javascrip-simple-getelementsbytagname/">getElementsByTagName的简写方式</a> 2010年06月24日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的鼠标划过切换效果" href="http://mrthink.net/script-mousechange-simple/">一个简单的鼠标划过切换效果</a> 2010年05月23日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="奇或偶数行高亮显示及鼠标划过高亮显示类" href="http://mrthink.net/javascript-tagnames-highlight/">奇或偶数行高亮显示及鼠标划过高亮显示类</a> 2010年05月05日 (5)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的纵横向动画效果类" href="http://mrthink.net/javascrip-dom-slide-simple/">一个简单的纵横向动画效果类</a> 2010年05月02日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="document.getElementById的简写方式" href="http://mrthink.net/javascript-getbyid-simplewrite/">document.getElementById的简写方式</a> 2010年04月18日 (1)</li>
+                                                    <li style="margin-top: 0px; "><a title="两种简单实现菜单高亮显示的JS类" href="http://mrthink.net/javascript-highlight-menu-twoway/">两种简单实现菜单高亮显示的JS类</a> 2010年04月17日 (10)</li>
+                                                    <li style="margin-top: 0px; "><a title="简易的点击展开/关闭效果(原生JS版和JQ版)" href="http://mrthink.net/js-jq-click-openclose/">简易的点击展开/关闭效果(原生JS版和JQ版)</a> 2010年08月02日 (6)</li>
+                                                    <li style="margin-top: 0px; "><a title="getElementsByTagName的简写方式" href="http://mrthink.net/javascrip-simple-getelementsbytagname/">getElementsByTagName的简写方式</a> 2010年06月24日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的鼠标划过切换效果" href="http://mrthink.net/script-mousechange-simple/">一个简单的鼠标划过切换效果</a> 2010年05月23日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="奇或偶数行高亮显示及鼠标划过高亮显示类" href="http://mrthink.net/javascript-tagnames-highlight/">奇或偶数行高亮显示及鼠标划过高亮显示类</a> 2010年05月05日 (5)</li>
+                                                    <li style="margin-top: 0px; "><a title="一个简单的纵横向动画效果类" href="http://mrthink.net/javascrip-dom-slide-simple/">一个简单的纵横向动画效果类</a> 2010年05月02日 (4)</li>
+                                                    <li style="margin-top: 0px; "><a title="document.getElementById的简写方式" href="http://mrthink.net/javascript-getbyid-simplewrite/">document.getElementById的简写方式</a> 2010年04月18日 (1)</li>
+                                                    <li style="margin-top: 0px; "><a title="两种简单实现菜单高亮显示的JS类" href="http://mrthink.net/javascript-highlight-menu-twoway/">两种简单实现菜单高亮显示的JS类</a> 2010年04月17日 (10)</li>
+                                                    <li style="margin-top: 0px; "><a title="简易的点击展开/关闭效果(原生JS版和JQ版)" href="http://mrthink.net/js-jq-click-openclose/">简易的点击展开/关闭效果(原生JS版和JQ版)</a> 2010年08月02日 (6)</li>
+                                                </ul>
                                             </div>
+
+
                                         </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user2.png" alt=""/>
-                                    </div>
-                                    <div class="details">
-                                        <div class="title">
-                                            <a href="#">Cameron Doe</a> - Sales
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 91%">
-                                                <span class="">91%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user3.png" alt=""/>
-                                    </div>
-                                    <div class="details">
-                                        <div class="title">
-                                            <a href="#">Hoffman Doe</a> - Support
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span class="">40%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user4.png" alt=""/>
-                                    </div>
-                                    <div class="details">
-                                        <div class="title">
-                                            <a href="#">Jane Doe</a> - Marketing
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                                <span class="">20%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="prog-avatar">
-                                        <img src="images/photos/user5.png" alt=""/>
-                                    </div>
-                                    <div class="details">
-                                        <div class="title">
-                                            <a href="#">Hoffman Doe</a> - Support
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                                <span class="">45%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="text-center"><a href="#">View all Goals</a></div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -457,7 +365,7 @@
                         <div class="panel-body">
                             <div class="media usr-info">
                                 <a href="#" class="pull-left">
-                                    <img class="thumb" src="images/photos/user2.png" alt=""/>
+                                    <img class="thumb" src="${staticRoot}/common/image/user2.png" alt=""/>
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">Mila Watson</h4>
@@ -488,13 +396,17 @@
 
 </body>
 <!-- system js -->
-<script type="text/javascript" src="${staticRoot}/back/util/echarts/echarts.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/vue/vue.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/layui/layer.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/echarts/echarts.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/layui/layer.js"></script>
 
 
 <!-- my js -->
 <script type="text/javascript" src="${staticRoot}/back/js/indexcontent.js"></script>
--->
+<!-- 最新评论滚动播放的js -->
+<script type="text/javascript" src="${staticRoot}/back/js/indexcontent_comment.js"></script>
+
+
+
 </html>

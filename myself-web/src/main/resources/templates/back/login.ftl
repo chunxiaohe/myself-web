@@ -77,8 +77,9 @@
 
 </div>
 </body>
-<script type="text/javascript" src="${staticRoot}/templateForPage/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/layui/layer.js"></script>
-<script type="text/javascript" src="${staticRoot}/back/util/vue/vue.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/layui/layer.js"></script>
+<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
+
 <script type="text/javascript" src="${staticRoot}/back/js/login.js"></script>
 </html>
