@@ -13,7 +13,6 @@ var vm = new Vue({
     },
     methods:{
         _initVisitCompare(){
-            console.log("初始化近七日访问量")
             visitCompare();
             visitCompareMap();
         }

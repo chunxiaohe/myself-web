@@ -33,8 +33,22 @@ public class SysUser extends Model<SysUser> {
 	@TableField("create_date")
 	private Date createDate;
 
+    /**
+     * 是否是超级管理员
+     * 1.是 2.不是
+     */
+	@TableField("is_admin")
+	private  Integer isAdmin;
 
-	public Long getUserId() {
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public Long getUserId() {
 		return userId;
 	}
 

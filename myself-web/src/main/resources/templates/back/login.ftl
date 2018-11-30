@@ -9,8 +9,7 @@
 
     <title>Travel</title>
 
-    <link href="${staticRoot}/templateForPage/css/style.css" rel="stylesheet">
-    <link href="${staticRoot}/templateForPage/css/style-responsive.css" rel="stylesheet">
+    <link href="${staticRoot}/back/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -77,9 +76,9 @@
 
 </div>
 </body>
-<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/layui/layer.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/layer/layer.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/vue/vue.js"></script>
 
 <script type="text/javascript" src="${staticRoot}/back/js/login.js"></script>
 </html>

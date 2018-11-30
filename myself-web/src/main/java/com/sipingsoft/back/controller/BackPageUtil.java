@@ -18,4 +18,8 @@ public class BackPageUtil {
      * 后台首页
      */
     public static final String BACK_INDEX_CONTENT = "back/indexcontent";
+    /**
+     * 文章分类页面
+     */
+    public static final String BACK_ATRICLE_CLASS = "back/atricleClass";
 }

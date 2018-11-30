@@ -55,4 +55,9 @@ public class BackPageController {
     public String indexContent() {
         return BackPageUtil.BACK_INDEX_CONTENT;
     }
+
+    @GetMapping("/back/page/articleClass")
+    public  String atricleClass(){
+        return BackPageUtil.BACK_ATRICLE_CLASS;
+    }
 }

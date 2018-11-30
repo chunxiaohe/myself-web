@@ -1,8 +1,6 @@
 (function ($) {
     $.fn.extend({
         "slideUp": function (value) {
-            console.log(1);
-
             var docthis = this;
             //默认参数
             value = $.extend({

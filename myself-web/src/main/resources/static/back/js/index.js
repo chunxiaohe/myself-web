@@ -20,8 +20,6 @@ var vm = new Vue({
             vm.city = returnCitySN['cname']
             //点击展开子菜单/更新样式
             that.showsubmenu();
-            //初始化主页数据
-            //that._initPage();
         })
     },
     methods:{
@@ -43,23 +41,12 @@ var vm = new Vue({
                     $(this).siblings().removeClass("active")
                 }
                 $(this).addClass("active");
-                that._initPage($(this).attr("data"));
+                //页面切换
+                vm.currentPage = $(this).attr("data");
             })
             //显示用户操作
             $("#operation").click(function () {
                 $("#operation_list").toggle();
-            })
-
-
-        },
-        _initPage(url){
-            console.log(url);
-            if(url==null){
-                url = "/back/page/index/content";
-            }
-            $.get(url,function (re) {
-                $("#pageContent").empty();
-                $("#pageContent").append(re);
             })
         }
     }

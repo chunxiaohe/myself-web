@@ -34,6 +34,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public ResponseMessage<SysMenuNode> getMenuList() {
         //从缓存中获取数据
         List<SysMenuNode> menuList =  (List<SysMenuNode>)EhcacheUtil.getInstance().getEhcacheInfo("menuListCache","menuList");
+        menuList = null;
         if(menuList == null || menuList.size()==0){
             //没有缓存从数据库中获取
             SysUser sysUser = ShiroUtils.getLoginUser();
