@@ -10,17 +10,8 @@ var vm = new Vue({
         });
     },
     methods: {
-        search() {
-
-            $("#jqGrid").setGridParam({
-                datatype: 'json',
-                page: 1
-            }).jqGrid('setGridParam', {
-                page: 1,
-                postData: {
-
-                }
-            }).trigger("reloadGrid");
+        toggleSearchForm() {
+            $('#searchForm').toggle();
         },
         _initTable() { // 初始化列表
             $("#jqGrid").jqGrid({
@@ -30,7 +21,6 @@ var vm = new Vue({
                 colModel: [{
                         label: 'id',
                         name: ''
-
                     }, {
                         label: '类型',
                         name: ''
@@ -92,9 +82,19 @@ var vm = new Vue({
                 }
             })
         },
-
         reset() {
 
+        },
+        search() {
+            $("#jqGrid").setGridParam({
+                datatype: 'json',
+                page: 1
+            }).jqGrid('setGridParam', {
+                page: 1,
+                postData: {
+
+                }
+            }).trigger("reloadGrid");
         }
     }
 });
