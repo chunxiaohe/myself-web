@@ -30,7 +30,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
-    @Override
+   @Override
     public ResponseMessage<SysMenuNode> getMenuList() {
         //从缓存中获取数据
         List<SysMenuNode> menuList =  (List<SysMenuNode>)EhcacheUtil.getInstance().getEhcacheInfo("menuListCache","menuList");

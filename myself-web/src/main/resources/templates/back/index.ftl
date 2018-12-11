@@ -22,14 +22,14 @@
     <div class="left-side sticky-left-side" >
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="/"><img src="${staticRoot}/templateForPage/images/logo.png" alt=""></a>
+            <img src="${staticRoot}/templateForPage/images/logo.png" alt="">
         </div>
         <!--logo and iconic logo end-->
 
         <div class="left-side-inner">
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class=""><a href="/"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li class=""><a href="/back/page/index"><i class="fa fa-home"></i> <span>主页</span></a></li>
                 <li class="menu-list " v-for="menu in treeData" style="cursor: pointer">
                     <a ><i :class=" menu.icon"></i><span>{{menu.name}}</span></a>
                     <ul class="sub-menu-list" >

@@ -5,7 +5,7 @@ spring:
     druid:
       url: jdbc:mysql://localhost:3306/myselfweb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
       username: root
-      password: 123456 
+      password: 123456
       initial-size: 5
       max-active: 50
       min-idle: 10
@@ -35,5 +35,5 @@ spring:
 
 com:
   sipingsoft:
-    static-root: http://127.0.0.1:8080/static
-    web_root: http://127.0.0.1:8080
+    static-root: http://94.191.12.180:8080/static
+    web_root: http://94.191.12.180:8080

@@ -9,6 +9,14 @@
     <#include '../common/commonStyle.ftl'>
     <#include '../common/commonScript.ftl'>
     <link rel="stylesheet" href="${staticRoot}/back/css/pageCommon.css">
+    <style>
+        .btn-info{
+            margin-top: 23px;
+        }
+        .col-lg-3{
+            width:20% ;
+        }
+    </style>
 </head>
 <body style="background: #EFF0F4;height: 500px">
 <div class="container-fluid" id="app">
@@ -35,6 +43,7 @@
             <div class="form-group col-sm-3 col-md-3 col-lg-3">
                 <button class="btn  btn-info" @click="search"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;查询</button>
                 <button class="btn btn-info" @click="reset"> <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;重置</button>
+                <button class="btn btn-info" @click="create"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;新建</button>
             </div>
         </form>
     </div>

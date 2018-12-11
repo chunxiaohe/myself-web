@@ -5,4 +5,4 @@ import com.sipingsoft.back.entity.SysUser;
 
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
-}
+   }

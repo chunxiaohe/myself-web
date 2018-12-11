@@ -83,10 +83,11 @@ var vm = new Vue({
             })
         },
         reset() {
-
+            console.log('重置')
         },
         search() {
-            $("#jqGrid").setGridParam({
+            console.log('查询')
+            /*$("#jqGrid").setGridParam({
                 datatype: 'json',
                 page: 1
             }).jqGrid('setGridParam', {
@@ -94,7 +95,10 @@ var vm = new Vue({
                 postData: {
 
                 }
-            }).trigger("reloadGrid");
+            }).trigger("reloadGrid");*/
+        },
+        create(){
+            console.log('新建')
         }
     }
 });
