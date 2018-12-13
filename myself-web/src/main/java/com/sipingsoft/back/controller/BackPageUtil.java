@@ -22,4 +22,8 @@ public class BackPageUtil {
      * 文章分类页面
      */
     public static final String BACK_ATRICLE_CLASS = "back/atricleClass";
+    /**
+     * 新增 文章分类 弹出页面
+     */
+    public static final String BACK_ADD_ATRICLE_CLASS = "/back/alert/addAtricleClass";
 }

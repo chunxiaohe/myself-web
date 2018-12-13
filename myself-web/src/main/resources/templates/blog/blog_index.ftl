@@ -8,8 +8,9 @@
 
 	<link href="${staticRoot}/blog/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="${staticRoot}/blog/css/common.css" />
-	<link href="${staticRoot}/blog/logo.ico" rel="shortcut icon" />
-	<script src="${staticRoot}/blog/plugin/jquery.min.js"></script>
+	<link rel="shortcut icon" href="${staticRoot}/blog/img/logo.png" type="image/png" />
+
+    <script src="${staticRoot}/blog/plugin/jquery.min.js"></script>
 	<script src="${staticRoot}/blog/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 	<body>

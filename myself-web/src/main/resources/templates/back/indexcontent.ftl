@@ -365,7 +365,7 @@
                         <div class="panel-body">
                             <div class="media usr-info">
                                 <a href="#" class="pull-left">
-                                    <img class="thumb" src="${staticRoot}/common/image/user2.png" alt=""/>
+                                    <img class="thumb" src="${staticRoot}/back/image/user2.png" alt=""/>
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">Mila Watson</h4>
@@ -396,10 +396,10 @@
 
 </body>
 <!-- system js -->
-<script type="text/javascript" src="${staticRoot}/common/js/echarts/echarts.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/layui/layer.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/echarts/echarts.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/vue/vue.js"></script>
+<#--<script type="text/javascript" src="${staticRoot}/common/js/layui/layer.js"></script>-->
 
 
 <!-- my js -->

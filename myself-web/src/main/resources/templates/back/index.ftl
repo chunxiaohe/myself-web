@@ -99,8 +99,8 @@
 </div>
 
 <!-- system js -->
-<script type="text/javascript" src="${staticRoot}/common/js/jquery/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${staticRoot}/common/js/vue/vue.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${staticRoot}/core/js/vue/vue.js"></script>
 <!-- 获取当前登录用户的ip以及所在城市 -->
 <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 

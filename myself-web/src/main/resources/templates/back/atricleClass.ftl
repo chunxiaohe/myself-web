@@ -43,19 +43,17 @@
             <div class="form-group col-sm-3 col-md-3 col-lg-3">
                 <button class="btn  btn-info" @click="search"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;查询</button>
                 <button class="btn btn-info" @click="reset"> <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;重置</button>
-                <button class="btn btn-info" @click="create"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;新建</button>
+                <button class="btn btn-info" @click="create"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;新增</button>
             </div>
         </form>
     </div>
     <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width: 60%;">
-        <!--  <button class="btn  btn-info" style="display: block; margin:10px 0;" @click="createSaleOrder">新增</button> -->
+        <#--<button class="btn  btn-info" style="display: block; margin:10px 0;" @click="createSaleOrder">新增</button> -->
         <table id="jqGrid"></table>
         <div id="jqGridPager" ></div>
     </div>
 
 </div>
 <script src="${staticRoot}/back/js/articleClass.js"></script>
-
-
 </body>
 </html>

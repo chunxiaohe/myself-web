@@ -3,10 +3,10 @@ Template Name: AdminEx Dashboard
 Author: ThemeBucket
 -------------------------------------------*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-@import url('../../common/css/bootstrap/bootstrap.min.css');
-@import url('../../common/css/bootstrap/bootstrap-reset.css');
-@import url('../../common/css/jquery/jquery-ui-1.10.3.css');
-@import url('../../common/fonts/css/font-awesome.min.css');
+@import url('../../core/css/bootstrap/bootstrap.css');
+@import url('../../core/css/bootstrap/bootstrap-reset.css');
+@import url('../../core/css/jquery/jquery-ui-1.10.3.css');
+@import url('../../core/css/fonts/font-awesome.min.css');
 
 body {
     background: #424f63;

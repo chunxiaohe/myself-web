@@ -98,7 +98,21 @@ var vm = new Vue({
             }).trigger("reloadGrid");*/
         },
         create(){
-            console.log('新建')
+            layer.open({
+                title:'新增文章分类',
+                type:2,
+                content:createURL("/back/page/addArticleClass"),
+                area:['30%','52%'],
+                btn:['确定','取消'],
+                yes:function(index,layero){
+                    var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
+                    if(valided){
+
+                    }else{
+                        layer.msg("基本属性不完整,请按要求填写!",{icon:2});
+                    }
+                }
+            })
         }
     }
 });

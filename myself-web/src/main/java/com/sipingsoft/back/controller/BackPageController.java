@@ -56,8 +56,21 @@ public class BackPageController {
         return BackPageUtil.BACK_INDEX_CONTENT;
     }
 
+    /**
+     * 文章分类页面
+     * @return
+     */
     @GetMapping("/back/page/articleClass")
     public  String atricleClass(){
         return BackPageUtil.BACK_ATRICLE_CLASS;
+    }
+
+    /**
+     *  新增文章分类的弹出页面
+     * @return
+     */
+    @GetMapping("/back/page/addArticleClass")
+    public String addAtricleClass(){
+        return BackPageUtil.BACK_ADD_ATRICLE_CLASS;
     }
 }

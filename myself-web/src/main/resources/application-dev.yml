@@ -37,3 +37,4 @@ com:
   sipingsoft:
     static-root: http://127.0.0.1:8080/static
     web_root: http://127.0.0.1:8080
+
