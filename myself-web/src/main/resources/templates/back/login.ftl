@@ -21,7 +21,7 @@
 
         <div class="form-signin-heading text-center">
             <#--<h1 class="sign-title">Sign In</h1>-->
-            <img src="${staticRoot}/templateForPage/images/travel.png" alt=""/>
+            <img src="${staticRoot}/back/image/travel.png" alt=""/>
         </div>
         <div class="login-wrap">
             <input type="text" name="username" class="form-control" placeholder="用户名" autofocus>

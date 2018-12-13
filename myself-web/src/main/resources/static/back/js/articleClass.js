@@ -14,38 +14,36 @@ var vm = new Vue({
             $('#searchForm').toggle();
         },
         _initTable() { // 初始化列表
+            console.log("1111111111111")
             $("#jqGrid").jqGrid({
-                url: "",
+                url: createURL('back/api/list/articleClass'),
                 datatype: "json",
                 mtype: 'get',
                 colModel: [{
                         label: 'id',
-                        name: ''
+                        name: 'id'
                     }, {
-                        label: '类型',
-                        name: ''
-                    }, {
-                        label: '备注',
-                        name: ''
+                        label: '分类名称',
+                        name: 'typeName'
                     }, {
                         label: '创建时间',
-                        name: '',
+                        name: 'createDate',
                     }, {
                         label: '创建人',
-                        name: ''
+                        name: 'createBy'
                     }, {
                         label: '更新时间',
-                        name: ''
+                        name: 'updateDate'
                     }, {
                         label: '更新人',
-                        name: ''
+                        name: 'updateBy'
                     }, {
-                        label: '备注',
-                        name: ''
+                        label: '启用',
+                        name: 'isUse'
 
                     },{
-                        label:"启用",
-                        name:''
+                        label:"备注",
+                        name:'remark'
                     }, {
                         label:"操作",
                         name:''
@@ -107,7 +105,7 @@ var vm = new Vue({
                 yes:function(index,layero){
                     var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
                     if(valided){
-
+                        document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(index);
                     }else{
                         layer.msg("基本属性不完整,请按要求填写!",{icon:2});
                     }

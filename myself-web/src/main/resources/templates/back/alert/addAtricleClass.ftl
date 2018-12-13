@@ -33,7 +33,7 @@
 	    </div>
 	    <div class="form-group">
 	        <label for="">备注</label>
-            <textarea class="form-control" rows="3" ></textarea>
+            <textarea class="form-control" rows="3" name="remark" ></textarea>
         </div>
     </form>
   </div>

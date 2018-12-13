@@ -26,17 +26,27 @@ function valid() {
     return valid;
 }
 
-function submitData() {
+function submitData(index) {
     var articleClass = getArticleClass();
-    $.get(createURL(''),articleClass,function (re) {
-        
+    console.log(articleClass);
+    $.get(createURL('/back/api/insert/articleClass'),articleClass,function (re) {
+        if(re.code===200){
+            layer.msg(re.message,{icon:1});
+            setTimeout(function () {
+                layer.close(index);
+            },2000)
+        }else if(re.code===500){
+            layer.msg(re.message,{icon:2});
+        }else{
+            layer.msg("系统异常",{icon:2});
+        }
     })
 }
 
 function getArticleClass(){
     var articleClass = {};
     articleClass.typeName = $("input[name='typeName']").val();
-    articleClass.isUse = $("input[name='isUse']").val();
-    articleClass.remark = $("input[name='remark']").val();
+    articleClass.isUse = $("select[name='isUse']").val();
+    articleClass.remark = $("textarea[name='remark']").val();
     return articleClass;
 }

@@ -21,6 +21,13 @@ public class PageResponse<T> implements Serializable {
     //当前页
     private Integer page;
 
+    public PageResponse(Integer tatol, Integer tatalCount, List<T> records, Integer page) {
+        this.tatol = tatol;
+        this.tatalCount = tatalCount;
+        this.records = records;
+        this.page = page;
+    }
+
     public Integer getTatol() {
         return tatol;
     }
@@ -51,5 +58,14 @@ public class PageResponse<T> implements Serializable {
 
     public void setPage(Integer page) {
         this.page = page;
+    }
+
+    /**
+     计算总页数
+     */
+    public static<T> PageResponse<T> getPageResponse(List<T> list,Integer count,Integer page,Integer rows){
+        //计算页数
+        Integer total = (count%rows)==0?(count/rows):(count/rows+1);
+        return new PageResponse<>(total,count,list,page);
     }
 }

@@ -51,7 +51,7 @@ hr {
 -------------------------------*/
 
 .login-body {
-    background: #65cea7 url("../../templateForPage/images/login-bg.jpg") no-repeat fixed;
+    background: #65cea7 url("../image/login-bg.jpg") no-repeat fixed;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -304,17 +304,17 @@ hr {
 }
 
 .custom-nav > li.menu-list > a {
-    background: transparent url(../../templateForPage/images/plus-white.png) no-repeat 93% center;
+    background: transparent url(../image/plus-white.png) no-repeat 93% center;
 }
 
 .custom-nav > li.menu-list > a:hover {
     background-color: #353f4f;
-    background-image: url(../../templateForPage/images/plus.png);
+    background-image: url(../image/plus.png);
 }
 
 .custom-nav > li.nav-active > a {
     background-color: #353f4f;
-    background-image: url(../../templateForPage/images/minus.png);
+    background-image: url(../image/minus.png);
     color: #65cea7;
 }
 
@@ -323,7 +323,7 @@ hr {
 }
 
 .custom-nav > li.nav-active > a:hover {
-    background-image: url(../../templateForPage/images/minus.png);
+    background-image: url(../image/minus.png);
 }
 
 .custom-nav > li.active > a,
@@ -334,15 +334,15 @@ hr {
 }
 
 .custom-nav > li.menu-list.active > a {
-    background-image: url(../../templateForPage/images/plus.png);
+    background-image: url(../image/plus.png);
 }
 
 .custom-nav > li.nav-active.active > a {
-    background-image: url(../../templateForPage/images/minus.png);
+    background-image: url(../image/minus.png);
 }
 
 .custom-nav > li.nav-active.active > a:hover {
-    background-image: url(../../templateForPage/images/minus.png);
+    background-image: url(../image/minus.png);
 }
 
 .custom-nav li .fa {

@@ -6,7 +6,7 @@
     <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <link rel="shortcut icon" href="${staticRoot}/templateForPage/images/travel.png" type="image/png">
+    <link rel="shortcut icon" href="${staticRoot}/back/image/travel.png" type="image/png">
 
     <title>Travel</title>
 
@@ -22,7 +22,7 @@
     <div class="left-side sticky-left-side" >
         <!--logo and iconic logo start-->
         <div class="logo">
-            <img src="${staticRoot}/templateForPage/images/logo.png" alt="">
+            <img src="${staticRoot}/back/image/logo.png" alt="">
         </div>
         <!--logo and iconic logo end-->
 
@@ -70,7 +70,7 @@
                 </li>
                 <li id="operation">
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="${staticRoot}/templateForPage/images/photos/user-avatar.png" alt="" />
+                        <img src="${staticRoot}/back/image/user-avatar.png" alt="" />
                         ${username}
                         <span class="caret"></span>
                     </a>

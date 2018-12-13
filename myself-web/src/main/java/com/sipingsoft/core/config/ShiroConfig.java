@@ -22,7 +22,6 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import com.sipingsoft.core.shiro.ShiroSessionListener;
 import com.sipingsoft.core.shiro.UserRealm;

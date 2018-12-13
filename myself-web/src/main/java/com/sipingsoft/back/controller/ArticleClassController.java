@@ -1,16 +1,21 @@
 package com.sipingsoft.back.controller;
 
+
 import com.sipingsoft.back.entity.ArticleClass;
 import com.sipingsoft.back.service.ArticleClassService;
+import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 文章分类控制层
- * @author HeChunXiao
- * @since 2018-12-13 上午 9:58
+ * <p>
+ * 文章分类 前端控制器
+ * </p>
+ *
+ * @author He Chunxiao
+ * @since 2018-12-13
  */
 @RestController
 public class ArticleClassController {
@@ -18,13 +23,28 @@ public class ArticleClassController {
     @Autowired
     private ArticleClassService articleClassService;
 
+
     /**
-     * 插入文章分类
-     * @param articleClass 文章分类实体
+     * 文章分类列表
+     * @param page
+     * @param rows
+     * @param articleClass
      * @return
      */
-    @GetMapping("/back")
-    public ResponseMessage<ArticleClass> insert(ArticleClass articleClass){
-        return articleClassService.insert(articleClass);
+    @GetMapping("back/api/list/articleClass")
+    public PageResponse<ArticleClass> findArticleClassList(Integer page,Integer rows,ArticleClass articleClass){
+        return  articleClassService.findArticleClassList(page,rows,articleClass);
     }
+
+    /**
+     * 插入文章分类
+     * @param articleClass
+     * @return
+     */
+    @GetMapping("/back/api/insert/articleClass")
+    public ResponseMessage<ArticleClass> insetArticleClass( ArticleClass articleClass){
+        return articleClassService.insertArticleClass(articleClass);
+    }
+
 }
+
