@@ -81,6 +81,12 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
      */
     @Override
     public ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass) {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String updateDate = simpleDateFormat.format(date);
+        articleClass.setUpdateDate(updateDate);
+        SysUser sysUser = ShiroUtils.getLoginUser();
+        articleClass.setUpdateBy(sysUser.getUserId().intValue());
         articleClassMapper.updateById(articleClass);
         return new ResponseMessage<>(200);
     }

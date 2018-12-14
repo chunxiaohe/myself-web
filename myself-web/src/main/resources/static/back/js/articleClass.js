@@ -21,42 +21,51 @@ var vm = new Vue({
                 colModel: [{
                     label: '分类名称',
                     name: 'typeName',
-                    align: 'center'
+                    align: 'center',
+                    sortable:false
                 }, {
                     label: '创建时间',
                     name: 'createDate',
                     align: 'center',
                     width: 110,
+                    sortable:false
                 }, {
                     label: '创建人',
                     name: 'createBy',
                     width: 60,
-                    align: 'center'
+                    align: 'center',
+                    sortable:false
                 }, {
                     label: '更新时间',
                     name: 'updateDate',
                     width: 110,
-                    align: 'center'
+                    align: 'center',
+                    sortable:false
                 }, {
                     label: '更新人',
                     name: 'updateBy',
                     width: 60,
-                    align: 'center'
+                    align: 'center',
+                    sortable:false
                 }, {
                     label: "备注",
+                    editable:true,
                     name: 'remark',
-                    align: 'center'
+                    align: 'center',
+                    sortable:false,
                 }, {
                     label: '状态',
                     name: 'isUse',
                     width: 50,
                     align: 'center',
-                    formatter: isUse
+                    formatter: isUse,
+                    sortable:false
                 }, {
                     label: "操作",
                     name: '',
                     width: 50,
                     align: 'center',
+                    sortable:false,
                     formatter: function (cellValue, options, cellObject) {
                         return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
                     }
