@@ -38,6 +38,10 @@ public class ResponseMessage<T> {
         this.message = message;
     }
 
+    public ResponseMessage(Integer code) {
+        this.code = code;
+    }
+
     public Integer getCode() {
         return code;
     }

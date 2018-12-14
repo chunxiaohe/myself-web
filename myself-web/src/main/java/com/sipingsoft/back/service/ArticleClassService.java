@@ -29,4 +29,18 @@ public interface ArticleClassService extends IService<ArticleClass> {
      * @return
      */
     PageResponse<ArticleClass> findArticleClassList(Integer page,Integer rows,ArticleClass articleClass);
+
+    /**
+     * 更新文章分类状态(1:启用 2:禁用)
+     * @param articleClass
+     * @return
+     */
+    ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass);
+
+    /**
+     * 删除 文章分类
+     * @param id 分类id
+     * @return
+     */
+    ResponseMessage<ArticleClass> deleteArticleClassById(Integer id);
 }

@@ -46,5 +46,25 @@ public class ArticleClassController {
         return articleClassService.insertArticleClass(articleClass);
     }
 
+    /**
+     * 更新文章分类启用类型
+     * @param articleClass
+     * @return
+     */
+    @GetMapping("/back/api/update/isUse")
+    public ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass){
+        return articleClassService.updateIsUseById(articleClass);
+    }
+
+    /**
+     * 删除文章分类
+     * @param id
+     * @return
+     */
+    @GetMapping("/back/api/delete/articleClass")
+    public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id){
+        return articleClassService.deleteArticleClassById(id);
+    }
+
 }
 

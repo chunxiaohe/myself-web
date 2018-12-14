@@ -27,13 +27,13 @@
             <div class="col-sm-3 col-md-3 col-lg-3 mb10">
                 <div class="form-group">
                     <label for="">类型名称</label>
-                    <input type="text" class="form-control" id="orderNo" >
+                    <input  class="form-control" id="typeName" >
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 mb10">
                 <div class="form-group">
                     <label for="">类型状态</label>
-                    <select name="status" id="status" class="form-control">
+                    <select name="isUse" id="isUse" class="form-control">
                         <option value="0"></option>
                         <option value="1">启用</option>
                         <option value="2">禁用</option>

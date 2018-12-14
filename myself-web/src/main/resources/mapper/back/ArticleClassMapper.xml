@@ -26,7 +26,7 @@
         FROM article_class arc
       <where>
           <if test="articleClass.typeName != null and articleClass.typeName != '' ">
-              AND arc.type_name = #{articleClass.typeName}
+              AND arc.type_name LIKE CONCAT('%',#{articleClass.typeName},'%')
           </if>
           <if test="articleClass.isUse != null and articleClass.isUse != '' ">
               AND arc.is_use = #{articleClass.isUse}
@@ -40,7 +40,7 @@
         FROM article_class
         <where>
             <if test="articleClass.typeName != null and articleClass.typeName != '' ">
-                AND type_name = #{articleClass.typeName}
+                AND type_name LIKE CONCAT('%',#{articleClass.typeName},'%')
             </if>
             <if test="articleClass.isUse != null and articleClass.isUse != '' ">
                 AND is_use = #{articleClass.isUse}

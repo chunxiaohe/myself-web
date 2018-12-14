@@ -65,7 +65,7 @@ public class ShiroConfig {
 		SimpleCookie simpleCookie = new SimpleCookie();
 		simpleCookie.setHttpOnly(true);
         //设置cookie过期时间(单位S) 30天 默认 -1  表示关闭浏览器时失效
-		simpleCookie.setMaxAge(2592000);
+		simpleCookie.setMaxAge(-1);
         //cookie的名字必须
 		simpleCookie.setName("simpleCookie");
 		return simpleCookie;
