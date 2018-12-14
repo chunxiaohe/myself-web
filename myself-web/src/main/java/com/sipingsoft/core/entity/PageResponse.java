@@ -10,10 +10,10 @@ import java.util.List;
 public class PageResponse<T> implements Serializable {
 
     //总页数
-    private Integer tatol;
+    private Integer total;
 
     //总条目数
-    private Integer tatalCount;
+    private Integer totalCount;
 
     //返回的数据
     private List<T> records;
@@ -21,27 +21,27 @@ public class PageResponse<T> implements Serializable {
     //当前页
     private Integer page;
 
-    public PageResponse(Integer tatol, Integer tatalCount, List<T> records, Integer page) {
-        this.tatol = tatol;
-        this.tatalCount = tatalCount;
+    public PageResponse(Integer total, Integer totalCount, List<T> records, Integer page) {
+        this.total = total;
+        this.totalCount = totalCount;
         this.records = records;
         this.page = page;
     }
 
-    public Integer getTatol() {
-        return tatol;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setTatol(Integer tatol) {
-        this.tatol = tatol;
+    public void setTotal(Integer tatol) {
+        this.total = tatol;
     }
 
-    public Integer getTatalCount() {
-        return tatalCount;
+    public Integer getTotalCount() {
+        return totalCount;
     }
 
-    public void setTatalCount(Integer tatalCount) {
-        this.tatalCount = tatalCount;
+    public void setTotalCount(Integer tatalCount) {
+        this.totalCount = tatalCount;
     }
 
     public List<T> getRecords() {
@@ -63,9 +63,9 @@ public class PageResponse<T> implements Serializable {
     /**
      计算总页数
      */
-    public static<T> PageResponse<T> getPageResponse(List<T> list,Integer count,Integer page,Integer rows){
+    public static<T> PageResponse<T> getPageResponse(List<T> list,Integer totalCount,Integer page,Integer rows){
         //计算页数
-        Integer total = (count%rows)==0?(count/rows):(count/rows+1);
-        return new PageResponse<>(total,count,list,page);
+        Integer total = (totalCount%rows)==0?(totalCount/rows):(totalCount/rows+1);
+        return new PageResponse<>(total,totalCount,list,page);
     }
 }

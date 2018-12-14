@@ -70,8 +70,8 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
         map.put("pageStart", (page - 1) * rows);
         map.put("pageSize", rows);
         List<ArticleClass> list = articleClassMapper.findArticleClassList(map);
-        Integer count = articleClassMapper.findArticleClassCount(map);
-        return PageResponse.getPageResponse(list, count, page, rows);
+        Integer totalCount = articleClassMapper.findArticleClassCount(map);
+        return PageResponse.getPageResponse(list, totalCount, page, rows);
     }
 
     /**

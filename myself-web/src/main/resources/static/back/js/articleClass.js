@@ -25,19 +25,22 @@ var vm = new Vue({
                 }, {
                     label: '创建时间',
                     name: 'createDate',
-                    align: 'center'
+                    align: 'center',
+                    width: 110,
                 }, {
                     label: '创建人',
                     name: 'createBy',
-                    width: 80,
+                    width: 60,
                     align: 'center'
                 }, {
                     label: '更新时间',
-                    name: 'updateDate'
+                    name: 'updateDate',
+                    width: 110,
+                    align: 'center'
                 }, {
                     label: '更新人',
                     name: 'updateBy',
-                    width: 80,
+                    width: 60,
                     align: 'center'
                 }, {
                     label: "备注",
@@ -46,13 +49,13 @@ var vm = new Vue({
                 }, {
                     label: '状态',
                     name: 'isUse',
-                    width: 100,
+                    width: 50,
                     align: 'center',
                     formatter: isUse
                 }, {
                     label: "操作",
                     name: '',
-                    width: 100,
+                    width: 50,
                     align: 'center',
                     formatter: function (cellValue, options, cellObject) {
                         return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
@@ -68,7 +71,7 @@ var vm = new Vue({
                     root: "records", // 表格数据
                     page: "page", // 页码
                     total: "total", // 总页数
-                    records: "totaicount", // 总条数
+                    records: "totalCount", // 总条数
                     repeatitems: false,
                 },
                 pager: "#jqGridPager",
@@ -87,7 +90,7 @@ var vm = new Vue({
                                 layer.msg('操作异常', {icon: 2});
                             }
                             layer.close(index);
-                            $("#jqGrid").trigger("reloadGrid");
+                            update();
                         })
                     })
                 } else if (num == 3) {
@@ -111,29 +114,19 @@ var vm = new Vue({
         reset() {
             $("#typeName").val('');
             $("#isUse").val('');
-            $("#jqGrid").setGridParam({
-                datatype: 'json',
-                page: 1
-            }).jqGrid('setGridParam', {
-                page: 1,
-                postData: {
-                    typeName:null,
-                    isUse:null
-                }
-            }).trigger(" ");
+            update();
         },
         search() {
             var typeName = $('#typeName').val();
-            var isUse  =$('#isUse').val();
-            console.log(typeName+":"+isUse)
+            var isUse = $('#isUse').val();
             $("#jqGrid").setGridParam({
                 datatype: 'json',
                 page: 1
             }).jqGrid('setGridParam', {
                 page: 1,
                 postData: {
-                    typeName:typeName,
-                    isUse:isUse==0?null:isUse
+                    typeName: typeName,
+                    isUse: isUse == 0 ? null : isUse
                 }
             }).trigger("reloadGrid");
         },
@@ -145,9 +138,14 @@ var vm = new Vue({
                 area: ['30%', '52%'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
+                    console.log(index);
                     var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
                     if (valided) {
                         document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(index);
+                        setTimeout(function () {
+                            layer.close(index);
+                        },2000);
+                        update();
                     } else {
                         layer.msg("基本属性不完整,请按要求填写!", {icon: 2});
                     }
@@ -180,4 +178,15 @@ function updateIsUse(id, isUse, index) {
     })
 }
 
-
+function update(){
+    $("#jqGrid").setGridParam({
+        datatype: 'json',
+        page: 1
+    }).jqGrid('setGridParam', {
+        page: 1,
+        postData: {
+            typeName: null,
+            isUse: null
+        }
+    }).trigger("reloadGrid");
+}

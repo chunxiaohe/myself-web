@@ -47,7 +47,7 @@
             </div>
         </form>
     </div>
-    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width: 60%;">
+    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12" >
         <#--<button class="btn  btn-info" style="display: block; margin:10px 0;" @click="createSaleOrder">新增</button> -->
         <table id="jqGrid"></table>
         <div id="jqGridPager" ></div>

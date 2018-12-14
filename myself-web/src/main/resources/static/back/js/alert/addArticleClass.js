@@ -28,22 +28,20 @@ function valid() {
 
 function submitData(index) {
     var articleClass = getArticleClass();
-    console.log(articleClass);
-    $.get(createURL('/back/api/insert/articleClass'),articleClass,function (re) {
-        if(re.code===200){
-            layer.msg(re.message,{icon:1});
-            setTimeout(function () {
-                layer.close(index);
-            },2000)
-        }else if(re.code===500){
-            layer.msg(re.message,{icon:2});
-        }else{
-            layer.msg("系统异常",{icon:2});
+    $.get(createURL('/back/api/insert/articleClass'), articleClass, function (re) {
+        console.log(re);
+        console.log(index);
+        if (re.code === 200) {
+            layer.msg(re.message, {icon: 1});
+        } else if (re.code === 500) {
+            layer.msg(re.message, {icon: 2});
+        } else {
+            layer.msg("系统异常", {icon: 2});
         }
     })
 }
 
-function getArticleClass(){
+function getArticleClass() {
     var articleClass = {};
     articleClass.typeName = $("input[name='typeName']").val();
     articleClass.isUse = $("select[name='isUse']").val();

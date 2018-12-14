@@ -16,7 +16,7 @@
 
     <sql id="base_sql">
         arc.id,arc.type_name,arc.remark,arc.is_use,arc.create_by,
-        DATE_FORMAT(arc.create_date,'%Y-%m-%d') create_date ,DATE_FORMAT(arc.update_date,'%Y-%m-%d') update_date,
+        DATE_FORMAT(arc.create_date,'%Y-%m-%d %H:%i:%s') create_date ,DATE_FORMAT(arc.update_date,'%Y-%m-%d %H:%i:%s') update_date,
         arc.update_by
     </sql>
 
@@ -32,6 +32,7 @@
               AND arc.is_use = #{articleClass.isUse}
           </if>
       </where>
+        ORDER BY arc.create_date
         LIMIT #{pageStart},#{pageSize}
     </select>
 
