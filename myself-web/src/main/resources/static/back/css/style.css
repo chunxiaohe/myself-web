@@ -6,7 +6,7 @@ Author: ThemeBucket
 @import url('../../core/css/bootstrap/bootstrap.css');
 @import url('../../core/css/bootstrap/bootstrap-reset.css');
 @import url('../../core/css/jquery/jquery-ui-1.10.3.css');
-@import url('../../core/css/fonts/font-awesome.min.css');
+@import url('../../core/css/font-awesome/css/font-awesome.css');
 
 body {
     background: #424f63;
@@ -2554,7 +2554,7 @@ table.display tr.even.gradeX, table.display tr.gradeX, tr.even.gradeU td.sorting
 }
 
 input.spinner[type="text"], input.spinner[type="password"], input.spinner[type="datetime"], input.spinner[type="datetime-local"], input.spinner[type="date"], input.spinner[type="month"], input.spinner[type="time"], input.spinner[type="week"], input.spinner[type="number"], input.spinner[type="email"], input.spinner[type="url"], input.spinner[type="search"], input.spinner[type="tel"], input.spinner[type="color"] {
-    background: url("../../templateForPage/images/input-spinner.gif") right no-repeat !important;
+    background: url("../image/input-spinner.gif") right no-repeat !important;
 }
 
 /*--------------------
@@ -2822,7 +2822,7 @@ div.tagsinput span.tag a {
 --------------------------*/
 
 .lock-screen {
-    background: #6fc4a5 url("../../templateForPage/images/lockscreen-bg.jpg") no-repeat fixed;
+    background: #6fc4a5 url("../image/lockscreen-bg.jpg") no-repeat fixed;
     background-size: cover;
     width: 100%;
     height: 100%;

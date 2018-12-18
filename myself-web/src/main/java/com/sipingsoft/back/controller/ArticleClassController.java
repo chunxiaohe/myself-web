@@ -7,6 +7,8 @@ import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -47,13 +49,13 @@ public class ArticleClassController {
     }
 
     /**
-     * 更新文章分类启用类型
+     * 更新文章分类信息
      * @param articleClass
      * @return
      */
-    @GetMapping("/back/api/update/isUse")
+    @RequestMapping("/back/api/update/articleClass")
     public ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass){
-        return articleClassService.updateIsUseById(articleClass);
+        return articleClassService.updateArticleClassById(articleClass);
     }
 
     /**

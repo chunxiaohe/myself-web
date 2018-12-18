@@ -1,6 +1,6 @@
 package com.sipingsoft.back.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sipingsoft.back.entity.ArticleClass;
 
 import java.util.List;

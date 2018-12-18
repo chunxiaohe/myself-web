@@ -73,4 +73,9 @@ public class BackPageController {
     public String addAtricleClass(){
         return BackPageUtil.BACK_ADD_ATRICLE_CLASS;
     }
+
+    @GetMapping("/back/page/payType")
+    public String payType(){
+        return BackPageUtil.BACK_PAY_TYPE;
+    }
 }

@@ -2,6 +2,8 @@ package com.sipingsoft.core.shiro;
 
 import java.util.Set;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.SysUserMapper;
 import com.sipingsoft.core.util.EhcacheUtil;
@@ -24,11 +26,10 @@ import org.springframework.stereotype.Component;
 
 
 /**
- *
  * @author He Chunxiao
  */
 @Component
-public class UserRealm extends AuthorizingRealm  {
+public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -48,7 +49,7 @@ public class UserRealm extends AuthorizingRealm  {
             permissions = shiroReamService.findPermissions(sysUser.getUserId().intValue());
             permissions.forEach(s -> System.out.println(s));
             //加入缓存
-            EhcacheUtil.getInstance().putEhcacheInfo("authorizationCache","permissions",permissions);
+            EhcacheUtil.getInstance().putEhcacheInfo("authorizationCache", "permissions", permissions);
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setStringPermissions(permissions);
@@ -64,9 +65,9 @@ public class UserRealm extends AuthorizingRealm  {
         if (user == null) {
             UsernamePasswordToken token = (UsernamePasswordToken) authToken;
             //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
-            SysUser sysUser = new SysUser();
-            sysUser.setUsername(token.getUsername());
-            user = sysUserMapper.selectOne(sysUser);
+            QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(SysUser::getUsername, token.getUsername());
+            user = sysUserMapper.selectOne(queryWrapper);
             if (user == null) {
                 throw new UnknownAccountException();
             }

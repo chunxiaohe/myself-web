@@ -18,54 +18,57 @@ var vm = new Vue({
                 url: createURL('back/api/list/articleClass'),
                 datatype: "json",
                 mtype: 'get',
+                cellEdit: true,
+                cellurl: createURL('/back/api/update/articleClass'),
                 colModel: [{
                     label: '分类名称',
                     name: 'typeName',
                     align: 'center',
-                    sortable:false
+                    sortable: false,
+                    editable: true,
                 }, {
                     label: '创建时间',
                     name: 'createDate',
                     align: 'center',
                     width: 110,
-                    sortable:false
+                    sortable: false
                 }, {
                     label: '创建人',
                     name: 'createBy',
                     width: 60,
                     align: 'center',
-                    sortable:false
+                    sortable: false
                 }, {
                     label: '更新时间',
                     name: 'updateDate',
                     width: 110,
                     align: 'center',
-                    sortable:false
+                    sortable: false
                 }, {
                     label: '更新人',
                     name: 'updateBy',
                     width: 60,
                     align: 'center',
-                    sortable:false
+                    sortable: false
                 }, {
                     label: "备注",
-                    editable:true,
+                    editable: true,
                     name: 'remark',
                     align: 'center',
-                    sortable:false,
+                    sortable: false,
                 }, {
                     label: '状态',
                     name: 'isUse',
                     width: 50,
                     align: 'center',
                     formatter: isUse,
-                    sortable:false
+                    sortable: false
                 }, {
                     label: "操作",
                     name: '',
                     width: 50,
                     align: 'center',
-                    sortable:false,
+                    sortable: false,
                     formatter: function (cellValue, options, cellObject) {
                         return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
                     }
@@ -105,7 +108,7 @@ var vm = new Vue({
                 } else if (num == 3) {
                     var isUse = $(this).attr('isUse');
                     if (isUse == 1) {
-                        layer.alert("确认禁用改文章分类?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                        layer.alert("确认禁用该文章分类?", {icon: 3, btn: ['确认', '取消']}, function (index) {
                             updateIsUse(id, 2, index);
                         })
                     } else if (isUse == 2) {
@@ -153,7 +156,7 @@ var vm = new Vue({
                         document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(index);
                         setTimeout(function () {
                             layer.close(index);
-                        },2000);
+                        }, 2000);
                         update();
                     } else {
                         layer.msg("基本属性不完整,请按要求填写!", {icon: 2});
@@ -172,7 +175,7 @@ function isUse(cellValue, options, cellObject) {
 }
 
 function updateIsUse(id, isUse, index) {
-    $.get(createURL('/back/api/update/isUse'), {id: id, isUse: isUse}, function (re) {
+    $.get(createURL('/back/api/update/articleClass'), {id: id, isUse: isUse}, function (re) {
         if (re.code == 200 && isUse == 1) {
             layer.msg("启用成功", {icon: 1});
             layer.close(index);
@@ -187,7 +190,7 @@ function updateIsUse(id, isUse, index) {
     })
 }
 
-function update(){
+function update() {
     $("#jqGrid").setGridParam({
         datatype: 'json',
         page: 1
@@ -199,3 +202,5 @@ function update(){
         }
     }).trigger("reloadGrid");
 }
+
+
