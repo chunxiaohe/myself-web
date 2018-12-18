@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sipingsoft.core.util.FormatDateUtil;
+
 import java.io.Serializable;
-import java.util.Date;
 
 @TableName(value = "pay_type")
 public class PayType implements Serializable {
@@ -19,16 +21,28 @@ public class PayType implements Serializable {
     private String address;
 
     @TableField(value = "create_date")
-    private Date createDate;
+    private String createDate;
 
     @TableField(value = "create_by")
     private Integer createBy;
 
     @TableField(value = "update_date")
-    private Date updateDate;
+    private String updateDate;
 
     @TableField(value = "update_by")
-    private Date updateBy;
+    private Integer updateBy;
+
+    /**
+     * 备注
+     */
+    @TableField(value = "remark")
+    private String remark;
+
+    /**
+     * 1.微信 2.支付宝
+     */
+    @TableField(value = "type")
+    private Integer type;
 
     private static final long serialVersionUID = 1L;
 
@@ -67,14 +81,15 @@ public class PayType implements Serializable {
     /**
      * @return create_date
      */
-    public Date getCreateDate() {
+    @JsonSerialize(using = FormatDateUtil.class)
+    public String getCreateDate() {
         return createDate;
     }
 
     /**
      * @param createDate
      */
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
@@ -95,29 +110,66 @@ public class PayType implements Serializable {
     /**
      * @return update_date
      */
-    public Date getUpdateDate() {
+    @JsonSerialize(using = FormatDateUtil.class)
+    public String getUpdateDate() {
         return updateDate;
     }
 
     /**
      * @param updateDate
      */
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 
     /**
      * @return update_by
      */
-    public Date getUpdateBy() {
+    public Integer getUpdateBy() {
         return updateBy;
     }
 
     /**
      * @param updateBy
      */
-    public void setUpdateBy(Date updateBy) {
+    public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
+    }
+
+    /**
+     * 获取备注
+     *
+     * @return remark - 备注
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param remark 备注
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    /**
+     * 获取1.微信 2.支付宝
+     *
+     * @return type - 1.微信 2.支付宝
+     */
+    public Integer getType() {
+        return type;
+    }
+
+    /**
+     * 设置1.微信 2.支付宝
+     *
+     * @param type 1.微信 2.支付宝
+     */
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     @Override
@@ -132,6 +184,8 @@ public class PayType implements Serializable {
         sb.append(", createBy=").append(createBy);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", updateBy=").append(updateBy);
+        sb.append(", remark=").append(remark);
+        sb.append(", type=").append(type);
         sb.append("]");
         return sb.toString();
     }

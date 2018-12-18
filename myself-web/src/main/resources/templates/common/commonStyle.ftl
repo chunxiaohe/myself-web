@@ -7,3 +7,5 @@
 <link rel="stylesheet" href="${staticRoot}/core/css/bootstrap/bootstrapValidator.css">
 <link rel="stylesheet" href="${staticRoot}/core/css/bootstrap/fileinput.css">
 <link rel="stylesheet" href="${staticRoot}/core/css/animate/animate.css">
+<link rel="stylesheet" href="${staticRoot}/core/css/layui/layui.css">
+

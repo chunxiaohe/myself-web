@@ -9,6 +9,7 @@
 <script src="${staticRoot}/core/js/laydate/laydate.js" charset="utf-8"></script>
 <script src="${staticRoot}/core/js/bootstrap/fileinput.js" charset="utf-8"></script>
 <script src="${staticRoot}/core/js/bootstrap/zh.js" charset="utf-8"></script>
+<script src="${staticRoot}/core/js/layui/layui.js" charset="utf-8"></script>
 <script>
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.styleUI = 'Bootstrap';

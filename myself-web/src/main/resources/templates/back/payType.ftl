@@ -16,6 +16,42 @@
         .col-lg-3{
             width:20% ;
         }
+        .a-upload {
+            float: right;
+            margin-top: -34px;
+            height: 34px;
+            padding: 4px 10px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #fff3fe;
+            background: #199a45;
+            border: 1px solid #199a45;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer;
+
+
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
     </style>
 </head>
 <body style="background: #EFF0F4;height: 500px">
@@ -31,6 +67,6 @@
     </div>
 
 </div>
-<script src="${staticRoot}/back/js/articleClass.js"></script>
+<script src="${staticRoot}/back/js/payType.js"></script>
 </body>
 </html>
