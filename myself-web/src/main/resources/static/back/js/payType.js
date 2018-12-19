@@ -1,3 +1,6 @@
+//上传的文件
+var file;
+
 var vm = new Vue({
     el: '#app',
     data: {},
@@ -19,36 +22,42 @@ var vm = new Vue({
                     align: 'center',
                     sortable: false,
                 }, {
+                    label: '图片名',
+                    name: 'fileName',
+                    align: 'center',
+                    sortable: false,
+                    width: 80
+                }, {
                     label: '类型',
                     name: 'type',
                     align: 'center',
-                    width: 50,
+                    width: 40,
                     sortable: false,
-                    formatter:function (cellValue,options,cellObject) {
-                        return cellObject.type==1 ? '微信':'支付宝'
+                    formatter: function (cellValue, options, cellObject) {
+                        return cellObject.type == 1 ? '微信' : '支付宝'
                     }
                 }, {
                     label: '创建时间',
                     name: 'createDate',
                     align: 'center',
-                    width: 110,
+                    width: 80,
                     sortable: false
                 }, {
                     label: '创建人',
                     name: 'createBy',
-                    width: 60,
+                    width: 40,
                     align: 'center',
                     sortable: false
                 }, {
                     label: '更新时间',
                     name: 'updateDate',
-                    width: 110,
+                    width: 80,
                     align: 'center',
                     sortable: false
                 }, {
                     label: '更新人',
                     name: 'updateBy',
-                    width: 60,
+                    width: 40,
                     align: 'center',
                     sortable: false
                 }, {
@@ -56,15 +65,24 @@ var vm = new Vue({
                     name: 'remark',
                     align: 'center',
                     sortable: false,
+                    width: 50
+                }, {
+                    label: '状态',
+                    name: 'isUse',
+                    width: 50,
+                    align: 'center',
+                    formatter: isUse,
+                    sortable: false
                 }, {
                     label: "操作",
                     name: '',
-                    width: 100,
+                    width: 70,
                     align: 'center',
                     sortable: false,
                     formatter: function (cellValue, options, cellObject) {
-                        return "<input type='button'  @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='查看'/>"
-                                +"<input style='margin-left: 5px;background-color: #ff0000' type='button'  @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/>";
+                        return "<input num='1' type='button'  @click='operate' class='btn btn-info' fileName='" + cellObject.fileName + "' ids='" + cellObject.id + "' value='查看'/>"
+                            + "<input num='2' style='margin-left: 5px;background-color: #ff0000' type='button'  @click='operate'" +
+                            " class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='删除'/>";
                     }
                 }
                 ],
@@ -86,32 +104,66 @@ var vm = new Vue({
             });
             $("tbody").on('click', 'input[type=button]', function () {
                 var id = $(this).attr('ids');
-                layer.alert("删除不可恢复,确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                    $.get(createURL('/back/api/delete/payType'), {id: id}, function (re) {
-                        if (re.code == 200) {
-                            layer.msg(re.message, {icon: 1});
-                        } else {
-                            layer.msg('操作异常', {icon: 2});
-                        }
-                        layer.close(index);
-                        update();
-                    })
-                })
+                var num = $(this).attr('num');
+                if (num == 1) {
+                    //查看
+                    var fileName = $(this).attr('fileName');
+                    showPic(fileName);
+                } else if (num == 2) {
+                    //删除
+                    var address = $(this).attr('address');
+                    deletePic(id, address);
+                } else if (num == 3) {
+                    //启用,禁用
+                    var isUse = $(this).attr("isUse");
+                    var type = $(this).attr("pay");
+                    if (isUse == 1) {
+                        layer.alert("确认禁用该图片?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                            updatePayType(id,type, 2, index);
+                        })
+                    } else if (isUse == 2) {
+                        layer.alert("确实启用该图片?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                            updatePayType(id, type,1, index);
+                        })
+                    } else {
+                        layer.alert("操作异常!", {icon: 5})
+                    }
+                } else {
+                    layer.msg("操作异常", {icon: 5});
+                }
             })
         },
         create() {
             layer.open({
                 title: '上传支付二维码',
-                content: teamplateHtml,
+                type: 2,
+                content: createURL('/back/page/addPaytype'),
                 area: ['30%', '52%'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
-
+                    var valided = document.getElementById($(layero).attr('id')).getElementsByTagName("iframe")[0].contentWindow.valid();
+                    if (valided) {
+                        var flag = document.getElementById($(layero).attr('id')).getElementsByTagName("iframe")[0].contentWindow.submitFile();
+                        if (flag) {
+                            setTimeout(function () {
+                                layer.close(index);
+                            }, 2000)
+                            update();
+                        }
+                    } else {
+                        layer.msg("基本信息不完整");
+                    }
                 }
             })
         }
     }
 });
+
+function isUse(cellValue, options, cellObject) {
+    return cellObject.isUse == 1 ?
+        "<input type='button' pay='"+cellObject.type+"' isUse='1' num='3' style='background-color: #00B83F'  class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='启用'/> "
+        : "<input type='button' pay='"+cellObject.type+"' isUse='2' num='3' style='background-color: #ff0000' class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='禁用'/> ";
+}
 
 function update() {
     $("#jqGrid").setGridParam({
@@ -122,39 +174,48 @@ function update() {
     }).trigger("reloadGrid");
 }
 
-var teamplateHtml =" <div class='form-group'>"
-    +"<label for=''>选择图片</label>"
-    +"<input class='form-control' style='width: 80%'>"
-    +"<a  class='a-upload '>" +
-    "    <input  type='file' name='' id=''>上传图片" +
-    "</a>"
-    +"</div>"
-    +"<div class='form-group'>"
-    +"<label for=''>支付方式</label>"
-    +"<select name='isUse' id='isUse' class='form-control'>"
-    +"<option value='1' >微信</option>"
-    +"<option value='2'>支付宝</option>"
-    +"</select>"
-    +"</div>"
-    +"<div class='form-group'>"
-    +"<label for=''>备注</label>"
-    +"<textarea class='form-control' rows='3' name='remark' ></textarea>"
-    +"</div>"
-
-$(function () {
-    layui.use('upload', function(){
-        var upload = layui.upload;
-
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: '/upload/' //上传接口
-            ,done: function(res){
-                //上传完毕回调
-            }
-            ,error: function(){
-                //请求异常回调
-            }
-        });
+//查看图片
+function showPic(fileName) {
+    var staticRoot = $('input[name="staticRoot"]').val();
+    $('#payTypePic').attr('src', staticRoot + "/payType/" + fileName);
+    layer.open({
+        type: 1,
+        title: false,
+        closeBtn: 1,
+        area: ['400px', '400px'],
+        skin: 'layui-layer-nobg', // 没有背景色
+        shadeClose: true,
+        content: $('#payTypePic')
     });
-})
+}
+
+//删除图片
+function deletePic(id, address) {
+    layer.alert("删除不可恢复,确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+        $.get(createURL('/back/api/delete/payType'), {id: id, address: address}, function (re) {
+            if (re.code == 200) {
+                layer.msg(re.message, {icon: 1});
+            } else if (re.code == 500) {
+                layer.alert(re.message, {icon: 2});
+            } else {
+                layer.msg("操作异常", {icon: 2});
+            }
+            layer.close(index);
+            update();
+        })
+    })
+}
+
+function updatePayType(id,type, isUse, index) {
+    $.post(createURL('/back/api/update/payType'), {id: id, isUse: isUse,type:type}, function (re) {
+        if (re.code == 200) {
+            layer.msg(re.message, {icon: 1});
+            update()
+        } else if (re.code == 500) {
+            layer.msg(re.message, {icon: 2})
+        } else {
+            layer.msg("操作异常", {icon: 2});
+        }
+        layer.close(index)
+    })
+}

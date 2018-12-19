@@ -26,13 +26,13 @@ function valid() {
     return valid;
 }
 
-function submitData(index) {
+function submitData() {
+    var flag = false;
     var articleClass = getArticleClass();
     $.get(createURL('/back/api/insert/articleClass'), articleClass, function (re) {
-        console.log(re);
-        console.log(index);
         if (re.code === 200) {
             layer.msg(re.message, {icon: 1});
+            flag = true;
         } else if (re.code === 500) {
             layer.msg(re.message, {icon: 2});
         } else {

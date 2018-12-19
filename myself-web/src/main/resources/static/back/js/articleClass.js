@@ -150,16 +150,17 @@ var vm = new Vue({
                 area: ['30%', '52%'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
-                    console.log(index);
                     var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
                     if (valided) {
-                        document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(index);
-                        setTimeout(function () {
-                            layer.close(index);
-                        }, 2000);
-                        update();
+                        var flag = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData();
+                        if (flag) {
+                            setTimeout(function () {
+                                layer.close(index);
+                            }, 2000);
+                            update();
+                        }
                     } else {
-                        layer.msg("基本属性不完整,请按要求填写!", {icon: 2});
+                        layer.msg("基本属性不完整");
                     }
                 }
             })

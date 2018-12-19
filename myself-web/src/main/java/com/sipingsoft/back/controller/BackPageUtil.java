@@ -30,4 +30,8 @@ public class BackPageUtil {
      * 支付方式页面
      */
     public static final String BACK_PAY_TYPE = "/back/payType";
+    /**
+     * 添加 支付方式 弹出页面
+     */
+    public static final String BACK_ADD_PAY_TYPE = "/back/alert/addPayType";
 }

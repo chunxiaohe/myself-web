@@ -44,6 +44,18 @@ public class PayType implements Serializable {
     @TableField(value = "type")
     private Integer type;
 
+    /**
+     * 文件名字
+     */
+    @TableField(value = "file_name")
+    private String fileName;
+
+    /**
+     * 1.启用 2.禁用
+     */
+    @TableField(value = "is_use")
+    private Integer isUse;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -172,6 +184,42 @@ public class PayType implements Serializable {
         this.type = type;
     }
 
+    /**
+     * 获取文件名字
+     *
+     * @return file_name - 文件名字
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
+     * 设置文件名字
+     *
+     * @param fileName 文件名字
+     */
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    /**
+     * 获取1.启用 2.禁用
+     *
+     * @return is_use - 1.启用 2.禁用
+     */
+    public Integer getIsUse() {
+        return isUse;
+    }
+
+    /**
+     * 设置1.启用 2.禁用
+     *
+     * @param isUse 1.启用 2.禁用
+     */
+    public void setIsUse(Integer isUse) {
+        this.isUse = isUse;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -186,6 +234,8 @@ public class PayType implements Serializable {
         sb.append(", updateBy=").append(updateBy);
         sb.append(", remark=").append(remark);
         sb.append(", type=").append(type);
+        sb.append(", fileName=").append(fileName);
+        sb.append(", isUse=").append(isUse);
         sb.append("]");
         return sb.toString();
     }
