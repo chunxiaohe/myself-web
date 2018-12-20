@@ -1,6 +1,6 @@
 package com.sipingsoft.back.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sipingsoft.back.entity.SysMenu;
 import com.sipingsoft.back.entity.SysMenuNode;
 import org.apache.ibatis.annotations.Select;

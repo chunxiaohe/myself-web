@@ -1,6 +1,6 @@
 package com.sipingsoft.back.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sipingsoft.back.entity.ArticleClass;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
@@ -35,7 +35,7 @@ public interface ArticleClassService extends IService<ArticleClass> {
      * @param articleClass
      * @return
      */
-    ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass);
+    ResponseMessage<ArticleClass> updateArticleClassById(ArticleClass articleClass);
 
     /**
      * 删除 文章分类
@@ -43,4 +43,11 @@ public interface ArticleClassService extends IService<ArticleClass> {
      * @return
      */
     ResponseMessage<ArticleClass> deleteArticleClassById(Integer id);
+
+    /**
+     * 更新文章分类名
+     * @param articleClass
+     * @return
+     */
+    ResponseMessage<ArticleClass> updateTypeNameById(ArticleClass articleClass);
 }

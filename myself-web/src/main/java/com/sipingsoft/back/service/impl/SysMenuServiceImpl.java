@@ -1,6 +1,6 @@
 package com.sipingsoft.back.service.impl;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sipingsoft.back.entity.SysMenu;
 import com.sipingsoft.back.entity.SysMenuNode;
 import com.sipingsoft.back.entity.SysUser;

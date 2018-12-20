@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>审核</title><#include '../../common/commonStyle.ftl'><#include '../../common/commonScript.ftl'>
+  <title>添加文章类型</title><#include '../../common/commonStyle.ftl'><#include '../../common/commonScript.ftl'>
   <style>
   label {
   	font-weight:normal;

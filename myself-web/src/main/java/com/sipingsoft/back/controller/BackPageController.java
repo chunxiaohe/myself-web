@@ -73,4 +73,22 @@ public class BackPageController {
     public String addAtricleClass(){
         return BackPageUtil.BACK_ADD_ATRICLE_CLASS;
     }
+
+    /**
+     * 支付方式列表页面
+     * @return
+     */
+    @GetMapping("/back/page/payType")
+    public String payType(){
+        return BackPageUtil.BACK_PAY_TYPE;
+    }
+
+    /**
+     * 新增支付方式的弹出页面
+     * @return
+     */
+    @GetMapping("/back/page/addPaytype")
+    public String addPayType(){
+        return BackPageUtil.BACK_ADD_PAY_TYPE;
+    }
 }

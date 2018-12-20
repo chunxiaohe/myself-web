@@ -9,21 +9,29 @@ public class BackPageUtil {
     /**
      *后台登录页面
      */
-    public static final String BACK_LOGIN = "back/login";
+    public static final String BACK_LOGIN = "/back/login";
     /**
      *后台主页
      */
-    public static final String BACK_INDEX = "back/index";
+    public static final String BACK_INDEX = "/back/index";
     /**
      * 后台首页
      */
-    public static final String BACK_INDEX_CONTENT = "back/indexcontent";
+    public static final String BACK_INDEX_CONTENT = "/back/indexcontent";
     /**
      * 文章分类页面
      */
-    public static final String BACK_ATRICLE_CLASS = "back/atricleClass";
+    public static final String BACK_ATRICLE_CLASS = "/back/atricleClass";
     /**
      * 新增 文章分类 弹出页面
      */
     public static final String BACK_ADD_ATRICLE_CLASS = "/back/alert/addAtricleClass";
+    /**
+     * 支付方式页面
+     */
+    public static final String BACK_PAY_TYPE = "/back/payType";
+    /**
+     * 添加 支付方式 弹出页面
+     */
+    public static final String BACK_ADD_PAY_TYPE = "/back/alert/addPayType";
 }
