@@ -56,6 +56,16 @@ public class PayType implements Serializable {
     @TableField(value = "is_use")
     private Integer isUse;
 
+    /**
+     * 创建人姓名
+     */
+    private String createName;
+
+    /**
+     * 更新人姓名
+     */
+    private String updateName;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -218,6 +228,22 @@ public class PayType implements Serializable {
      */
     public void setIsUse(Integer isUse) {
         this.isUse = isUse;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getUpdateName() {
+        return updateName;
+    }
+
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
     }
 
     @Override

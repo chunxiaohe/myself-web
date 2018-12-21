@@ -15,8 +15,10 @@ spring:
     cache: false
     # jackson时间格式化
   jackson:
-      time-zone: GMT+8
+      time-zone: GMT+8 #时区
       date-format: yyyy-MM-dd HH:mm:ss
+      serialization:
+        write-dates-as-timestamps: false
   mvc:
     static-path-pattern: /static #指定springboot默认映射的文件夹
     #throw-exception-if-no-handler-found: true #出现错误时, 直接抛出异常

@@ -3,7 +3,7 @@
 <mapper namespace="com.sipingsoft.back.mapper.PayTypeMapper">
 
   <resultMap id="BaseResultMap" type="com.sipingsoft.back.entity.PayType">
-    <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="id" jdbcType="INTEGER" property="id" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_by" jdbcType="INTEGER" property="createBy" />
@@ -13,12 +13,36 @@
     <result column="type" jdbcType="BOOLEAN" property="type" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
     <result column="is_use" jdbcType="BOOLEAN" property="isUse" />
+      <result property="createName" column="createName"/>
+      <result property="updateName" column="updateName"/>
+
   </resultMap>
 
   <sql id="Base_Column_List">
     id, address, create_date, create_by, update_date, update_by, remark, `type`, file_name,
     is_use
   </sql>
+
+    <sql id="Column_List">
+    pty.id, pty.address, pty.create_date, pty.update_date, pty.remark, pty.`type`, pty.file_name,
+    pty.is_use,sysu.name createName, sysus.name updateName
+  </sql>
+
+    <select id="findPayTypeList" resultMap="BaseResultMap">
+      SELECT
+      <include refid="Column_List"/>
+      FROM pay_type pty
+      LEFT JOIN sys_user sysu
+      ON pty.create_by = sysu.user_id
+      LEFT JOIN sys_user sysus
+      ON pty.update_by = sysus.user_id
+      LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="java.lang.Integer">
+      select count(*)
+      from pay_type
+    </select>
 
 
 </mapper>

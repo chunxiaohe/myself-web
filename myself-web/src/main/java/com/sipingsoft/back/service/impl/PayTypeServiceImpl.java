@@ -40,10 +40,11 @@ public class PayTypeServiceImpl implements PayTypeService {
      */
     @Override
     public PageResponse<PayType> findPayTypeList(Integer page, Integer rows) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.last("LIMIT " + (page - 1) * rows + "," + rows);
-        List<PayType> list = payTypeMapper.selectList(queryWrapper);
-        Integer totalCount = payTypeMapper.selectCount(queryWrapper);
+        Map<String,Object> map = new HashMap<>();
+        map.put("pageStart",(page-1)*rows);
+        map.put("pageSize",rows);
+        List<PayType> list = payTypeMapper.findPayTypeList(map);
+        Integer totalCount = payTypeMapper.getTotalCount();
         return PageResponse.getPageResponse(list, totalCount, page, rows);
     }
 
@@ -56,13 +57,13 @@ public class PayTypeServiceImpl implements PayTypeService {
     @Override
     public ResponseMessage<PayType> deletePayTypeById(Integer id, String address) {
         if (StringUtils.isEmpty(address)) {
-            return new ResponseMessage<>(500, "系统异常:删除图片失败,请刷新页面重试");
+            return new ResponseMessage<>(500, "操作异常:删除图片失败,请刷新页面重试");
         }
         //删除文件
         File file = new File(address);
         if (!file.exists()) {
             payTypeMapper.deleteById(id);
-            return new ResponseMessage<>(500, "系统异常:您删除的图片不存在,请刷新页面重试");
+            return new ResponseMessage<>(500, "您删除的图片不存在,请刷新页面重试");
         }
         file.delete();
         //删除数据库数据

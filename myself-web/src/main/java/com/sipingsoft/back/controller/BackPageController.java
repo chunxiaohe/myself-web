@@ -62,7 +62,7 @@ public class BackPageController {
      */
     @GetMapping("/back/page/articleClass")
     public  String atricleClass(){
-        return BackPageUtil.BACK_ATRICLE_CLASS;
+        return BackPageUtil.BACK_ARTICLE_CLASS;
     }
 
     /**
@@ -71,7 +71,7 @@ public class BackPageController {
      */
     @GetMapping("/back/page/addArticleClass")
     public String addAtricleClass(){
-        return BackPageUtil.BACK_ADD_ATRICLE_CLASS;
+        return BackPageUtil.BACK_ADD_ARTICLE_CLASS;
     }
 
     /**
@@ -90,5 +90,14 @@ public class BackPageController {
     @GetMapping("/back/page/addPaytype")
     public String addPayType(){
         return BackPageUtil.BACK_ADD_PAY_TYPE;
+    }
+
+    /**
+     * 文章列表
+     * @return
+     */
+    @GetMapping("/back/page/article")
+    public String article(){
+        return BackPageUtil.BACK_ARTICLE;
     }
 }

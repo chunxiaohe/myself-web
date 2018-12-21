@@ -44,7 +44,7 @@ var vm = new Vue({
                     sortable: false
                 }, {
                     label: '创建人',
-                    name: 'createBy',
+                    name: 'createName',
                     width: 40,
                     align: 'center',
                     sortable: false
@@ -56,7 +56,7 @@ var vm = new Vue({
                     sortable: false
                 }, {
                     label: '更新人',
-                    name: 'updateBy',
+                    name: 'updateName',
                     width: 40,
                     align: 'center',
                     sortable: false
@@ -119,11 +119,11 @@ var vm = new Vue({
                     var type = $(this).attr("pay");
                     if (isUse == 1) {
                         layer.alert("确认禁用该图片?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                            updatePayType(id,type, 2, index);
+                            updatePayType(id, type, 2, index);
                         })
                     } else if (isUse == 2) {
                         layer.alert("确实启用该图片?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                            updatePayType(id, type,1, index);
+                            updatePayType(id, type, 1, index);
                         })
                     } else {
                         layer.alert("操作异常!", {icon: 5})
@@ -161,8 +161,8 @@ var vm = new Vue({
 
 function isUse(cellValue, options, cellObject) {
     return cellObject.isUse == 1 ?
-        "<input type='button' pay='"+cellObject.type+"' isUse='1' num='3' style='background-color: #00B83F'  class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='启用'/> "
-        : "<input type='button' pay='"+cellObject.type+"' isUse='2' num='3' style='background-color: #ff0000' class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='禁用'/> ";
+        "<input type='button' pay='" + cellObject.type + "' isUse='1' num='3' style='background-color: #00B83F'  class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='启用'/> "
+        : "<input type='button' pay='" + cellObject.type + "' isUse='2' num='3' style='background-color: #ff0000' class='btn btn-info' ids='" + cellObject.id + "' isUse='" + cellObject.isUse + "'  isUse='" + cellObject.isUse + "' value='禁用'/> ";
 }
 
 function update() {
@@ -177,16 +177,44 @@ function update() {
 //查看图片
 function showPic(fileName) {
     var staticRoot = $('input[name="staticRoot"]').val();
-    $('#payTypePic').attr('src', staticRoot + "/payType/" + fileName);
-    layer.open({
-        type: 1,
-        title: false,
-        closeBtn: 1,
-        area: ['400px', '400px'],
-        skin: 'layui-layer-nobg', // 没有背景色
-        shadeClose: true,
-        content: $('#payTypePic')
-    });
+    var imagePath = staticRoot + "/payType/" + fileName;
+    //判断图片是否存在
+    var flag = checkImg(imagePath);
+    if (flag) {
+        $('#payTypePic').attr('src', imagePath);
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            area: ['400px', '400px'],
+            skin: 'layui-layer-nobg', // 没有背景色
+            shadeClose: true,
+            content: $('#payTypePic')
+        });
+    } else {
+        layer.alert("查看的图片不存在", {icon: 5})
+    }
+}
+
+//判断图片是否存在
+function checkImg(imagePath) {
+    var xmlHttp;
+    //判断浏览器是否支持ActiveX控件
+    if (window.ActiveXObject) {
+        //支持-通过ActiveXObject的一个新实例来创建XMLHttpRequest对象
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //不支持
+    else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest()
+    }
+    xmlHttp.open("Get", imagePath, false);
+    xmlHttp.send();
+    if (xmlHttp.status == 404) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 //删除图片
@@ -206,8 +234,8 @@ function deletePic(id, address) {
     })
 }
 
-function updatePayType(id,type, isUse, index) {
-    $.post(createURL('/back/api/update/payType'), {id: id, isUse: isUse,type:type}, function (re) {
+function updatePayType(id, type, isUse, index) {
+    $.post(createURL('/back/api/update/payType'), {id: id, isUse: isUse, type: type}, function (re) {
         if (re.code == 200) {
             layer.msg(re.message, {icon: 1});
             update()

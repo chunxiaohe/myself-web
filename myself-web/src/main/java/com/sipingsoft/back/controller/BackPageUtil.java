@@ -21,11 +21,11 @@ public class BackPageUtil {
     /**
      * 文章分类页面
      */
-    public static final String BACK_ATRICLE_CLASS = "/back/atricleClass";
+    public static final String BACK_ARTICLE_CLASS = "/back/articleClass";
     /**
      * 新增 文章分类 弹出页面
      */
-    public static final String BACK_ADD_ATRICLE_CLASS = "/back/alert/addAtricleClass";
+    public static final String BACK_ADD_ARTICLE_CLASS = "/back/alert/addArticleClass";
     /**
      * 支付方式页面
      */
@@ -34,4 +34,9 @@ public class BackPageUtil {
      * 添加 支付方式 弹出页面
      */
     public static final String BACK_ADD_PAY_TYPE = "/back/alert/addPayType";
+
+    /**
+     * 文章列表
+     */
+    public static final String BACK_ARTICLE = "/back/article";
 }

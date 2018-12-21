@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <meta charset="utf-8">
     <title>layui</title>
@@ -9,6 +9,7 @@
     <#include '../common/commonStyle.ftl'>
     <#include '../common/commonScript.ftl'>
     <link rel="stylesheet" href="${staticRoot}/back/css/pageCommon.css">
+
     <style>
         .btn-info{
             margin-top: 23px;
