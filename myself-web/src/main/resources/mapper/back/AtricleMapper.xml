@@ -4,7 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.sipingsoft.back.entity.Article">
       <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="atricle_class_id" jdbcType="INTEGER" property="atricleClassId" />
+    <result column="article_class_id" jdbcType="INTEGER" property="articleClassId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="keyword" jdbcType="VARCHAR" property="keyword" />
     <result column="content" jdbcType="VARCHAR" property="content" />
@@ -23,12 +23,12 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    art.id, art.atricle_class_id, art.title, art.keyword, art.content, art.click, art.is_use, art.create_date, art.create_by,
+    art.id, art.article_class_id, art.title, art.keyword, art.content, art.click, art.is_use, art.create_date, art.create_by,
     art.update_date, art.update_by
   </sql>
 
     <sql id="Column_List">
-        art.id, art.atricle_class_id, art.title, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
+        art.id, art.article_class_id, art.title, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
         art.update_date, art.update_by,
         arc.type_name,sysu.name updateName,sysus.name createName
     </sql>
@@ -38,18 +38,18 @@
       <include refid="Column_List"/>
     FROM article art
     LEFT JOIN article_class arc
-    ON art.atricle_class_id = arc.id
+    ON art.article_class_id = arc.id
     LEFT JOIN sys_user sysu
     ON art.create_by = sysu.user_id
     LEFT JOIN sys_user sysus
     ON art.update_by = sysus.user_id
     <where>
         art.is_delete = 1
-        <if test="article.title != null and article.title != null != '' ">
+        <if test="article.title != null and article.title  != '' ">
             AND      art.title = #{article.title}
         </if>
-        <if test="article.atricleClassId != null and article.atricleClassId != null != ''">
-            AND art.atricle_class_id = #{article.atricleClassId}
+        <if test="article.articleClassId != null and article.articleClassId  != ''">
+            AND art.article_class_id = #{article.articleClassId}
         </if>
         <if test="article.isUse != null and article.isUse != '' ">
             AND  art.is_use = #{article.isUse}
@@ -58,6 +58,9 @@
             AND  art.create_date = #{article.createDate}
         </if>
     </where>
+    <if test="sord != null and sord != '' ">
+      ORDER BY art.click  ${sord}
+    </if>
     LIMIT #{pageStart},#{pageSize}
   </select>
 
@@ -66,11 +69,11 @@
       FROM article
       <where>
             is_delete = 1
-          <if test="article.title != null and article.title != null != '' ">
+          <if test="article.title != null and article.title  != '' ">
               AND title = #{article.title}
           </if>
-          <if test="article.atricleClassId != null and article.atricleClassId != null != ''">
-              AND atricle_class_id = #{article.atricleClassId}
+          <if test="article.articleClassId != null and article.articleClassId  != ''">
+              AND article_class_id = #{article.articleClassId}
           </if>
           <if test="article.isUse != null and article.isUse != '' ">
               AND  is_use = #{article.isUse}

@@ -12,15 +12,17 @@ public interface ArticleService {
 
     /**
      * 文章列表
+     *
      * @param article
      * @param page
      * @param rows
      * @return
      */
-    PageResponse<Article> findArticleList(Article article, Integer page, Integer rows);
+    PageResponse<Article> findArticleList(Article article, Integer page, Integer rows, String sord);
 
     /**
      * 更新文章
+     *
      * @param article
      * @return
      */

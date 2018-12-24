@@ -26,9 +26,10 @@ public class ArticleController {
      * @param rows 条目数
      * @return
      */
-    @GetMapping("/back/api/list/article")
-    public PageResponse<Article> findArticleList(Article article, Integer page, Integer rows){
-        return articleService.findArticleList(article, page, rows);
+    @GetMapping("/back/api/article/list")
+    public PageResponse<Article> findArticleList(Article article, Integer page, Integer rows,String sord){
+        System.out.println(sord);
+        return articleService.findArticleList(article, page, rows,sord);
     }
 
     /**
@@ -36,7 +37,7 @@ public class ArticleController {
      * @param article
      * @return
      */
-    @PostMapping("/back/api/update/article")
+    @PostMapping("/back/api/article/update")
     public ResponseMessage<Article> updateArticle(Article article){
         return articleService.updateArticle(article);
     }

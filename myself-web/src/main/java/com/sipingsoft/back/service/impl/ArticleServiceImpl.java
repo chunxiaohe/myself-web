@@ -28,20 +28,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 文章列表
+     *
      * @param article
      * @param page
      * @param rows
      * @return
      */
     @Override
-    public PageResponse<Article> findArticleList(Article article, Integer page, Integer rows) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("article",article);
-        map.put("pageStart",(page-1)*rows);
-        map.put("pageSize",rows);
+    public PageResponse<Article> findArticleList(Article article, Integer page, Integer rows, String sord) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("article", article);
+        map.put("pageStart", (page - 1) * rows);
+        map.put("pageSize", rows);
+        map.put("sord", sord);
         List<Article> list = articleMapper.findArticleList(map);
         Integer totalCount = articleMapper.findArticleListConut(map);
-        return PageResponse.getPageResponse(list,totalCount,page,rows);
+        return PageResponse.getPageResponse(list, totalCount, page, rows);
     }
 
     @Override
@@ -49,8 +51,8 @@ public class ArticleServiceImpl implements ArticleService {
         SysUser sysUser = ShiroUtils.getLoginUser();
         article.setUpdateBy(sysUser.getUserId().intValue());
         Date date = new Date();
-        article.setUpdateDate(SimpleDateFormatUtil.dateToString(date,"yyyy-MM-dd hh:mm:ss"));
+        article.setUpdateDate(SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd hh:mm:ss"));
         articleMapper.updateById(article);
-        return new ResponseMessage<>(200,"更新操作成功");
+        return new ResponseMessage<>(200, "更新操作成功");
     }
 }

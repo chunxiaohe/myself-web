@@ -27,16 +27,15 @@
             <div class="col-sm-3 col-md-3 col-lg-3 mb10">
                 <div class="form-group">
                     <label for="">文章名称</label>
-                    <input  class="form-control" id="typeName" >
+                    <input  class="form-control" id="title" >
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 mb10">
                 <div class="form-group">
                     <label for="">文章分类</label>
-                    <select name="isUse" id="isUse" class="form-control">
-                        <option value="0"></option>
-                        <option value="1">启用</option>
-                        <option value="2">禁用</option>
+                    <select name="articleClassId" id="articleClassId" class="form-control" >
+                        <option value="0" selected="selected"></option>
+                        <option  v-for="articleClass in  articleClassList"  :value="articleClass.id">{{articleClass.typeName}}</option>
                     </select>
                 </div>
             </div>
@@ -45,15 +44,15 @@
                     <label for="">是否上架</label>
                     <select name="isUse" id="isUse" class="form-control">
                         <option value="0"></option>
-                        <option value="1">上架</option>
-                        <option value="2">下架</option>
+                        <option value="1">已发布</option>
+                        <option value="2">未发布</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3 mb10">
                 <div class="form-group">
                     <label for="">创建日期</label>
-                    <input  class="form-control" id="typeName" >
+                    <input  class="form-control" id="createDate" >
                 </div>
             </div>
             <div class="form-group col-sm-3 col-md-3 col-lg-3">

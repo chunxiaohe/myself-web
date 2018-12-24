@@ -111,6 +111,13 @@
 			<version>${shiro.version}</version>
 		</dependency>
 		<!-- shiro -->
+		<!-- json处理包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
+		<!-- -->
 		<!--redis 缓存-->
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -17,8 +17,8 @@ public class Article implements Serializable {
     /**
      * 文章分类id
      */
-    @TableField(value = "atricle_class_id")
-    private Integer atricleClassId;
+    @TableField(value = "article_class_id")
+    private Integer articleClassId;
 
     /**
      * 标题
@@ -71,14 +71,16 @@ public class Article implements Serializable {
     /**
      * 创建人姓名
      */
+    @TableField(exist = false)
     private String createName;
 
     /**
      * 更新人姓名
      */
+    @TableField(exist = false)
     private String updateName;
 
-
+    @TableField(exist = false)
     private ArticleClass articleClass;
 
     private static final long serialVersionUID = 1L;
@@ -102,17 +104,17 @@ public class Article implements Serializable {
      *
      * @return atricle_class_id - 文章分类id
      */
-    public Integer getAtricleClassId() {
-        return atricleClassId;
+    public Integer getArticleClassId() {
+        return articleClassId;
     }
 
     /**
      * 设置文章分类id
      *
-     * @param atricleClassId 文章分类id
+     * @param articleClassId 文章分类id
      */
-    public void setAtricleClassId(Integer atricleClassId) {
-        this.atricleClassId = atricleClassId;
+    public void setArticleClassId(Integer articleClassId) {
+        this.articleClassId = articleClassId;
     }
 
     /**
@@ -312,7 +314,7 @@ public class Article implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", atricleClassId=").append(atricleClassId);
+        sb.append(", articleClassId=").append(articleClassId);
         sb.append(", title=").append(title);
         sb.append(", keyword=").append(keyword);
         sb.append(", content=").append(content);

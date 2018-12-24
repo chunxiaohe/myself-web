@@ -33,7 +33,7 @@ public class ArticleClassController {
      * @param articleClass
      * @return
      */
-    @GetMapping("back/api/list/articleClass")
+    @GetMapping("back/api/articleClass/list")
     public PageResponse<ArticleClass> findArticleClassList(Integer page,Integer rows,ArticleClass articleClass){
         return  articleClassService.findArticleClassList(page,rows,articleClass);
     }
@@ -43,7 +43,7 @@ public class ArticleClassController {
      * @param articleClass
      * @return
      */
-    @GetMapping("/back/api/insert/articleClass")
+    @GetMapping("/back/api/articleClass/insert")
     public ResponseMessage<ArticleClass> insetArticleClass( ArticleClass articleClass){
         return articleClassService.insertArticleClass(articleClass);
     }
@@ -53,7 +53,7 @@ public class ArticleClassController {
      * @param articleClass
      * @return
      */
-    @RequestMapping("/back/api/update/articleClass")
+    @RequestMapping("/back/api/articleClass/update")
     public ResponseMessage<ArticleClass> updateIsUseById(ArticleClass articleClass){
         return articleClassService.updateArticleClassById(articleClass);
     }
@@ -63,10 +63,19 @@ public class ArticleClassController {
      * @param id
      * @return
      */
-    @GetMapping("/back/api/delete/articleClass")
+    @GetMapping("/back/api/articleClass/delete")
     public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id){
         return articleClassService.deleteArticleClassById(id);
     }
 
+    /**
+     * 获取启用/禁用的所有文章分类
+     * @param isUse 1.启用 2.禁用
+     * @return
+     */
+    @GetMapping("/back/api/articleClass/getAll")
+    public ResponseMessage<ArticleClass> getAllArticleClass(Integer isUse){
+        return articleClassService.getAllArticleClass(isUse);
+    }
 }
 

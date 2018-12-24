@@ -45,9 +45,9 @@ public interface ArticleClassService extends IService<ArticleClass> {
     ResponseMessage<ArticleClass> deleteArticleClassById(Integer id);
 
     /**
-     * 更新文章分类名
-     * @param articleClass
+     * 获取所有启用/禁用的文章分类
+     * @param isUse 1.启用 2.禁用
      * @return
      */
-    ResponseMessage<ArticleClass> updateTypeNameById(ArticleClass articleClass);
+    ResponseMessage<ArticleClass> getAllArticleClass(Integer isUse);
 }

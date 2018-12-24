@@ -9,6 +9,7 @@ import com.sipingsoft.back.service.ArticleClassService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.shiro.ShiroUtils;
+import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
 
     /**
      * 插入文章分类
+     *
      * @param articleClass
      * @return
      */
@@ -41,7 +43,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
     public ResponseMessage<ArticleClass> insertArticleClass(ArticleClass articleClass) {
         //查找是否有同名文章分类
         QueryWrapper<ArticleClass> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(ArticleClass::getTypeName,articleClass.getTypeName());
+        queryWrapper.lambda().eq(ArticleClass::getTypeName, articleClass.getTypeName());
         Integer count = articleClassMapper.selectCount(queryWrapper);
         if (count > 0) {
             return new ResponseMessage<>(500, "文章分类名已存在");
@@ -58,6 +60,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
 
     /**
      * 文章分类列表
+     *
      * @param page
      * @param rows
      * @param articleClass
@@ -76,21 +79,20 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
 
     /**
      * 更新文章分类状态
+     *
      * @param articleClass
      * @return
      */
     @Override
     public ResponseMessage<ArticleClass> updateArticleClassById(ArticleClass articleClass) {
-        if(articleClass.getTypeName() != null && articleClass.getTypeName().trim() != ""){
+        if (articleClass.getTypeName() != null && articleClass.getTypeName().trim() != "") {
             //查找是否有同名文章分类
         }
-        if(articleClass.getTypeName() != null && articleClass.getTypeName().trim() == ""){
-            return new ResponseMessage<>(500,"请填写文章分类名称");
+        if (articleClass.getTypeName() != null && articleClass.getTypeName().trim() == "") {
+            return new ResponseMessage<>(500, "请填写文章分类名称");
         }
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String updateDate = simpleDateFormat.format(date);
-        articleClass.setUpdateDate(updateDate);
+        articleClass.setUpdateDate(SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd hh:mm:ss"));
         SysUser sysUser = ShiroUtils.getLoginUser();
         articleClass.setUpdateBy(sysUser.getUserId().intValue());
         articleClassMapper.updateById(articleClass);
@@ -99,29 +101,29 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
 
     /**
      * 删除文章分类
+     *
      * @param id 分类id
      * @return
      */
     @Override
     public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id) {
         articleClassMapper.deleteById(id);
-        return new ResponseMessage<>(200,"删除成功");
+        return new ResponseMessage<>(200, "删除成功");
     }
 
     /**
-     * 更新文章分类名称
-     * @param articleClass
+     * 获取所有启用/禁用的文章分类
+     *
+     * @param isUse 1.启用 2.禁用
      * @return
      */
     @Override
-    public ResponseMessage<ArticleClass> updateTypeNameById(ArticleClass articleClass) {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String updateDate = simpleDateFormat.format(date);
-        articleClass.setUpdateDate(updateDate);
-        SysUser sysUser = ShiroUtils.getLoginUser();
-        articleClass.setUpdateBy(sysUser.getUserId().intValue());
-        articleClassMapper.updateById(articleClass);
-        return new ResponseMessage<>(200,"文章名更新成功");
+    public ResponseMessage<ArticleClass> getAllArticleClass(Integer isUse) {
+        QueryWrapper<ArticleClass> queryWrapper = new QueryWrapper<>();
+        if (isUse != null ) {
+            queryWrapper.eq("is_use", isUse);
+        }
+        List<ArticleClass> list = articleClassMapper.selectList(queryWrapper);
+        return new ResponseMessage<>(200, list);
     }
 }

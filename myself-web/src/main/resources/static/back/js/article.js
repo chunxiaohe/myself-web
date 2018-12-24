@@ -1,12 +1,19 @@
 var vm = new Vue({
         el: '#app',
         data: {
-            templateHTML: ''
+            articleClassList: []
         },
         mounted() {
             var that = this;
             that.$nextTick(function () {
+                //初始化列表
                 that._initTable();
+                //初始化文章分类
+                that._initArticleClass();
+                //初始化事假选择器
+                laydate.render({
+                    elem: '#createDate' //指定元素
+                });
             });
         },
         methods: {
@@ -15,7 +22,7 @@ var vm = new Vue({
             },
             _initTable() { // 初始化列表
                 $("#jqGrid").jqGrid({
-                    url: createURL('back/api/list/article'),
+                    url: createURL('back/api/article/list'),
                     datatype: "json",
                     mtype: 'get',
                     colModel: [{
@@ -29,6 +36,11 @@ var vm = new Vue({
                         align: 'center',
                         sortable: false,
                         formatter:typeNameFormatter
+                    },{
+                        label: '点击量',
+                        name: 'click',
+                        width: 50,
+                        align: 'center',
                     }, {
                         label: '创建人',
                         name: 'createName',
@@ -41,7 +53,6 @@ var vm = new Vue({
                         align: 'center',
                         width: 110,
                         sortable: false
-
                     }, {
                         label: '更新人',
                         name: 'updateName',
@@ -57,7 +68,7 @@ var vm = new Vue({
                     }, {
                         label: '状态',
                         name: 'isUse',
-                        width: 50,
+                        width: 60,
                         align: 'center',
                         formatter: isUse,
                         sortable: false
@@ -125,23 +136,38 @@ var vm = new Vue({
                     }
                 })
             },
+            _initArticleClass(){
+                $.get(createURL('/back/api/articleClass/getAll'),{isUse:null},function (re) {
+                    if (re.code==200){
+                        vm.articleClassList = re.data
+                    } else{
+                        layer.alert(re.message,{icon:2});
+                    }
+                })
+            },
             reset() {
-                $("#typeName").val('');
-                $("#isUse").val('');
+                $("#title").val("");
+                $('#articleClassId').val("");
+                $('#isUse').val("");
+                $('#createDate').val("");
                 update();
             }
             ,
             search() {
-                var typeName = $('#typeName').val();
+                var title = $("#title").val();
+                var articleClassId = $('#articleClassId').val();
                 var isUse = $('#isUse').val();
+                var createDate = $('#createDate').val();
                 $("#jqGrid").setGridParam({
                     datatype: 'json',
                     page: 1
                 }).jqGrid('setGridParam', {
                     page: 1,
                     postData: {
-                        typeName: typeName,
-                        isUse: isUse == 0 ? null : isUse
+                        title: title,
+                        articleClassId:articleClassId,
+                        isUse: isUse == 0 ? null : isUse,
+                        createDate:createDate
                     }
                 }).trigger("reloadGrid");
             }
@@ -187,7 +213,7 @@ function isUse(cellValue, options, cellObject) {
 
 //上下架操作
 function updateIsUse(id, isUse, index) {
-    $.post(createURL('/back/api/update/article'), {id: id, isUse: isUse}, function (re) {
+    $.post(createURL('/back/api/article/update'), {id: id, isUse: isUse}, function (re) {
         if (re.code == 200 && isUse == 1) {
             layer.msg("发布成功", {icon: 1});
             layer.close(index);
@@ -211,8 +237,10 @@ function update() {
     }).jqGrid('setGridParam', {
         page: 1,
         postData: {
-            typeName: null,
-            isUse: null
+            title: null,
+            articleClassId:null,
+            isUse:null,
+            createDate:null
         }
     }).trigger("reloadGrid");
 }

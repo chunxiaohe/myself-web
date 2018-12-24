@@ -15,11 +15,11 @@ var vm = new Vue({
         },
         _initTable() { // 初始化列表
             $("#jqGrid").jqGrid({
-                url: createURL('back/api/list/articleClass'),
+                url: createURL('back/api/articleClass/list'),
                 datatype: "json",
                 mtype: 'get',
                 cellEdit: true,
-                cellurl: createURL('/back/api/update/articleClass'),
+                cellurl: createURL('/back/api/articleClass/update'),
                 colModel: [{
                     label: '分类名称',
                     name: 'typeName',
@@ -95,7 +95,7 @@ var vm = new Vue({
                 var id = $(this).attr('ids');
                 if (num == 2) {
                     layer.alert("删除不可恢复,确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                        $.get(createURL('/back/api/delete/articleClass'), {id: id}, function (re) {
+                        $.get(createURL('/back/api/articleClass/delete'), {id: id}, function (re) {
                             if (re.code == 200) {
                                 layer.msg(re.message, {icon: 1});
                             } else {
@@ -176,7 +176,7 @@ function isUse(cellValue, options, cellObject) {
 }
 
 function updateIsUse(id, isUse, index) {
-    $.get(createURL('/back/api/update/articleClass'), {id: id, isUse: isUse}, function (re) {
+    $.get(createURL('/back/api/articleClass/update'), {id: id, isUse: isUse}, function (re) {
         if (re.code == 200 && isUse == 1) {
             layer.msg("启用成功", {icon: 1});
             layer.close(index);

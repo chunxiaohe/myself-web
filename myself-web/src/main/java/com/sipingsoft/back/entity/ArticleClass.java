@@ -53,11 +53,13 @@ public class ArticleClass extends Model<ArticleClass> {
     /**
      * 创建人姓名
      */
+    @TableField(exist = false)
 	private String createName;
 
     /**
      * 更新人姓名
      */
+    @TableField(exist = false)
 	private String updateName;
 
 	public Integer getId() {

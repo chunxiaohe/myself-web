@@ -29,7 +29,7 @@ function valid() {
 function submitData() {
     var flag = false;
     var articleClass = getArticleClass();
-    $.get(createURL('/back/api/insert/articleClass'), articleClass, function (re) {
+    $.get(createURL('/back/api/articleClass/insert'), articleClass, function (re) {
         if (re.code === 200) {
             layer.msg(re.message, {icon: 1});
             flag = true;
