@@ -75,11 +75,12 @@ var vm = new Vue({
                     }, {
                         label: "操作",
                         name: '',
-                        width: 50,
+                        width: 100,
                         align: 'center',
                         sortable: false,
                         formatter: function (cellValue, options, cellObject) {
-                            return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
+                            return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> "
+                            + "<input type='button' num='4' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='编辑'/> ";
                         }
                     }
                     ],
@@ -104,7 +105,7 @@ var vm = new Vue({
                 $("tbody").on('click', 'input[type=button]', function () {
                     var num = $(this).attr('num');
                     var id = $(this).attr('ids');
-                    if (num == 2) {
+                    if (num == 2) {//删除
                         layer.alert("确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
                             $.post(createURL('/back/api/update/article'), {id: id,isDelete:2}, function (re) {
                                 if (re.code == 200) {
@@ -118,7 +119,7 @@ var vm = new Vue({
                                 update();
                             })
                         })
-                    } else if (num == 3) {
+                    } else if (num == 3) {//上下架
                         var isUse = $(this).attr('isUse');
                         if (isUse == 1) {
                             layer.alert("确认取消发布该文章?", {icon: 3, btn: ['确认', '取消']}, function (index) {
@@ -131,6 +132,8 @@ var vm = new Vue({
                         } else {
                             layer.alert("操作异常!", {icon: 5})
                         }
+                    }else if(num==4){//编辑
+                        editArticle(id);
                     } else {
                         layer.alert("操作异常!", {icon: 5})
                     }
@@ -230,6 +233,7 @@ function updateIsUse(id, isUse, index) {
     })
 }
 
+//刷新表格
 function update() {
     $("#jqGrid").setGridParam({
         datatype: 'json',
@@ -245,4 +249,17 @@ function update() {
     }).trigger("reloadGrid");
 }
 
+//编辑文章
+function editArticle(id) {
+    layer.open({
+        title:'修改文章',
+        type:2,
+        content: createURL('/back/page/edit/article'),
+        btn:['确认','取消'],
+        area:['97%','97%'],
+        yes:function (index,layero) {
+            
+        }
+    })
+}
 

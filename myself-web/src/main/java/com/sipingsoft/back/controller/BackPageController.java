@@ -1,7 +1,10 @@
 package com.sipingsoft.back.controller;
 
+import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.back.entity.SysUser;
+import com.sipingsoft.back.service.ArticleService;
 import com.sipingsoft.core.shiro.ShiroUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class BackPageController {
+
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * 后台 登录页
@@ -99,5 +105,20 @@ public class BackPageController {
     @GetMapping("/back/page/article")
     public String article(){
         return BackPageUtil.BACK_ARTICLE;
+    }
+
+    /**
+     * 添加/修改文章 页面
+     * @param map 返回的数据map
+     * @param id 文章id
+     * @return
+     */
+    @GetMapping("/back/page/edit/article")
+    public String articleEdit(ModelMap map,Integer id){
+        if (id != null && id.toString().trim() != ""){
+            Article article = articleService.getArticleById(id);
+            map.put("article",article);
+        }
+        return BackPageUtil.BACK_ARTICLE_EDIT;
     }
 }

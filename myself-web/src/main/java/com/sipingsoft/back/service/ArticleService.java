@@ -27,4 +27,11 @@ public interface ArticleService {
      * @return
      */
     ResponseMessage<Article> updateArticle(Article article);
+
+    /**
+     * 根据文章id 查找文章信息
+     * @param id
+     * @return
+     */
+    Article getArticleById(Integer id);
 }

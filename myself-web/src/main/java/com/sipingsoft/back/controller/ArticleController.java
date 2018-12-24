@@ -41,4 +41,6 @@ public class ArticleController {
     public ResponseMessage<Article> updateArticle(Article article){
         return articleService.updateArticle(article);
     }
+
+
 }

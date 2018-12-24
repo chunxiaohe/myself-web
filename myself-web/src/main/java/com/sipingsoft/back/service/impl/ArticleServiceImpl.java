@@ -46,6 +46,11 @@ public class ArticleServiceImpl implements ArticleService {
         return PageResponse.getPageResponse(list, totalCount, page, rows);
     }
 
+    /**
+     * 更新文章信息
+     * @param article
+     * @return
+     */
     @Override
     public ResponseMessage<Article> updateArticle(Article article) {
         SysUser sysUser = ShiroUtils.getLoginUser();
@@ -54,5 +59,15 @@ public class ArticleServiceImpl implements ArticleService {
         article.setUpdateDate(SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd hh:mm:ss"));
         articleMapper.updateById(article);
         return new ResponseMessage<>(200, "更新操作成功");
+    }
+
+    /**
+     * 根据文章id 查找文章信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Article getArticleById(Integer id) {
+        return articleMapper.selectById(id);
     }
 }

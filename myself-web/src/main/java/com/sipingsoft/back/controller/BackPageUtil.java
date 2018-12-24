@@ -39,4 +39,9 @@ public class BackPageUtil {
      * 文章列表
      */
     public static final String BACK_ARTICLE = "/back/article";
+
+    /**
+     * 添加/修改文章页面
+     */
+    public static final String BACK_ARTICLE_EDIT = "back/articleEdit";
 }
