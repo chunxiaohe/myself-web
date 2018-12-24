@@ -50,6 +50,15 @@ public class ArticleClass extends Model<ArticleClass> {
 	@TableField("update_by")
 	private Integer updateBy;
 
+    /**
+     * 创建人姓名
+     */
+	private String createName;
+
+    /**
+     * 更新人姓名
+     */
+	private String updateName;
 
 	public Integer getId() {
 		return id;
@@ -128,7 +137,23 @@ public class ArticleClass extends Model<ArticleClass> {
 		return this.id;
 	}
 
-	@Override
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getUpdateName() {
+        return updateName;
+    }
+
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
+    }
+
+    @Override
 	public String toString() {
 		return "ArticleClass{" +
 			"id=" + id +

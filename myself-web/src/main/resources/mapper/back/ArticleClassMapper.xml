@@ -12,6 +12,9 @@
         <result column="create_by" property="createBy" />
         <result column="update_date" property="updateDate" />
         <result column="update_by" property="updateBy" />
+        <result property="createName" column="createName"/>
+        <result property="updateName" column="updateName"/>
+
     </resultMap>
 
     <sql id="base_sql">
@@ -20,10 +23,20 @@
         arc.update_by
     </sql>
 
+    <sql id="base_sql_2">
+        arc.id,arc.type_name,arc.remark,arc.is_use,arc.create_by,
+        DATE_FORMAT(arc.create_date,'%Y-%m-%d %H:%i:%s') create_date ,DATE_FORMAT(arc.update_date,'%Y-%m-%d %H:%i:%s') update_date,
+        arc.update_by,sysu.name createName ,sysus.name updateName
+    </sql>
+
     <select id="findArticleClassList" resultMap="BaseResultMap" parameterType="map">
       SELECT
-        <include refid="base_sql"/>
+        <include refid="base_sql_2"/>
         FROM article_class arc
+      LEFT JOIN sys_user sysu
+      ON sysu.user_id = arc.create_by
+      LEFT JOIN sys_user sysus
+      ON arc.update_by = sysus.user_id
       <where>
           <if test="articleClass.typeName != null and articleClass.typeName != '' ">
               AND arc.type_name LIKE CONCAT('%',#{articleClass.typeName},'%')

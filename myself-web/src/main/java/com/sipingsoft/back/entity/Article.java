@@ -9,7 +9,7 @@ import com.sipingsoft.core.util.FormatDateUtil;
 
 import java.io.Serializable;
 
-@TableName(value = "atricle")
+@TableName(value = "article")
 public class Article implements Serializable {
      @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -48,7 +48,7 @@ public class Article implements Serializable {
      * 是否上架(1.上架  2.下架)
      */
     @TableField(value = "is_use")
-    private Integer isUse;
+    private Byte isUse;
 
     @TableField(value = "create_date")
     private String createDate;
@@ -63,19 +63,23 @@ public class Article implements Serializable {
     private Integer updateBy;
 
     /**
-     * 文章类型
+     * 1.未删除 2.已删除
      */
-    private ArticleClass articleClass;
+    @TableField(value = "is_delete")
+    private Integer isDelete;
 
     /**
-     * 创建人
+     * 创建人姓名
      */
     private String createName;
 
     /**
-     * 更新人
+     * 更新人姓名
      */
-    private String  updateName;
+    private String updateName;
+
+
+    private ArticleClass articleClass;
 
     private static final long serialVersionUID = 1L;
 
@@ -188,7 +192,7 @@ public class Article implements Serializable {
      *
      * @return is_use - 是否上架(1.上架  2.下架)
      */
-    public Integer getIsUse() {
+    public Byte getIsUse() {
         return isUse;
     }
 
@@ -197,7 +201,7 @@ public class Article implements Serializable {
      *
      * @param isUse 是否上架(1.上架  2.下架)
      */
-    public void setIsUse(Integer isUse) {
+    public void setIsUse(Byte isUse) {
         this.isUse = isUse;
     }
 
@@ -259,12 +263,22 @@ public class Article implements Serializable {
         this.updateBy = updateBy;
     }
 
-    public ArticleClass getArticleClass() {
-        return articleClass;
+    /**
+     * 获取1.未删除 2.已删除
+     *
+     * @return delete - 1.未删除 2.已删除
+     */
+    public Integer getIsDelete() {
+        return isDelete;
     }
 
-    public void setArticleClass(ArticleClass articleClass) {
-        this.articleClass = articleClass;
+    /**
+     * 设置1.未删除 2.已删除
+     *
+     * @param isDelete 1.未删除 2.已删除
+     */
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 
     public String getCreateName() {
@@ -281,6 +295,14 @@ public class Article implements Serializable {
 
     public void setUpdateName(String updateName) {
         this.updateName = updateName;
+    }
+
+    public ArticleClass getArticleClass() {
+        return articleClass;
+    }
+
+    public void setArticleClass(ArticleClass articleClass) {
+        this.articleClass = articleClass;
     }
 
     @Override
@@ -300,6 +322,7 @@ public class Article implements Serializable {
         sb.append(", createBy=").append(createBy);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", updateBy=").append(updateBy);
+        sb.append(", isDelete=").append(isDelete);
         sb.append("]");
         return sb.toString();
     }

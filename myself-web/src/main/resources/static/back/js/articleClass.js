@@ -27,14 +27,20 @@ var vm = new Vue({
                     sortable: false,
                     editable: true,
                 }, {
+                    label: '创建人',
+                    name: 'createName',
+                    width: 60,
+                    align: 'center',
+                    sortable: false
+                }, {
                     label: '创建时间',
                     name: 'createDate',
                     align: 'center',
                     width: 110,
                     sortable: false
                 }, {
-                    label: '创建人',
-                    name: 'createBy',
+                    label: '更新人',
+                    name: 'updateName',
                     width: 60,
                     align: 'center',
                     sortable: false
@@ -42,12 +48,6 @@ var vm = new Vue({
                     label: '更新时间',
                     name: 'updateDate',
                     width: 110,
-                    align: 'center',
-                    sortable: false
-                }, {
-                    label: '更新人',
-                    name: 'updateBy',
-                    width: 60,
                     align: 'center',
                     sortable: false
                 }, {
@@ -185,6 +185,8 @@ function updateIsUse(id, isUse, index) {
             layer.msg("禁用成功", {icon: 1});
             layer.close(index);
             $("#jqGrid").trigger("reloadGrid");
+        }else if(re.code==500){
+            layer.alert(re.message, {icon: 2});
         } else {
             layer.msg("操作参数异常", {iocn: 2});
         }

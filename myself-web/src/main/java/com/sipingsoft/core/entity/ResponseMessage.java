@@ -15,7 +15,7 @@ public class ResponseMessage<T> {
 	
 	private List<T> data;
 	
-	
+
 
 	public ResponseMessage() {
 		super();

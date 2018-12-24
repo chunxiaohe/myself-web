@@ -33,6 +33,7 @@ public class ExceptionController {
     @ExceptionHandler(WithaleafException.class)
     @ResponseBody
     public Map<String, Object> withaleafExceptionDiscope( WithaleafException e) {
+        e.printStackTrace();
         Map<String,Object> map = new HashMap<>();
         map.put("code",e.getCode());
         map.put("errorMsg",e.getErrorMsg());
@@ -42,12 +43,21 @@ public class ExceptionController {
     @ExceptionHandler(RandomCodeException.class)
     @ResponseBody
     public ResponseMessage codeException(RandomCodeException e){
+        e.printStackTrace();
         return new ResponseMessage(500,e.getMessage());
     }
 
     @ExceptionHandler(FileNotFoundException.class)
     @ResponseBody
     public ResponseMessage fileException(FileNotFoundException e){
-        return new ResponseMessage(500,"系统异常,请刷新页面重试");
+        e.printStackTrace();
+        return new ResponseMessage(500,"系统异常,请刷新页面重试:"+e.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ResponseMessage exception(Exception e){
+        e.printStackTrace();
+        return new ResponseMessage(500,"系统异常:"+e.getMessage());
     }
 }

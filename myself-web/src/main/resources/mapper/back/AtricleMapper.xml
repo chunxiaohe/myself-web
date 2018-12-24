@@ -13,6 +13,7 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_by" jdbcType="INTEGER" property="createBy" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="is_delete" property="isDelete"/>
     <result column="update_by" jdbcType="INTEGER" property="updateBy" />
       <result property="createName" column="createName"/>
       <result property="updateName" column="updateName"/>
@@ -43,8 +44,9 @@
     LEFT JOIN sys_user sysus
     ON art.update_by = sysus.user_id
     <where>
+        art.is_delete = 1
         <if test="article.title != null and article.title != null != '' ">
-            AND art.title = #{article.title}
+            AND      art.title = #{article.title}
         </if>
         <if test="article.atricleClassId != null and article.atricleClassId != null != ''">
             AND art.atricle_class_id = #{article.atricleClassId}
@@ -63,6 +65,7 @@
       SELECT COUNT(*)
       FROM article
       <where>
+            is_delete = 1
           <if test="article.title != null and article.title != null != '' ">
               AND title = #{article.title}
           </if>

@@ -2,6 +2,7 @@ package com.sipingsoft.back.service;
 
 import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.core.entity.PageResponse;
+import com.sipingsoft.core.entity.ResponseMessage;
 
 /**
  * @author HeChunXiao
@@ -17,4 +18,11 @@ public interface ArticleService {
      * @return
      */
     PageResponse<Article> findArticleList(Article article, Integer page, Integer rows);
+
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    ResponseMessage<Article> updateArticle(Article article);
 }

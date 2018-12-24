@@ -1,12 +1,17 @@
 package com.sipingsoft.back.service.impl;
 
 import com.sipingsoft.back.entity.Article;
+import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.ArticleMapper;
 import com.sipingsoft.back.service.ArticleService;
 import com.sipingsoft.core.entity.PageResponse;
+import com.sipingsoft.core.entity.ResponseMessage;
+import com.sipingsoft.core.shiro.ShiroUtils;
+import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,5 +42,15 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> list = articleMapper.findArticleList(map);
         Integer totalCount = articleMapper.findArticleListConut(map);
         return PageResponse.getPageResponse(list,totalCount,page,rows);
+    }
+
+    @Override
+    public ResponseMessage<Article> updateArticle(Article article) {
+        SysUser sysUser = ShiroUtils.getLoginUser();
+        article.setUpdateBy(sysUser.getUserId().intValue());
+        Date date = new Date();
+        article.setUpdateDate(SimpleDateFormatUtil.dateToString(date,"yyyy-MM-dd hh:mm:ss"));
+        articleMapper.updateById(article);
+        return new ResponseMessage<>(200,"更新操作成功");
     }
 }

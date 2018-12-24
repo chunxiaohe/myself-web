@@ -94,11 +94,13 @@ var vm = new Vue({
                     var num = $(this).attr('num');
                     var id = $(this).attr('ids');
                     if (num == 2) {
-                        layer.alert("删除不可恢复,确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                            $.get(createURL('/back/api/delete/articleClass'), {id: id}, function (re) {
+                        layer.alert("确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                            $.post(createURL('/back/api/update/article'), {id: id,isDelete:2}, function (re) {
                                 if (re.code == 200) {
-                                    layer.msg(re.message, {icon: 1});
-                                } else {
+                                    layer.msg("删除成功", {icon: 1});
+                                } else if(re.code==500){
+                                    layer.alert(re.message, {icon: 2});
+                                }else{
                                     layer.msg('操作异常', {icon: 2});
                                 }
                                 layer.close(index);
@@ -108,11 +110,11 @@ var vm = new Vue({
                     } else if (num == 3) {
                         var isUse = $(this).attr('isUse');
                         if (isUse == 1) {
-                            layer.alert("确认禁用该文章分类?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                            layer.alert("确认取消发布该文章?", {icon: 3, btn: ['确认', '取消']}, function (index) {
                                 updateIsUse(id, 2, index);
                             })
                         } else if (isUse == 2) {
-                            layer.alert("确实启用该文章分类?", {icon: 3, btn: ['确认', '取消']}, function (index) {
+                            layer.alert("确实发布该文章?", {icon: 3, btn: ['确认', '取消']}, function (index) {
                                 updateIsUse(id, 1, index);
                             })
                         } else {
@@ -185,17 +187,19 @@ function isUse(cellValue, options, cellObject) {
 
 //上下架操作
 function updateIsUse(id, isUse, index) {
-    $.get(createURL('/back/api/update/articleClass'), {id: id, isUse: isUse}, function (re) {
+    $.post(createURL('/back/api/update/article'), {id: id, isUse: isUse}, function (re) {
         if (re.code == 200 && isUse == 1) {
             layer.msg("发布成功", {icon: 1});
             layer.close(index);
             $("#jqGrid").trigger("reloadGrid");
-        } else if (re.code = 200 && isUse == 2) {
-            layer.msg("禁用成功", {icon: 1});
+        } else if (re.code == 200 && isUse == 2) {
+            layer.msg("取消发布成功", {icon: 1});
             layer.close(index);
             $("#jqGrid").trigger("reloadGrid");
-        } else {
-            layer.msg("操作参数异常", {iocn: 2});
+        } else if(re.code==500) {
+            layer.alert(re.message, {iocn: 2});
+        }else{
+            layer.msg("操作参数错误,请刷新后重试", {iocn: 2});
         }
     })
 }
