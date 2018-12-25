@@ -10,7 +10,7 @@ var vm = new Vue({
                 that._initTable();
                 //初始化文章分类
                 that._initArticleClass();
-                //初始化事假选择器
+                //初始化时间选择器
                 laydate.render({
                     elem: '#createDate' //指定元素
                 });
@@ -177,24 +177,13 @@ var vm = new Vue({
             ,
             create() {
                 layer.open({
-                    title: '新增文章分类',
-                    type: 2,
-                    content: createURL("/back/page/addArticleClass"),
-                    area: ['30%', '52%'],
-                    btn: ['确定', '取消'],
-                    yes: function (index, layero) {
-                        var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
-                        if (valided) {
-                            var flag = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData();
-                            if (flag) {
-                                setTimeout(function () {
-                                    layer.close(index);
-                                }, 2000);
-                                update();
-                            }
-                        } else {
-                            layer.msg("基本属性不完整");
-                        }
+                    title:'修改文章',
+                    type:2,
+                    content: createURL('/back/page/edit/article'),
+                    btn:['确认','取消'],
+                    area:['97%','97%'],
+                    yes:function (index,layero) {
+
                     }
                 })
             }
@@ -254,7 +243,7 @@ function editArticle(id) {
     layer.open({
         title:'修改文章',
         type:2,
-        content: createURL('/back/page/edit/article'),
+        content: createURL('/back/page/edit/article?id='+id),
         btn:['确认','取消'],
         area:['97%','97%'],
         yes:function (index,layero) {

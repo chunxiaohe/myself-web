@@ -68,6 +68,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article getArticleById(Integer id) {
-        return articleMapper.selectById(id);
+        return articleMapper.getArticleById(id);
     }
 }

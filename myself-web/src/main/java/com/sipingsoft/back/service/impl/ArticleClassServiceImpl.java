@@ -2,22 +2,22 @@ package com.sipingsoft.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.back.entity.ArticleClass;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.ArticleClassMapper;
+import com.sipingsoft.back.mapper.ArticleMapper;
 import com.sipingsoft.back.service.ArticleClassService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.shiro.ShiroUtils;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -32,6 +32,9 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
 
     @Autowired
     private ArticleClassMapper articleClassMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
 
     /**
      * 插入文章分类
@@ -87,6 +90,13 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
     public ResponseMessage<ArticleClass> updateArticleClassById(ArticleClass articleClass) {
         if (articleClass.getTypeName() != null && articleClass.getTypeName().trim() != "") {
             //查找是否有同名文章分类
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("type_name",articleClass.getTypeName());
+            queryWrapper.ne("id",articleClass.getId());
+            List<ArticleClass> list = articleClassMapper.selectList(queryWrapper);
+            if(CollectionUtils.isNotEmpty(list)){
+                return new ResponseMessage<>(500,"文章分类名已存在");
+            }
         }
         if (articleClass.getTypeName() != null && articleClass.getTypeName().trim() == "") {
             return new ResponseMessage<>(500, "请填写文章分类名称");
@@ -96,7 +106,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
         SysUser sysUser = ShiroUtils.getLoginUser();
         articleClass.setUpdateBy(sysUser.getUserId().intValue());
         articleClassMapper.updateById(articleClass);
-        return new ResponseMessage<>(200);
+        return new ResponseMessage<>(200,"文章分类更新成功");
     }
 
     /**
@@ -107,6 +117,13 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
      */
     @Override
     public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id) {
+        //判断删除的文章分类下是否含有相关文章
+        QueryWrapper<Article> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("article_class_id",id);
+        List<Article> list = articleMapper.selectList(queryWrapper);
+        if (CollectionUtils.isNotEmpty(list)){
+            return new ResponseMessage<>(500,"该分类下包含文章,请删除或移动文章后重试");
+        }
         articleClassMapper.deleteById(id);
         return new ResponseMessage<>(200, "删除成功");
     }

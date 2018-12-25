@@ -18,8 +18,6 @@ var vm = new Vue({
                 url: createURL('back/api/articleClass/list'),
                 datatype: "json",
                 mtype: 'get',
-                cellEdit: true,
-                cellurl: createURL('/back/api/articleClass/update'),
                 colModel: [{
                     label: '分类名称',
                     name: 'typeName',
@@ -52,7 +50,6 @@ var vm = new Vue({
                     sortable: false
                 }, {
                     label: "备注",
-                    editable: true,
                     name: 'remark',
                     align: 'center',
                     sortable: false,
@@ -66,11 +63,12 @@ var vm = new Vue({
                 }, {
                     label: "操作",
                     name: '',
-                    width: 50,
+                    width: 100,
                     align: 'center',
                     sortable: false,
                     formatter: function (cellValue, options, cellObject) {
-                        return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
+                        return "<input type='button' num='1' @click='update' class='btn btn-info' ids='" + cellObject.id + "' value='编辑'/> "
+                            + "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> ";
                     }
                 }
                 ],
@@ -93,11 +91,35 @@ var vm = new Vue({
             $("tbody").on('click', 'input[type=button]', function () {
                 var num = $(this).attr('num');
                 var id = $(this).attr('ids');
-                if (num == 2) {
+                if (num == 1) {//编辑
+                    layer.open({
+                        title: '编辑文章分类',
+                        type: 2,
+                        content: createURL("/back/page/addArticleClass?id="+id),
+                        area: ['30%', '52%'],
+                        btn: ['确定', '取消'],
+                        yes: function (index, layero) {
+                            var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
+                            if (valided) {
+                                var flag = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(1,id);
+                                if (flag) {
+                                    setTimeout(function () {
+                                        layer.close(index);
+                                    }, 2000);
+                                    update();
+                                }
+                            } else {
+                                layer.msg("基本属性不完整");
+                            }
+                        }
+                    })
+                } else if (num == 2) {
                     layer.alert("删除不可恢复,确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
                         $.get(createURL('/back/api/articleClass/delete'), {id: id}, function (re) {
                             if (re.code == 200) {
                                 layer.msg(re.message, {icon: 1});
+                            }else if(re.code==500){
+                                layer.alert(re.message,{icon:2});
                             } else {
                                 layer.msg('操作异常', {icon: 2});
                             }
@@ -146,13 +168,13 @@ var vm = new Vue({
             layer.open({
                 title: '新增文章分类',
                 type: 2,
-                content: createURL("/back/page/addArticleClass"),
+                content: createURL("/back/page/addArticleClass?id="),
                 area: ['30%', '52%'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {
                     var valided = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.valid();
                     if (valided) {
-                        var flag = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData();
+                        var flag = document.getElementById($(layero).attr('id')).getElementsByTagName('iframe')[0].contentWindow.submitData(2);
                         if (flag) {
                             setTimeout(function () {
                                 layer.close(index);
@@ -185,7 +207,7 @@ function updateIsUse(id, isUse, index) {
             layer.msg("禁用成功", {icon: 1});
             layer.close(index);
             $("#jqGrid").trigger("reloadGrid");
-        }else if(re.code==500){
+        } else if (re.code == 500) {
             layer.alert(re.message, {icon: 2});
         } else {
             layer.msg("操作参数异常", {iocn: 2});

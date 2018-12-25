@@ -13,7 +13,6 @@
     $.jgrid.defaults.responsive = true;
     $.jgrid.defaults.styleUI = 'Bootstrap';
 </script>
-
 <script>
     function createURL(url){
         return '${webRoot}/'+ url;

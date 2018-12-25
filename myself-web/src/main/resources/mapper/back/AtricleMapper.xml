@@ -33,6 +33,12 @@
         arc.type_name,sysu.name updateName,sysus.name createName
     </sql>
 
+    <sql id="Column_List_1">
+        art.id, art.article_class_id, art.title,art.content, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
+        art.update_date, art.update_by,
+        arc.type_name,sysu.name updateName,sysus.name createName
+    </sql>
+
   <select id="findArticleList" parameterType="map" resultMap="BaseResultMap">
     SELECT
       <include refid="Column_List"/>
@@ -82,6 +88,20 @@
               AND  create_date = #{article.createDate}
           </if>
       </where>
+    </select>
+
+    <!-- 根据id获取文章信息 -->
+    <select id="getArticleById" resultMap="BaseResultMap" parameterType="Integer">
+      SELECT
+      <include refid="Column_List_1"/>
+        FROM article art
+        LEFT JOIN article_class arc
+        ON art.article_class_id = arc.id
+        LEFT JOIN sys_user sysu
+        ON art.create_by = sysu.user_id
+        LEFT JOIN sys_user sysus
+        ON art.update_by = sysus.user_id
+      WHERE art.id = #{id}
     </select>
 
 </mapper>

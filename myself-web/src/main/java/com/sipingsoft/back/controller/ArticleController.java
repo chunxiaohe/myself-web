@@ -28,7 +28,6 @@ public class ArticleController {
      */
     @GetMapping("/back/api/article/list")
     public PageResponse<Article> findArticleList(Article article, Integer page, Integer rows,String sord){
-        System.out.println(sord);
         return articleService.findArticleList(article, page, rows,sord);
     }
 

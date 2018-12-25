@@ -21,4 +21,11 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @return
      */
     Integer findArticleListConut(Map<String ,Object> map);
+
+    /**
+     * 根据id获取文章信息
+     * @param id
+     * @return
+     */
+    Article getArticleById(Integer id);
 }
