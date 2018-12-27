@@ -24,41 +24,46 @@
 </head>
 <body style="background: #EFF0F4;height: 500px">
 <div class="container-fluid" id="app">
-    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12" id="toolbar">
-        <h5 style="width:20%;float: left;margin: 10px ">
-            <i class="fa fa-book" aria-hidden="true"></i>&nbsp;文章名字
-            <input class="form-control" v-if="${type}==1" value="${(article.title)!''}">
-            <input class="form-control" v-else>
-        </h5>
-        <h5 style="width:20%;float: left;margin: 10px ">
-            <i class="fa fa-pie-chart" aria-hidden="true"></i>&nbsp;文章分类
-            <input class="form-control" v-if="${type}==1" value="${(article.title)!''}">
-            <input class="form-control" v-else>
-        </h5>
-        <h5 style="width:20%; margin: 10px; float: left">
-            <i class="fa fa-keyboard-o" aria-hidden="true"></i>&nbsp;关键字
-            <input class="form-control" v-if="${type}==1" value="${(article.keyword)!''}">
-            <input class="form-control" v-else>
-        </h5>
-        <h5 style="width:20%; margin: 10px; float: left">
-            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;创建人
-            <input class="form-control" disabled="disabled" v-if="${type}==1" value="${(article.createName)!''}">
-            <input class="form-control" disabled="disabled" v-else value="${(name)!''}">
-        </h5>
-        <h5 style="width:20%; margin: 10px; float: left">
-            <i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;创建日期
-            <input disabled="disabled" class="form-control" v-if="${type}==1" value="${(article.createDate)!''}">
-            <input disabled="disabled" class="form-control" v-else value="${(date)!''}">
-        </h5>
-        <hr>
-    </div>
-    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <#--<button class="btn  btn-info" style="display: block; margin:10px 0;" @click="createSaleOrder">新增</button> -->
-        <div id="toolbar" class="toolbar"></div>
-        <div id="editor" class="text"> <!--可使用 min-height 实现编辑区域自动增加高度-->
-            ${(article.content)!''}
+    <form id="articleForm">
+        <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12" id="toolbar">
+            <h5 style="width:20%;float: left;margin: 10px ">
+                <i class="fa fa-book" aria-hidden="true"></i>&nbsp;文章名字
+                <input class="form-control" <#if article.id??> articleId = "${article.id}" <#else>:articleId="articleId"</#if> name="title" value="${(article.title)!''}">
+            </h5>
+            <h5 style="width:20%;float: left;margin: 10px ">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i>&nbsp;文章分类
+                <select class="form-control" name="articleClassId">
+                    <#list articleClass as aClass>
+                        <option value="${aClass.id}" <#if article.articleClassId??>
+                        <#if aClass.id == article.articleClassId>selected="selected"</#if>
+                    </#if>
+                        <#if aClass.isUse==2>style="color: red" </#if> >${(aClass.typeName)!''}</option>
+                    </#list>
+                </select>
+            </h5>
+            <h5 style="width:20%; margin: 10px; float: left">
+                <i class="fa fa-keyboard-o" aria-hidden="true"></i>&nbsp;关键字
+                <input class="form-control" name="keyword" value="${(article.keyword)!''}">
+            </h5>
+            <h5 style="width:20%; margin: 10px; float: left">
+                <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;创建人
+                <input class="form-control" name="createBy" createBy="${article.createBy}" disabled="disabled"
+                       value="${(article.createName)!''}">
+            </h5>
+            <h5 style="width:20%; margin: 10px; float: left">
+                <i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;创建日期
+                <input disabled="disabled" name="createDate" class="form-control" value="${(article.createDate)!''}">
+            </h5>
+            <hr>
         </div>
-    </div>
+        <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <#--<button class="btn  btn-info" style="display: block; margin:10px 0;" @click="createSaleOrder">新增</button> -->
+            <div id="toolbar" class="toolbar"></div>
+            <div id="editor" name="content" class="text"> <!--可使用 min-height 实现编辑区域自动增加高度-->
+                <p>${(article.content)!''}</p>
+            </div>
+        </div>
+    </form>
 </div>
 <script src="${staticRoot}/back/js/articleEdit.js"></script>
 </body>

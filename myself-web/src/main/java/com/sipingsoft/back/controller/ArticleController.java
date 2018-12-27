@@ -5,9 +5,7 @@ import com.sipingsoft.back.service.ArticleService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author HeChunXiao
@@ -41,5 +39,14 @@ public class ArticleController {
         return articleService.updateArticle(article);
     }
 
+    /**
+     * 新增文章
+     * @param article
+     * @return
+     */
+    @PostMapping("/back/api/article/insert")
+    public ResponseMessage<Article> insertArticle(Article article){
+        return articleService.insertArticle(article);
+    }
 
 }

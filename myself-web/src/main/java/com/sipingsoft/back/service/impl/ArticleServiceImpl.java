@@ -11,10 +11,7 @@ import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author HeChunXiao
@@ -48,6 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 更新文章信息
+     *
      * @param article
      * @return
      */
@@ -63,11 +61,32 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 根据文章id 查找文章信息
+     *
      * @param id
      * @return
      */
     @Override
     public Article getArticleById(Integer id) {
         return articleMapper.getArticleById(id);
+    }
+
+    @Override
+    public ResponseMessage<Article> insertArticle(Article article) {
+        //id不为空时   保存
+        List list = new ArrayList();
+        if (article.getId() != null) {
+            SysUser sysUser = ShiroUtils.getLoginUser();
+            article.setUpdateBy(sysUser.getUserId().intValue());
+            article.setUpdateDate(SimpleDateFormatUtil.dateToString(new Date(),"yyyy-MM-dd hh:mm:ss"));
+            articleMapper.updateById(article);
+            list.add(article.getId());
+        } else {
+            //上架
+            article.setIsUse(1);
+            article.setIsDelete(1);
+            articleMapper.insert(article);
+            list.add(article.getId());
+        }
+        return new ResponseMessage<>(200, "文章保存成功", list);
     }
 }

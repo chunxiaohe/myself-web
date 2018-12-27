@@ -119,7 +119,10 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
     public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id) {
         //判断删除的文章分类下是否含有相关文章
         QueryWrapper<Article> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("article_class_id",id);
+        Map<String,Object> map = new HashMap<>();
+        map.put("article_class_id",id);
+        map.put("is_delete",1);
+        queryWrapper.allEq(map);
         List<Article> list = articleMapper.selectList(queryWrapper);
         if (CollectionUtils.isNotEmpty(list)){
             return new ResponseMessage<>(500,"该分类下包含文章,请删除或移动文章后重试");

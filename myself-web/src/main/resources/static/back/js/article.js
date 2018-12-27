@@ -30,13 +30,13 @@ var vm = new Vue({
                         name: 'title',
                         align: 'center',
                         sortable: false,
-                    },{
+                    }, {
                         label: '文章分类',
                         name: 'typeName',
                         align: 'center',
                         sortable: false,
-                        formatter:typeNameFormatter
-                    },{
+                        formatter: typeNameFormatter
+                    }, {
                         label: '点击量',
                         name: 'click',
                         width: 50,
@@ -80,39 +80,39 @@ var vm = new Vue({
                         sortable: false,
                         formatter: function (cellValue, options, cellObject) {
                             return "<input type='button' num='2' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='删除'/> "
-                            + "<input type='button' num='4' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='编辑'/> ";
+                                + "<input type='button' num='4' @click='operate' class='btn btn-info' ids='" + cellObject.id + "' value='编辑'/> ";
                         }
                     }
                     ],
                     viewrecords: true,
-                    height:480,
+                    height: 480,
                     rownumbers: true,
-                    rowNum:10,
-                    rowList:[10, 30, 50, 80, 100],
+                    rowNum: 10,
+                    rowList: [10, 30, 50, 80, 100],
                     jsonReader:
                         { //   后台分页参数的名字。
                             root: "records", // 表格数据
-                            page:"page", // 页码
-                            total:"total", // 总页数
-                            records:"totalCount", // 总条数
-                            repeatitems:false,
+                            page: "page", // 页码
+                            total: "total", // 总页数
+                            records: "totalCount", // 总条数
+                            repeatitems: false,
                         }
                     ,
                     pager: "#jqGridPager",
                     autowidth: true,
-                    hoverrows:true,
+                    hoverrows: true,
                 });
                 $("tbody").on('click', 'input[type=button]', function () {
                     var num = $(this).attr('num');
                     var id = $(this).attr('ids');
                     if (num == 2) {//删除
                         layer.alert("确认删除?", {icon: 3, btn: ['确认', '取消']}, function (index) {
-                            $.post(createURL('/back/api/update/article'), {id: id,isDelete:2}, function (re) {
+                            $.post(createURL('/back/api/article/update'), {id: id, isDelete: 2}, function (re) {
                                 if (re.code == 200) {
                                     layer.msg("删除成功", {icon: 1});
-                                } else if(re.code==500){
+                                } else if (re.code == 500) {
                                     layer.alert(re.message, {icon: 2});
-                                }else{
+                                } else {
                                     layer.msg('操作异常', {icon: 2});
                                 }
                                 layer.close(index);
@@ -132,19 +132,19 @@ var vm = new Vue({
                         } else {
                             layer.alert("操作异常!", {icon: 5})
                         }
-                    }else if(num==4){//编辑
+                    } else if (num == 4) {//编辑
                         editArticle(id);
                     } else {
                         layer.alert("操作异常!", {icon: 5})
                     }
                 })
             },
-            _initArticleClass(){
-                $.get(createURL('/back/api/articleClass/getAll'),{isUse:null},function (re) {
-                    if (re.code==200){
+            _initArticleClass() {
+                $.get(createURL('/back/api/articleClass/getAll'), {isUse: null}, function (re) {
+                    if (re.code == 200) {
                         vm.articleClassList = re.data
-                    } else{
-                        layer.alert(re.message,{icon:2});
+                    } else {
+                        layer.alert(re.message, {icon: 2});
                     }
                 })
             },
@@ -168,22 +168,29 @@ var vm = new Vue({
                     page: 1,
                     postData: {
                         title: title,
-                        articleClassId:articleClassId,
+                        articleClassId: articleClassId,
                         isUse: isUse == 0 ? null : isUse,
-                        createDate:createDate
+                        createDate: createDate
                     }
                 }).trigger("reloadGrid");
             }
             ,
             create() {
                 layer.open({
-                    title:'修改文章',
-                    type:2,
+                    title: '新增文章',
+                    type: 2,
                     content: createURL('/back/page/edit/article'),
-                    btn:['确认','取消'],
-                    area:['97%','97%'],
-                    yes:function (index,layero) {
-
+                    btn: ['保存', '确认', '取消'],
+                    area: ['97%', '97%'],
+                    yes: function (index, layero) {
+                        document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
+                    },
+                    btn2: function (index, layero) {
+                        document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
+                        update();
+                    },
+                    btn3:function (index,layero) {
+                        update();
                     }
                 })
             }
@@ -192,8 +199,8 @@ var vm = new Vue({
 ;
 
 //文章分类名 数据格式化
-function typeNameFormatter(cellValue,options,cellObject) {
-    return cellObject.articleClass==null?'':cellObject.articleClass.typeName;
+function typeNameFormatter(cellValue, options, cellObject) {
+    return cellObject.articleClass == null ? '' : cellObject.articleClass.typeName;
 }
 
 //上下架 数据格式化
@@ -214,9 +221,9 @@ function updateIsUse(id, isUse, index) {
             layer.msg("取消发布成功", {icon: 1});
             layer.close(index);
             $("#jqGrid").trigger("reloadGrid");
-        } else if(re.code==500) {
+        } else if (re.code == 500) {
             layer.alert(re.message, {iocn: 2});
-        }else{
+        } else {
             layer.msg("操作参数错误,请刷新后重试", {iocn: 2});
         }
     })
@@ -231,9 +238,9 @@ function update() {
         page: 1,
         postData: {
             title: null,
-            articleClassId:null,
-            isUse:null,
-            createDate:null
+            articleClassId: null,
+            isUse: null,
+            createDate: null
         }
     }).trigger("reloadGrid");
 }
@@ -241,13 +248,20 @@ function update() {
 //编辑文章
 function editArticle(id) {
     layer.open({
-        title:'修改文章',
-        type:2,
-        content: createURL('/back/page/edit/article?id='+id),
-        btn:['确认','取消'],
-        area:['97%','97%'],
-        yes:function (index,layero) {
-            
+        title: '修改文章',
+        type: 2,
+        content: createURL('/back/page/edit/article?id=' + id),
+        btn: ['保存', '确认', '取消'],
+        area: ['97%', '97%'],
+        yes: function (index, layero) {
+            document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
+        },
+        btn2: function (index, layero) {
+            document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
+            update();
+        },
+        btn3:function (index,layero) {
+            update();
         }
     })
 }

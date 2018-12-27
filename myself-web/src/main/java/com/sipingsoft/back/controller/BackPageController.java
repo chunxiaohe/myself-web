@@ -150,8 +150,11 @@ public class BackPageController {
             //新增页面
             map.put("type", 2);
             SysUser sysUser = ShiroUtils.getLoginUser();
-            map.put("name", sysUser.getName());
-            map.put("date", SimpleDateFormatUtil.dateToString(new Date(), "yyyy-MM-dd hh:mm:ss"));
+            Article article = new Article();
+            article.setCreateDate(SimpleDateFormatUtil.dateToString(new Date(), "yyyy-MM-dd hh:mm:ss"));
+            article.setCreateName(sysUser.getName());
+            article.setCreateBy(sysUser.getUserId().intValue());
+            map.put("article", article);
             //获取可用文章分类(启用)
             list = articleClassService.getAllArticleClass(1).getData();
         }
@@ -159,4 +162,5 @@ public class BackPageController {
 
         return BackPageUtil.BACK_ARTICLE_EDIT;
     }
+
 }

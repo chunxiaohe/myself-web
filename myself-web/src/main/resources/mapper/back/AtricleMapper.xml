@@ -30,13 +30,13 @@
     <sql id="Column_List">
         art.id, art.article_class_id, art.title, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
         art.update_date, art.update_by,
-        arc.type_name,sysu.name updateName,sysus.name createName
+        arc.type_name,sysu.name createName  ,sysus.name updateName
     </sql>
 
     <sql id="Column_List_1">
         art.id, art.article_class_id, art.title,art.content, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
         art.update_date, art.update_by,
-        arc.type_name,sysu.name updateName,sysus.name createName
+        arc.type_name,sysu.name createName  ,sysus.name updateName
     </sql>
 
   <select id="findArticleList" parameterType="map" resultMap="BaseResultMap">

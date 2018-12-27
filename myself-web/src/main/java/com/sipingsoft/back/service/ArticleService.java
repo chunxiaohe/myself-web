@@ -34,4 +34,12 @@ public interface ArticleService {
      * @return
      */
     Article getArticleById(Integer id);
+
+    /**
+     * 新增文章
+     * @param article
+     * @return
+     */
+    ResponseMessage<Article> insertArticle(Article article);
+
 }

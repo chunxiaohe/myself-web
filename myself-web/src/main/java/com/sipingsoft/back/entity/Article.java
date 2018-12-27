@@ -48,7 +48,7 @@ public class Article implements Serializable {
      * 是否上架(1.上架  2.下架)
      */
     @TableField(value = "is_use")
-    private Byte isUse;
+    private Integer isUse;
 
     @TableField(value = "create_date")
     private String createDate;
@@ -194,7 +194,7 @@ public class Article implements Serializable {
      *
      * @return is_use - 是否上架(1.上架  2.下架)
      */
-    public Byte getIsUse() {
+    public Integer getIsUse() {
         return isUse;
     }
 
@@ -203,7 +203,7 @@ public class Article implements Serializable {
      *
      * @param isUse 是否上架(1.上架  2.下架)
      */
-    public void setIsUse(Byte isUse) {
+    public void setIsUse(Integer isUse) {
         this.isUse = isUse;
     }
 
