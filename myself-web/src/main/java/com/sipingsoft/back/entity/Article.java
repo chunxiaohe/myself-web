@@ -63,6 +63,18 @@ public class Article implements Serializable {
     private Integer updateBy;
 
     /**
+     * 预览图地址
+     */
+    @TableField(value = "preview")
+    private String preview;
+
+    /**
+     * 预览图名字
+     */
+    @TableField(value = "preview_name")
+    private String previewName;
+
+    /**
      * 1.未删除 2.已删除
      */
     @TableField(value = "is_delete")
@@ -305,6 +317,22 @@ public class Article implements Serializable {
 
     public void setArticleClass(ArticleClass articleClass) {
         this.articleClass = articleClass;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
+    }
+
+    public String getPreviewName() {
+        return previewName;
+    }
+
+    public void setPreviewName(String previewName) {
+        this.previewName = previewName;
     }
 
     @Override

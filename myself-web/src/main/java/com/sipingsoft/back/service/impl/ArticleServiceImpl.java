@@ -10,7 +10,10 @@ import com.sipingsoft.core.shiro.ShiroUtils;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -71,22 +74,77 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ResponseMessage<Article> insertArticle(Article article) {
+    public ResponseMessage<Integer> insertArticle(MultipartFile file, Article article) {
         //id不为空时   保存
-        List list = new ArrayList();
+        //图片处理
+        // 1.如果传入的图片不为空  则删除原来的图片 更新现在的图片
+        //   (1.)文章id为空 则是新增文章,不删除图片直接添加
+        //   (2.)文章id不为空,则是保存文章,删除原来的图片,更新图片
+        // 2. 如果传入的图片为空  则不做任何处理
+        if (file != null && file.getSize() != 0) {
+            dealImage(article, file);
+        }
+        List<Integer> list = new ArrayList<>();
         if (article.getId() != null) {
             SysUser sysUser = ShiroUtils.getLoginUser();
             article.setUpdateBy(sysUser.getUserId().intValue());
-            article.setUpdateDate(SimpleDateFormatUtil.dateToString(new Date(),"yyyy-MM-dd hh:mm:ss"));
+            article.setUpdateDate(SimpleDateFormatUtil.dateToString(new Date(), "yyyy-MM-dd hh:mm:ss"));
             articleMapper.updateById(article);
             list.add(article.getId());
         } else {
+            //id为空时   新加入
             //上架
             article.setIsUse(1);
             article.setIsDelete(1);
+            article.setUpdateBy(article.getCreateBy());
+            article.setUpdateDate(article.getCreateDate());
             articleMapper.insert(article);
             list.add(article.getId());
         }
-        return new ResponseMessage<>(200, "文章保存成功", list);
+        return new ResponseMessage<Integer>(200, "文章保存成功", list);
+    }
+
+    private void dealImage(Article article, MultipartFile file) {
+        String oFileName = file.getOriginalFilename();
+        String fileNameSuffix = oFileName.substring(oFileName.lastIndexOf("."));
+        Date date = new Date();
+        String dir = SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd");
+        String nFileName = date.getTime() + fileNameSuffix;
+        String path = null;
+        try {
+            path = ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + dir + "/" + nFileName;
+            File file1 = new File(ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + dir + "/");
+            if (article.getPreviewName() != null) {
+                //删除原来的图片
+                String createDate = article.getCreateDate().substring(0, 10);
+                String oldPath = ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + createDate + "/" + article.getPreviewName();
+                File oldFile = new File(oldPath);
+                if (oldFile.exists()) {
+                    boolean flag =  oldFile.delete();
+                }
+            }
+            if (!file1.exists()) {
+                boolean flag =  file1.mkdirs();
+            }
+            //保存图片
+            InputStream inputStream = file.getInputStream();
+            // 设置数据缓冲
+            byte[] bs = new byte[1024 * 2];
+            // 读取到的数据长度
+            int len;
+            OutputStream outputStream = new FileOutputStream(path);
+            while ((len = inputStream.read(bs)) != -1) {
+                outputStream.write(bs, 0, len);
+            }
+            //关闭流
+            inputStream.close();
+            outputStream.close();
+            article.setPreview(path);
+            article.setPreviewName(nFileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

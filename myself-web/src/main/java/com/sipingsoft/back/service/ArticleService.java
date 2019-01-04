@@ -3,6 +3,7 @@ package com.sipingsoft.back.service;
 import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author HeChunXiao
@@ -30,6 +31,7 @@ public interface ArticleService {
 
     /**
      * 根据文章id 查找文章信息
+     *
      * @param id
      * @return
      */
@@ -37,9 +39,10 @@ public interface ArticleService {
 
     /**
      * 新增文章
+     *
      * @param article
      * @return
      */
-    ResponseMessage<Article> insertArticle(Article article);
+    ResponseMessage<Integer> insertArticle(MultipartFile file, Article article);
 
 }

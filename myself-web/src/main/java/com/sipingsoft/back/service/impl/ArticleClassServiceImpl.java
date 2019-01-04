@@ -90,7 +90,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
     public ResponseMessage<ArticleClass> updateArticleClassById(ArticleClass articleClass) {
         if (articleClass.getTypeName() != null && articleClass.getTypeName().trim() != "") {
             //查找是否有同名文章分类
-            QueryWrapper queryWrapper = new QueryWrapper();
+            QueryWrapper<ArticleClass> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("type_name",articleClass.getTypeName());
             queryWrapper.ne("id",articleClass.getId());
             List<ArticleClass> list = articleClassMapper.selectList(queryWrapper);
@@ -118,7 +118,7 @@ public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, Art
     @Override
     public ResponseMessage<ArticleClass> deleteArticleClassById(Integer id) {
         //判断删除的文章分类下是否含有相关文章
-        QueryWrapper<Article> queryWrapper = new QueryWrapper();
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
         Map<String,Object> map = new HashMap<>();
         map.put("article_class_id",id);
         map.put("is_delete",1);

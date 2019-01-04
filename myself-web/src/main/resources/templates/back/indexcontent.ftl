@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
     <!--common-->
     <link href="${staticRoot}/back/css/style.css" rel="stylesheet">
     <!-- 滚动css -->

@@ -2,7 +2,7 @@
 <html >
 <head>
     <meta charset="utf-8">
-    <title>支付方式</title>
+    <title>图片轮播</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -23,7 +23,6 @@
 <body style="background: #EFF0F4;height: 500px">
 <input type="hidden" name="staticRoot" value="${staticRoot}">
 <div class="container-fluid" id="app">
-
         <div class="form-group col-sm-3 col-md-3 col-lg-3">
             <button class="btn btn-info" @click="create"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;新增</button>
         </div>
@@ -34,6 +33,6 @@
     </div>
     <img style="display: none;width: 100%;height: 100%" id="payTypePic" src="">
 </div>
-<script src="${staticRoot}/back/js/payType.js"></script>
+<script src="${staticRoot}/back/js/slideShow.js"></script>
 </body>
 </html>

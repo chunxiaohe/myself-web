@@ -154,8 +154,7 @@ var vm = new Vue({
                 $('#isUse').val("");
                 $('#createDate').val("");
                 update();
-            }
-            ,
+            },
             search() {
                 var title = $("#title").val();
                 var articleClassId = $('#articleClassId').val();
@@ -189,7 +188,7 @@ var vm = new Vue({
                         document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
                         update();
                     },
-                    btn3:function (index,layero) {
+                    btn3: function (index, layero) {
                         update();
                     }
                 })
@@ -260,7 +259,7 @@ function editArticle(id) {
             document.getElementById($(layero).attr("id")).getElementsByTagName("iframe")[0].contentWindow.submitDate();
             update();
         },
-        btn3:function (index,layero) {
+        btn3: function (index, layero) {
             update();
         }
     })

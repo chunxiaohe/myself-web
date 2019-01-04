@@ -22,20 +22,11 @@ var vm = new Vue({
                     align: 'center',
                     sortable: false,
                 }, {
-                    label: '图片名',
-                    name: 'fileName',
+                    label: '轮播顺序',
+                    name: 'theOrder',
                     align: 'center',
                     sortable: false,
-                    width: 80
-                }, {
-                    label: '类型',
-                    name: 'type',
-                    align: 'center',
-                    width: 40,
-                    sortable: false,
-                    formatter: function (cellValue, options, cellObject) {
-                        return cellObject.type == 1 ? '微信' : '支付宝'
-                    }
+                    width: 40
                 }, {
                     label: '创建人',
                     name: 'createName',
@@ -76,13 +67,13 @@ var vm = new Vue({
                 }, {
                     label: "操作",
                     name: '',
-                    width: 70,
+                    width: 100,
                     align: 'center',
                     sortable: false,
                     formatter: function (cellValue, options, cellObject) {
                         return "<input num='1' type='button'  @click='operate' class='btn btn-info' fileName='" + cellObject.fileName + "' ids='" + cellObject.id + "' value='查看'/>"
-                            + "<input num='2' style='margin-left: 5px;background-color: #ff0000' type='button'  @click='operate'" +
-                            " class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='删除'/>";
+                            + "<input num='3' style='margin-left: 5px;' type='button'  @click='operate' class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='编辑'/>"
+                            + "<input num='2' style='margin-left: 5px;background-color: #ff0000' type='button'  @click='operate' class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='删除'/>";
                     }
                 }
                 ],

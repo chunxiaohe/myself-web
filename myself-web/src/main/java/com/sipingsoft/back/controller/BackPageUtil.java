@@ -7,11 +7,11 @@ package com.sipingsoft.back.controller;
 public class BackPageUtil {
 
     /**
-     *后台登录页面
+     * 后台登录页面
      */
     public static final String BACK_LOGIN = "/back/login";
     /**
-     *后台主页
+     * 后台主页
      */
     public static final String BACK_INDEX = "/back/index";
     /**
@@ -43,5 +43,10 @@ public class BackPageUtil {
     /**
      * 添加/修改文章页面
      */
-    public static final String BACK_ARTICLE_EDIT = "back/articleEdit";
+    public static final String BACK_ARTICLE_EDIT = "back/alert/articleEdit";
+
+    /**
+     * 轮播图片页面
+     */
+    public static final String BACK_SLIDESHOW = "back/slideShow";
 }

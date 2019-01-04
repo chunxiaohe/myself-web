@@ -163,4 +163,13 @@ public class BackPageController {
         return BackPageUtil.BACK_ARTICLE_EDIT;
     }
 
+    /**
+     * 图片轮播管理
+     * @return
+     */
+    @GetMapping("/back/page/slideShow")
+    public String slideShow(){
+        return BackPageUtil.BACK_SLIDESHOW;
+    }
+
 }

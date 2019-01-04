@@ -1,4 +1,5 @@
 var editor;
+var file;
 var vm = new Vue({
     el: '#app',
     data: {
@@ -9,6 +10,7 @@ var vm = new Vue({
         that.$nextTick(function () {
             //初始化富文本编辑器
             that._initWangEditor();
+            that.checkPreview();
         });
     },
     methods: {
@@ -252,6 +254,53 @@ var vm = new Vue({
             ]
 
             editor.create();
+        },
+        lookPreview() {
+            console.log()
+            var fileName = $("input[name='fileName']").val();
+            if (fileName === "") {
+                layer.alert("您查看的预览图片不存在", {icon: 5})
+            } else {
+                var updateDate = $("#updateDate").val();
+                var staticRoot = $("input[name='staticRoot']").val();
+                var dirPr = updateDate.substring(0, 10);
+                //判断图片是否存在
+                var imagePath = staticRoot + "/preview/" + dirPr + "/" + fileName;
+                var flag = checkImg(imagePath);
+                if (flag) {
+                    $('#previewPic').attr('src', imagePath);
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 1,
+                        area: ['400px', '400px'],
+                        skin: 'layui-layer-nobg', // 没有背景色
+                        shadeClose: true,
+                        content: $('#previewPic')
+                    });
+                } else {
+                    layer.alert("服务器上不存在您查看的预览图,请重新上传提交再进行查看!", {icon: 5})
+                }
+            }
+        },
+        checkPreview() {
+            $('#file').on('change', function () {
+                //验证文件的格式
+                file = $("#file")[0].files;
+                if (file[0].type.indexOf("image/") == -1) {
+                    layer.msg('请选择图片上传', {icon: 2});
+                    var previewName = $("#previewName").val();
+                    console.log(previewName);
+                    if (previewName === '') {
+                        $("#file").val('');
+                    } else {
+                        $("#file").val(previewName);
+                    }
+                    $("input[name='fileName']").val('');
+                } else {
+                    $("input[name='fileName']").val(file[0].name);
+                }
+            })
         }
     }
 })
@@ -260,19 +309,36 @@ var vm = new Vue({
  * 数据提交
  */
 function submitDate() {
-    var article = getSArticle();
-    if (article != null) {
-        $.ajax.async=false;
-        $.post(createURL('/back/api/article/insert'), article, function (re) {
-            if (re.code == 200) {
-                vm.articleId = re.data[0];
-                layer.msg(re.message, {icon: 1})
-            } else if (re.code == 500) {
-                layer.alert(re.message, {icon: 1})
-            } else {
-                layer.alert("系统异常");
+    var data = getSArticle();
+    if (data != null) {
+        var formData = new FormData();
+        /*if (file != null){
+            formData.append("file",file);
+            formData.append("article",article);
+        } else {
+            formData.append("article",article);
+        }*/
+        $.ajax({
+            url:createURL('/back/api/article/insert'),
+            type:'post',
+            data:data,
+            contentType:false,//必须
+            processData:false,//用于对data参数进行序列化处理 这里必须false
+            cache: false,//上传文件无需缓存
+            async: false,
+            traditional:true,
+            success:function (re) {
+                if (re.code == 200) {
+                    vm.articleId = re.data[0];
+                    layer.msg(re.message, {icon: 1})
+                } else if (re.code == 500) {
+                    layer.alert(re.message, {icon: 1})
+                } else {
+                    layer.alert("系统异常");
+                }
             }
-        });
+        })
+
     }
 }
 
@@ -280,17 +346,18 @@ function submitDate() {
  * 数据获取
  */
 function getSArticle() {
-    var article = {};
-    var flag = true;
-    article.id = $("input[name='title']").attr("articleId");
-    article.title = $("input[name='title']").val();
-    article.articleClassId = $("select[name='articleClassId']").val();
-    article.keyword = $("input[name='keyword']").val();
-    article.createBy = $("input[name='createBy']").attr("createBy");
-    article.createDate = $("input[name='createDate']").val();
-    article.content = editor.txt.html();
-    var text = editor.txt.text();
-    if (article.title == null || article.title.trim() === '') {
+    let flag = true;
+    let formData = new FormData();
+    let id = $("input[name='title']").attr("articleId");
+    let title = $("input[name='title']").val();
+    let articleClassId = $("select[name='articleClassId']").val();
+    let keyword = $("input[name='keyword']").val();
+    let createBy = $("input[name='createBy']").attr("createBy");
+    let createDate = $("input[name='createDate']").val();
+    let previewName = $("#previewName").val();
+    let content = editor.txt.html();
+    let text = editor.txt.text();
+    if (title == null || title.trim() === '') {
         layer.alert("文章名不能为空", {src: 2});
         flag = false;
     }
@@ -299,6 +366,40 @@ function getSArticle() {
         flag = false;
     }
     if (flag) {
-        return article;
+        formData.append("id",id);
+        formData.append("title",title);
+        formData.append("articleClassId",articleClassId);
+        formData.append("keyword",keyword);
+        formData.append("createBy",createBy);
+        formData.append("createDate",createDate);
+        formData.append("previewName",previewName);
+        formData.append("content",content);
+        if(typeof (file) !== "undefined"){
+            formData.append("file",file[0]);
+        }else{
+            formData.append("file",'');
+        }
+        return formData;
+    }
+}
+
+//判断图片是否存在
+function checkImg(imagePath) {
+    var xmlHttp;
+    //判断浏览器是否支持ActiveX控件
+    if (window.ActiveXObject) {
+        //支持-通过ActiveXObject的一个新实例来创建XMLHttpRequest对象
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //不支持
+    else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest()
+    }
+    xmlHttp.open("Get", imagePath, false);
+    xmlHttp.send();
+    if (xmlHttp.status == 404) {
+        return false;
+    } else {
+        return true;
     }
 }

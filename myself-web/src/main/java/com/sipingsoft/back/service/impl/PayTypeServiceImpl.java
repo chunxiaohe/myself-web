@@ -8,6 +8,7 @@ import com.sipingsoft.back.service.PayTypeService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.shiro.ShiroUtils;
+import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -107,9 +108,7 @@ public class PayTypeServiceImpl implements PayTypeService {
             payType.setFileName(nFileName);
             payType.setType(type);
             payType.setAddress(path);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String date1 = sdf.format(date);
-            payType.setCreateDate(date1);
+            payType.setCreateDate(SimpleDateFormatUtil.dateToString(date,"yyyy-MM-dd hh:mm:ss"));
             payType.setIsUse(2);
             SysUser sysUser = ShiroUtils.getLoginUser();
             payType.setCreateBy(sysUser.getUserId().intValue());
