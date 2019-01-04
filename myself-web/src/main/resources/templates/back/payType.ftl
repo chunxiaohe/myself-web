@@ -22,6 +22,7 @@
 </head>
 <body style="background: #EFF0F4;height: 500px">
 <input type="hidden" name="staticRoot" value="${staticRoot}">
+<input type="hidden" name="imagePath" value="${imagePath}">
 <div class="container-fluid" id="app">
 
         <div class="form-group col-sm-3 col-md-3 col-lg-3">

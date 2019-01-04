@@ -8,10 +8,11 @@ import com.sipingsoft.back.service.PayTypeService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.shiro.ShiroUtils;
+import com.sipingsoft.core.util.OperationImageUtil;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,8 @@ public class PayTypeServiceImpl implements PayTypeService {
 
     @Autowired
     private PayTypeMapper payTypeMapper;
+    @Value("${paytype-path}")
+    private String payTypePath;
 
     /**
      * 支付方式列表
@@ -88,22 +91,13 @@ public class PayTypeServiceImpl implements PayTypeService {
         String nFileName = date.getTime() + fileNameSuffix;
         String path = null;
         try {
-            path = ResourceUtils.getURL("classpath:").getPath() + "/static/payType/" + nFileName;
-            File file1 = new File(ResourceUtils.getURL("classpath:").getPath() + "/static/payType/");
+            path = payTypePath + nFileName;
+            File file1 = new File(payTypePath);
             if (!file1.exists()) {
                 file1.mkdirs();
             }
             //保存图片
-            //file.transferTo(file1);
-            InputStream inputStream = file.getInputStream();
-            // 设置数据缓冲
-            byte[] bs = new byte[1024 * 2];
-            // 读取到的数据长度
-            int len;
-            OutputStream outputStream = new FileOutputStream(path);
-            while ((len = inputStream.read(bs)) != -1) {
-                outputStream.write(bs, 0, len);
-            }
+            OperationImageUtil.saveImage(file,path);
             PayType payType = new PayType();
             payType.setFileName(nFileName);
             payType.setType(type);
@@ -114,9 +108,6 @@ public class PayTypeServiceImpl implements PayTypeService {
             payType.setCreateBy(sysUser.getUserId().intValue());
             payType.setRemark(remark);
             payTypeMapper.insert(payType);
-            //关闭流
-            inputStream.close();
-            outputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return new ResponseMessage<>(500, "系统异常:文件夹创建失败.");
@@ -139,7 +130,7 @@ public class PayTypeServiceImpl implements PayTypeService {
         }
         Integer type = payType.getType();
         if (payType.getIsUse()==1){
-            QueryWrapper queryWrapper = new QueryWrapper();
+            QueryWrapper<PayType> queryWrapper = new QueryWrapper<>();
             Map<String, Object> map = new HashMap<>();
             map.put("type", type);
             map.put("is_use", payType.getIsUse());

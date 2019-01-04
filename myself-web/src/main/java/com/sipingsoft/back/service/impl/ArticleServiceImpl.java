@@ -7,6 +7,7 @@ import com.sipingsoft.back.service.ArticleService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.shiro.ShiroUtils;
+import com.sipingsoft.core.util.OperationImageUtil;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,18 +128,7 @@ public class ArticleServiceImpl implements ArticleService {
                 boolean flag =  file1.mkdirs();
             }
             //保存图片
-            InputStream inputStream = file.getInputStream();
-            // 设置数据缓冲
-            byte[] bs = new byte[1024 * 2];
-            // 读取到的数据长度
-            int len;
-            OutputStream outputStream = new FileOutputStream(path);
-            while ((len = inputStream.read(bs)) != -1) {
-                outputStream.write(bs, 0, len);
-            }
-            //关闭流
-            inputStream.close();
-            outputStream.close();
+            OperationImageUtil.saveImage(file,path);
             article.setPreview(path);
             article.setPreviewName(nFileName);
         } catch (FileNotFoundException e) {

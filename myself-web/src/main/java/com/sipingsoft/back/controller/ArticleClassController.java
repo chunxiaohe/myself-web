@@ -6,6 +6,7 @@ import com.sipingsoft.back.service.ArticleClassService;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,6 @@ public class ArticleClassController {
 
     @Autowired
     private ArticleClassService articleClassService;
-
 
     /**
      * 文章分类列表

@@ -176,12 +176,14 @@ function update() {
 
 //查看图片
 function showPic(fileName) {
-    var staticRoot = $('input[name="staticRoot"]').val();
-    var imagePath = staticRoot + "/payType/" + fileName;
+    var imagePath = $('input[name="imagePath"]').val();
+    console.log(imagePath);
+    var payTypePath = imagePath+ "/payType/"+fileName;
     //判断图片是否存在
-    var flag = checkImg(imagePath);
+    //var flag = checkImg(imagePath);
+    var flag = true;
     if (flag) {
-        $('#payTypePic').attr('src', imagePath);
+        $('#payTypePic').attr('src', payTypePath);
         layer.open({
             type: 1,
             title: false,

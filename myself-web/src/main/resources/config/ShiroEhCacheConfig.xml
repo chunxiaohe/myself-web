@@ -18,7 +18,7 @@
      	eternal="false"
      	timeToIdleSeconds="600"
      	timeToLiveSeconds="600"
-     	overflowToDisk="true"
+     	overflowToDisk="false"
      	maxElementsOnDisk="10000000"
      	diskPersistent="false"
      	diskExpiryThreadIntervalSeconds="120"
@@ -61,7 +61,7 @@
            eternal="false"
            timeToIdleSeconds="1800"
            timeToLiveSeconds="1800"
-           overflowToDisk="true"
+           overflowToDisk="false"
            statistics="true">
     </cache>
     

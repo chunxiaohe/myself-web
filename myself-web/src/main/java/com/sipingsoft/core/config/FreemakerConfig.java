@@ -25,6 +25,7 @@ public class FreemakerConfig {
 		Map<String,Object> variables = new HashMap<>();
 		variables.put("staticRoot", commonProperyies.getStaticRoot());
 		variables.put("webRoot", commonProperyies.getWebRoot());
+        variables.put("imagePath",commonProperyies.getImagePath());
 		configurer.setFreemarkerVariables(variables);
 		
 		Properties settings = new Properties();

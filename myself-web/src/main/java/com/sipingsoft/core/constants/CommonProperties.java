@@ -20,7 +20,13 @@ public class CommonProperties {
      *根路径
      */
 	private String webRoot;
-	
+
+    /**
+     * 图片代理路径
+     * @return
+     */
+    private String imagePath;
+
 
 	public String getStaticRoot() {
 		return staticRoot;
@@ -38,6 +44,12 @@ public class CommonProperties {
 	public void setWebRoot(String webRoot) {
 		this.webRoot = webRoot;
 	}
-	
-	
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 }

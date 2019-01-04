@@ -32,9 +32,14 @@ spring:
               config:
                   multi-statement-allow: true
 
-
 com:
   sipingsoft:
-    static-root: http://127.0.0.1:8080/static
-    web_root: http://127.0.0.1:8080
+    static-root: http://app.blog.com/static
+    web-root: http://app.blog.com
+    image-path: http://app.blog.com/image
 
+#支付图片存储路径
+paytype-path: D:/IDEA/workspace/java-web/payType/
+
+#文章缩略图存储路径
+preview-path: D:/IDEA/workspace/java-web/preview/
