@@ -262,13 +262,13 @@ var vm = new Vue({
                 layer.alert("您查看的预览图片不存在", {icon: 5})
             } else {
                 var updateDate = $("#updateDate").val();
-                var staticRoot = $("input[name='staticRoot']").val();
+                var imagePath = $("input[name='imagePath']").val();
                 var dirPr = updateDate.substring(0, 10);
                 //判断图片是否存在
-                var imagePath = staticRoot + "/preview/" + dirPr + "/" + fileName;
-                var flag = checkImg(imagePath);
+                var previewPath = imagePath +"/preview/"+ dirPr + "/" + fileName;
+                var flag = checkImg(previewPath);
                 if (flag) {
-                    $('#previewPic').attr('src', imagePath);
+                    $('#previewPic').attr('src', previewPath);
                     layer.open({
                         type: 1,
                         title: false,
@@ -290,7 +290,6 @@ var vm = new Vue({
                 if (file[0].type.indexOf("image/") == -1) {
                     layer.msg('请选择图片上传', {icon: 2});
                     var previewName = $("#previewName").val();
-                    console.log(previewName);
                     if (previewName === '') {
                         $("#file").val('');
                     } else {
@@ -384,7 +383,7 @@ function getSArticle() {
 }
 
 //判断图片是否存在
-function checkImg(imagePath) {
+function checkImg(previewPath) {
     var xmlHttp;
     //判断浏览器是否支持ActiveX控件
     if (window.ActiveXObject) {
@@ -395,7 +394,7 @@ function checkImg(imagePath) {
     else if (window.XMLHttpRequest) {
         xmlHttp = new XMLHttpRequest()
     }
-    xmlHttp.open("Get", imagePath, false);
+    xmlHttp.open("Get", previewPath, false);
     xmlHttp.send();
     if (xmlHttp.status == 404) {
         return false;

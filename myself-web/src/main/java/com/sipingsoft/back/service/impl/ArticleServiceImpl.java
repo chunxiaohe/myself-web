@@ -10,6 +10,7 @@ import com.sipingsoft.core.shiro.ShiroUtils;
 import com.sipingsoft.core.util.OperationImageUtil;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Value("${preview-path}")
+    private String previewPath;
     /**
      * 文章列表
      *
@@ -113,12 +116,12 @@ public class ArticleServiceImpl implements ArticleService {
         String nFileName = date.getTime() + fileNameSuffix;
         String path = null;
         try {
-            path = ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + dir + "/" + nFileName;
-            File file1 = new File(ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + dir + "/");
+            path = previewPath + dir + "/" + nFileName;
+            File file1 = new File(previewPath + dir + "/");
             if (article.getPreviewName() != null) {
                 //删除原来的图片
                 String createDate = article.getCreateDate().substring(0, 10);
-                String oldPath = ResourceUtils.getURL("classpath:").getPath() + "/static/preview/" + createDate + "/" + article.getPreviewName();
+                String oldPath = previewPath + createDate + "/" + article.getPreviewName();
                 File oldFile = new File(oldPath);
                 if (oldFile.exists()) {
                     boolean flag =  oldFile.delete();

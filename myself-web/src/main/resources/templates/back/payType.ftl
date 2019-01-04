@@ -21,7 +21,6 @@
     </style>
 </head>
 <body style="background: #EFF0F4;height: 500px">
-<input type="hidden" name="staticRoot" value="${staticRoot}">
 <input type="hidden" name="imagePath" value="${imagePath}">
 <div class="container-fluid" id="app">
 

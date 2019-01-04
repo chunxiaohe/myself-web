@@ -177,11 +177,9 @@ function update() {
 //查看图片
 function showPic(fileName) {
     var imagePath = $('input[name="imagePath"]').val();
-    console.log(imagePath);
     var payTypePath = imagePath+ "/payType/"+fileName;
     //判断图片是否存在
-    //var flag = checkImg(imagePath);
-    var flag = true;
+    var flag = checkImg(payTypePath);
     if (flag) {
         $('#payTypePic').attr('src', payTypePath);
         layer.open({
@@ -199,7 +197,7 @@ function showPic(fileName) {
 }
 
 //判断图片是否存在
-function checkImg(imagePath) {
+function checkImg(payTypePath) {
     var xmlHttp;
     //判断浏览器是否支持ActiveX控件
     if (window.ActiveXObject) {
@@ -210,7 +208,7 @@ function checkImg(imagePath) {
     else if (window.XMLHttpRequest) {
         xmlHttp = new XMLHttpRequest()
     }
-    xmlHttp.open("Get", imagePath, false);
+    xmlHttp.open("Get", payTypePath, false);
     xmlHttp.send();
     if (xmlHttp.status == 404) {
         return false;
