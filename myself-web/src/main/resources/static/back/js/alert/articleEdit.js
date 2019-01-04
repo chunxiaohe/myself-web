@@ -261,9 +261,9 @@ var vm = new Vue({
             if (fileName === "") {
                 layer.alert("您查看的预览图片不存在", {icon: 5})
             } else {
-                var updateDate = $("#updateDate").val();
+                var createDate = $("#createDate").val();
                 var imagePath = $("input[name='imagePath']").val();
-                var dirPr = updateDate.substring(0, 10);
+                var dirPr = createDate.substring(0, 10);
                 //判断图片是否存在
                 var previewPath = imagePath +"/preview/"+ dirPr + "/" + fileName;
                 var flag = checkImg(previewPath);

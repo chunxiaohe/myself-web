@@ -70,9 +70,8 @@
     </style>
 </head>
 <body style="background: #EFF0F4;height: 500px">
-<input type="hidden" value="${staticRoot}" name = "staticRoot">
 <input type="hidden" value="${imagePath}" name = "imagePath">
-<input type="hidden" value="${(article.updateDate)!''}" id="updateDate" >
+<input type="hidden" value="${(article.createDate)!''}" id="createDate" >
 <input type="hidden" value="${(article.previewName)!''}" id="previewName" >
 <div class="container-fluid" id="app">
     <form id="articleForm">

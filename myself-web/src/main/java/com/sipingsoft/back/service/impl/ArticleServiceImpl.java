@@ -30,6 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Value("${preview-path}")
     private String previewPath;
+
     /**
      * 文章列表
      *
@@ -108,30 +109,38 @@ public class ArticleServiceImpl implements ArticleService {
         return new ResponseMessage<Integer>(200, "文章保存成功", list);
     }
 
+    /**
+     * 文章保存/更新时  缩略图片的处理
+     * @param article
+     * @param file
+     */
     private void dealImage(Article article, MultipartFile file) {
         String oFileName = file.getOriginalFilename();
+        assert oFileName != null;
         String fileNameSuffix = oFileName.substring(oFileName.lastIndexOf("."));
         Date date = new Date();
-        String dir = SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd");
+        /*String dir = SimpleDateFormatUtil.dateToString(date, "yyyy-MM-dd");*/
+        //创建日期:获取缩略图所在文件夹
+        String createDate = article.getCreateDate().substring(0, 10);
         String nFileName = date.getTime() + fileNameSuffix;
         String path = null;
         try {
-            path = previewPath + dir + "/" + nFileName;
-            File file1 = new File(previewPath + dir + "/");
+            path = previewPath + createDate + "/" + nFileName;
+            File file1 = new File(previewPath + createDate + "/");
             if (article.getPreviewName() != null) {
                 //删除原来的图片
-                String createDate = article.getCreateDate().substring(0, 10);
                 String oldPath = previewPath + createDate + "/" + article.getPreviewName();
+                System.out.println(oldPath);
                 File oldFile = new File(oldPath);
                 if (oldFile.exists()) {
-                    boolean flag =  oldFile.delete();
+                    boolean flag = oldFile.delete();
                 }
             }
             if (!file1.exists()) {
-                boolean flag =  file1.mkdirs();
+                boolean flag = file1.mkdirs();
             }
             //保存图片
-            OperationImageUtil.saveImage(file,path);
+            OperationImageUtil.saveImage(file, path);
             article.setPreview(path);
             article.setPreviewName(nFileName);
         } catch (FileNotFoundException e) {
