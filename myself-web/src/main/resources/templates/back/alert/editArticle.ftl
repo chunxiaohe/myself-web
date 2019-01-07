@@ -129,6 +129,6 @@
     </form>
     <img style="display: none;width: 100%;height: 100%" id="previewPic" src="">
 </div>
-<script src="${staticRoot}/back/js/alert/articleEdit.js"></script>
+<script src="${staticRoot}/back/js/alert/editArticle.js"></script>
 </body>
 </html>

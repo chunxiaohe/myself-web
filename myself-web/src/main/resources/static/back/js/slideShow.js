@@ -72,7 +72,7 @@ var vm = new Vue({
                     sortable: false,
                     formatter: function (cellValue, options, cellObject) {
                         return "<input num='1' type='button'  @click='operate' class='btn btn-info' fileName='" + cellObject.fileName + "' ids='" + cellObject.id + "' value='查看'/>"
-                            + "<input num='3' style='margin-left: 5px;' type='button'  @click='operate' class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='编辑'/>"
+                            + "<input num='4' style='margin-left: 5px;' type='button'  @click='operate' class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='编辑'/>"
                             + "<input num='2' style='margin-left: 5px;background-color: #ff0000' type='button'  @click='operate' class='btn btn-info' address='" + cellObject.address + "' ids='" + cellObject.id + "' value='删除'/>";
                     }
                 }
@@ -119,6 +119,8 @@ var vm = new Vue({
                     } else {
                         layer.alert("操作异常!", {icon: 5})
                     }
+                } else if (num === 4) {
+                    //编辑
                 } else {
                     layer.msg("操作异常", {icon: 5});
                 }
@@ -128,7 +130,7 @@ var vm = new Vue({
             layer.open({
                 title: '上传轮播图',
                 type: 2,
-                content: createURL('/back/page/addPaytype'),
+                content: createURL('/back/page/edit/slideshow'),
                 area: ['30%', '52%'],
                 btn: ['确定', '取消'],
                 yes: function (index, layero) {

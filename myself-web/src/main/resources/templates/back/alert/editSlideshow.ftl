@@ -44,7 +44,6 @@
             filter: alpha(opacity=0);
             cursor: pointer;
 
-
         }
 
         .a-upload:hover {
@@ -60,26 +59,23 @@
     <form id="addPayType">
         <div class='form-group' id='uploadFile'>
             <label for=''>选择图片</label>
-            <input disabled='disabled' id="fileName"  name="fileName" class='form-control' style='width: 80%'>
+            <input disabled='disabled' value="${(slideshow.realName)!''}" id="fileName"  name="fileName" class='form-control' style='width: 80%'>
             <a class='a-upload'>
                 <input type='file' name='file' id='file'>上传图片
             </a>
         </div>
         <div class='form-group'>
-            <label for=''>支付方式</label>
-            <select name='type' id='type' class='form-control'>
-                <option value='1'>微信</option>
-                <option value='2'>支付宝</option>
-            </select>
+            <label for=''>轮播顺序</label>
+            <input class='form-control' name="theOrder" value="${(slideshow.theOrder)!''}">
         </div>
         <div class='form-group'>
             <label for=''>备注</label>
-            <textarea class='form-control' rows='3' name='remark'></textarea>
+            <textarea class='form-control' rows='3' name='remark'>${(slideshow.remark)!''}</textarea>
         </div>
 
     </form>
 </div>
 </div>
 </body>
-<script type="text/javascript" src="${staticRoot}/back/js/alert/addPayType.js"></script>
+<script type="text/javascript" src="${staticRoot}/back/js/alert/editSlideshow.js"></script>
 </html>

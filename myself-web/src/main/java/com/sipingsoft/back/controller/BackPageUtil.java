@@ -53,5 +53,5 @@ public class BackPageUtil {
     /**
      * 新增轮播图 弹窗页面
      */
-    public static final String BACK_ADD_SLIDESHOW = "back/alert/addSlideshow";
+    public static final String BACK_ADD_SLIDESHOW = "back/alert/editSlideshow";
 }

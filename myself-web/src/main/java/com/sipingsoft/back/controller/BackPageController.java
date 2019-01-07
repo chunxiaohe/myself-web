@@ -181,6 +181,7 @@ public class BackPageController {
      * 新增/修改 图片轮播页面
      * @return
      */
+    @GetMapping("/back/page/edit/slideshow")
     public String addSlideshow(ModelMap map, Integer id){
         Slideshow slideshow = slideshowService.getById(id);
         map.put("slideshow",slideshow);
