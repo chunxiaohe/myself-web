@@ -1,5 +1,6 @@
 package com.sipingsoft.back.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.ArticleMapper;
@@ -22,7 +23,7 @@ import java.util.*;
  * @since 2018-12-21 16:07
  */
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class ArticleServiceImpl extends ServiceImpl<ArticleMapper,Article> implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;

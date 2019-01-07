@@ -2,9 +2,11 @@ package com.sipingsoft.back.controller;
 
 import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.back.entity.ArticleClass;
+import com.sipingsoft.back.entity.Slideshow;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.service.ArticleClassService;
 import com.sipingsoft.back.service.ArticleService;
+import com.sipingsoft.back.service.SlideshowService;
 import com.sipingsoft.core.shiro.ShiroUtils;
 import com.sipingsoft.core.util.FormatDateUtil;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
@@ -30,6 +32,9 @@ public class BackPageController {
 
     @Autowired
     private ArticleClassService articleClassService;
+
+    @Autowired
+    private SlideshowService slideshowService;
 
     /**
      * 后台 登录页
@@ -172,4 +177,13 @@ public class BackPageController {
         return BackPageUtil.BACK_SLIDESHOW;
     }
 
+    /**
+     * 新增/修改 图片轮播页面
+     * @return
+     */
+    public String addSlideshow(ModelMap map, Integer id){
+        Slideshow slideshow = slideshowService.getById(id);
+        map.put("slideshow",slideshow);
+        return BackPageUtil.BACK_ADD_SLIDESHOW;
+    }
 }

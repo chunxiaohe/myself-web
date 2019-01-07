@@ -13,7 +13,7 @@ var vm = new Vue({
     methods: {
         _initTable() { // 初始化列表
             $("#jqGrid").jqGrid({
-                url: createURL('/back/api/payType/list'),
+                url: createURL('/back/api/slideshow/list'),
                 datatype: "json",
                 mtype: 'get',
                 colModel: [{
@@ -126,7 +126,7 @@ var vm = new Vue({
         },
         create() {
             layer.open({
-                title: '上传支付二维码',
+                title: '上传轮播图',
                 type: 2,
                 content: createURL('/back/page/addPaytype'),
                 area: ['30%', '52%'],

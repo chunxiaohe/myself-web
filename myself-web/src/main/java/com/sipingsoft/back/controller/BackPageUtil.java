@@ -43,10 +43,15 @@ public class BackPageUtil {
     /**
      * 添加/修改文章页面
      */
-    public static final String BACK_ARTICLE_EDIT = "back/alert/articleEdit";
+    public static final String BACK_ARTICLE_EDIT = "back/alert/editArticle";
 
     /**
      * 轮播图片页面
      */
     public static final String BACK_SLIDESHOW = "back/slideShow";
+
+    /**
+     * 新增轮播图 弹窗页面
+     */
+    public static final String BACK_ADD_SLIDESHOW = "back/alert/addSlideshow";
 }

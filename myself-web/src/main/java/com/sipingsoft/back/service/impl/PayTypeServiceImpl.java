@@ -1,6 +1,7 @@
 package com.sipingsoft.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sipingsoft.back.entity.PayType;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.PayTypeMapper;
@@ -28,7 +29,7 @@ import java.util.Map;
  * @since 2018-12-18 上午 11:56
  */
 @Service
-public class PayTypeServiceImpl implements PayTypeService {
+public class PayTypeServiceImpl extends ServiceImpl<PayTypeMapper,PayType> implements PayTypeService  {
 
     @Autowired
     private PayTypeMapper payTypeMapper;

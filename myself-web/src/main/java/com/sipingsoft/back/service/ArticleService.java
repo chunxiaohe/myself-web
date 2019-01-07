@@ -1,5 +1,6 @@
 package com.sipingsoft.back.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sipingsoft.back.entity.Article;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
@@ -9,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author HeChunXiao
  * @since 2018-12-21 16:06
  */
-public interface ArticleService {
+public interface ArticleService extends IService<Article> {
 
     /**
      * 文章列表

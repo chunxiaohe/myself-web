@@ -1,5 +1,6 @@
 package com.sipingsoft.back.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sipingsoft.back.entity.PayType;
 import com.sipingsoft.core.entity.PageResponse;
 import com.sipingsoft.core.entity.ResponseMessage;
@@ -12,7 +13,7 @@ import java.io.FileNotFoundException;
  * @author HeChunXiao
  * @since 2018-12-18 上午 11:52
  */
-public interface PayTypeService {
+public interface PayTypeService extends IService<PayType> {
 
     /**
      * 支付方式列表\
