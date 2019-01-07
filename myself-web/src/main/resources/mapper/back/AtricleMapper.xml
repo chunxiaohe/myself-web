@@ -19,6 +19,7 @@
       <result property="updateName" column="updateName"/>
       <result property="preview" column="preview" jdbcType="VARCHAR"/>
       <result property="previewName" column="preview_name" jdbcType="VARCHAR"/>
+      <result property="realName" column="real_name" jdbcType="VARCHAR"/>
     <association property="articleClass" javaType="com.sipingsoft.back.entity.ArticleClass">
         <result column="type_name" property="typeName"/>
     </association>
@@ -37,7 +38,7 @@
 
     <sql id="Column_List_1">
         art.id, art.article_class_id, art.title,art.content, art.keyword, art.click, art.is_use, art.create_date, art.create_by,
-        art.update_date, art.update_by,art.preview,art.preview_name,
+        art.update_date, art.update_by,art.preview,art.preview_name,art.real_name,
         arc.type_name,sysu.name createName  ,sysus.name updateName
     </sql>
 

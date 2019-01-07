@@ -75,6 +75,12 @@ public class Article implements Serializable {
     private String previewName;
 
     /**
+     * 上传图片的原始名称
+     */
+    @TableField(value = "real_name")
+    private  String realName;
+
+    /**
      * 1.未删除 2.已删除
      */
     @TableField(value = "is_delete")
@@ -333,6 +339,14 @@ public class Article implements Serializable {
 
     public void setPreviewName(String previewName) {
         this.previewName = previewName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     @Override

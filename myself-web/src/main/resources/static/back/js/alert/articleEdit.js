@@ -256,8 +256,7 @@ var vm = new Vue({
             editor.create();
         },
         lookPreview() {
-            console.log()
-            var fileName = $("input[name='fileName']").val();
+            var fileName = $("#previewName").val();
             if (fileName === "") {
                 layer.alert("您查看的预览图片不存在", {icon: 5})
             } else {

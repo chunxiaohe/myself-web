@@ -142,6 +142,7 @@ public class ArticleServiceImpl implements ArticleService {
             OperationImageUtil.saveImage(file, path);
             article.setPreview(path);
             article.setPreviewName(nFileName);
+            article.setRealName(oFileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

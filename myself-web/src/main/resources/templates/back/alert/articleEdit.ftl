@@ -109,7 +109,7 @@
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;预览图
                 <#--<input  name="createDate" class="form-control" value="">-->
                 <input disabled='disabled' id="fileName" name="fileName" class='form-control'
-                       value="${(article.previewName)!''}" style='width: 60%;margin-left: 51px'>
+                       value="${(article.realName)!''}" style='width: 60%;margin-left: 51px'>
                 <a class='a-upload' style="float: left" @click="lookPreview">
                     <input type="button" name='look'>查看
                 </a>
