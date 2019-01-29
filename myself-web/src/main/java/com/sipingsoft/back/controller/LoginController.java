@@ -11,13 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -141,4 +144,17 @@ public class LoginController {
         return true;
     }
 
+    @RequestMapping("/back/login/test")
+    @ResponseBody
+    public String test(HttpServletRequest request){
+        System.out.println("登录成功");
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()){
+            System.out.println((String) parameterNames.nextElement());
+        }
+
+        return "Login";
+    }
+
 }
+

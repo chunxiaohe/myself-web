@@ -8,7 +8,6 @@ import com.sipingsoft.back.service.ArticleClassService;
 import com.sipingsoft.back.service.ArticleService;
 import com.sipingsoft.back.service.SlideshowService;
 import com.sipingsoft.core.shiro.ShiroUtils;
-import com.sipingsoft.core.util.FormatDateUtil;
 import com.sipingsoft.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
