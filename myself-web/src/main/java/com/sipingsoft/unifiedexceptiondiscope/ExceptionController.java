@@ -4,7 +4,6 @@ package com.sipingsoft.unifiedexceptiondiscope;
 import com.sipingsoft.core.entity.ResponseMessage;
 import com.sipingsoft.core.exception.RandomCodeException;
 import com.sipingsoft.core.exception.WithaleafException;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +32,6 @@ public class ExceptionController {
     @ExceptionHandler(WithaleafException.class)
     @ResponseBody
     public Map<String, Object> withaleafExceptionDiscope( WithaleafException e) {
-        e.printStackTrace();
         Map<String,Object> map = new HashMap<>();
         map.put("code",e.getCode());
         map.put("errorMsg",e.getErrorMsg());
@@ -43,21 +41,18 @@ public class ExceptionController {
     @ExceptionHandler(RandomCodeException.class)
     @ResponseBody
     public ResponseMessage codeException(RandomCodeException e){
-        e.printStackTrace();
         return new ResponseMessage(500,e.getMessage());
     }
 
     @ExceptionHandler(FileNotFoundException.class)
     @ResponseBody
     public ResponseMessage fileException(FileNotFoundException e){
-        e.printStackTrace();
         return new ResponseMessage(500,"系统异常,请刷新页面重试:"+e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseMessage exception(Exception e){
-        e.printStackTrace();
         return new ResponseMessage(500,"系统异常:"+e.getMessage());
     }
 }

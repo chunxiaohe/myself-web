@@ -3,7 +3,7 @@ var vm = new Vue({
     data: {
         picName: '',
         randomNum: '',
-        pic: '',
+        validataCodepath: '',
     },
     mounted() {
         var that = this;
@@ -13,7 +13,7 @@ var vm = new Vue({
             //展示提示信息
             that._verify();
             //更新验证码
-            that._updateSecurityCode();
+            //that._updateSecurityCode();
 
         })
     },
@@ -27,21 +27,11 @@ var vm = new Vue({
             }
         },
         _getSecurityCode() {
-            var picName = $("input[name='picName']").val();
-            $.get("/back/login/createCode", {"picName":picName},function (re) {
-                if (re.code == 200) {
-                    var staticRoot = $("#staticRoot").val();
-                    vm.picName = re.data[0].picName;
-                    vm.pic = staticRoot + "/codeImage/" + re.data[0].picName;
-                    vm.randomNum = re.data[0].randomNum;
-                }
-            })
+            let randomNum = Math.random()*10000;
+            vm.validataCodepath=$("#webRoot").val() + "/back/login/createCode?randomNum="+randomNum;
         },
-        _updateSecurityCode(){
-            var that = this;
-            $(".login-wrap").on('click',"img",function () {
-                that._getSecurityCode();
-            })
+        updateCode(){
+            vm._getSecurityCode();
         }
     }
 })

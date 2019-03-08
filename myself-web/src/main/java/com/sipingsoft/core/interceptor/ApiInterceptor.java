@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * API 拦截器
+ * API 拦截器 (拦截的微信请求)
  * @author HeChunXiao
  * @since 2018-11-08 下午 3:59
  */
@@ -22,6 +22,7 @@ public class ApiInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle 请求拦截");
+        //获取用户信息
         return true;
     }
 

@@ -64,7 +64,7 @@
             AND  art.is_use = #{article.isUse}
         </if>
         <if test="article.createDate != null and article.createDate != '' ">
-            AND  art.create_date = #{article.createDate}
+            AND  art.create_date LIKE CONCAT(#{article.createDate},"%")
         </if>
     </where>
     <if test="sord != null and sord != '' ">

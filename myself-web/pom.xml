@@ -92,12 +92,12 @@
             <version>3.0.6</version>
         </dependency>
 		<!-- 热部署 -->
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-            &lt;!&ndash; optional 必须设置为true 热部署才生效 &ndash;&gt;
+            <!-- optional 必须设置为true 热部署才生效 -->
 			<optional>true</optional>
-		</dependency>-->
+		</dependency>
 		<!-- 热部署 -->
 		<!-- shiro -->
 		<dependency>
@@ -135,6 +135,28 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
+        </dependency>
+
+        <!-- 一个Java基础工具类，对文件、流、
+        加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类 -->
+        <!--<dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.5.1</version>
+        </dependency>-->
+
+        <!-- HUtool 工具包的验证码组件 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+        <!-- 微信开发javaSDK (订阅号/服务号) -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>3.3.0</version>
         </dependency>
 
 	</dependencies>

@@ -19,7 +19,7 @@
             <span class="w_header_nav">
 					<ul>
 						<li><a href="" class="active">首页</a></li>
-						<li><a href="about.html">关于</a></li>
+						<li><a href="${webRoot}/wechat/page/getAnime">关于</a></li>
 						<li><a href="article.html">成长</a></li>
 						<li><a href="">学习</a></li>
 						<li><a href="">娱乐</a></li>

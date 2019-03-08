@@ -15,6 +15,7 @@
 
 <body class="login-body">
 <input type="hidden" value="${staticRoot}" id="staticRoot">
+<input type="hidden" value="${webRoot}" id="webRoot">
 <div class="container" id="app">
 
     <form class="form-signin" method="post" action="/back/login/submit" onsubmit="return check()">
@@ -26,8 +27,8 @@
         <div class="login-wrap">
             <input type="text" name="username" class="form-control" placeholder="用户名" autofocus>
             <input type="password" name="password" class="form-control" placeholder="密码">
-            <input type="text" name="code" class="form-control" placeholder="验证码" style="width: 60%;float: left">
-            <img :src="pic" style="float: right;margin-top: 9px;margin-right: 15px;cursor: pointer">
+            <input type="text" name="code" class="form-control" placeholder="验证码" style="float: left">
+            <img :src="validataCodepath" @click="updateCode" style="cursor: pointer;text-align: center;margin-left: 40px;">
             <input type="hidden" :value="picName" name="picName" id="picName">
             <input type="hidden" :value="randomNum" name="randomNum">
             <button class="btn btn-lg btn-login btn-block" type="submit">

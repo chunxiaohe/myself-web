@@ -1,19 +1,10 @@
 package com.sipingsoft.core.shiro;
 
-import java.util.Set;
-
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sipingsoft.back.entity.SysUser;
 import com.sipingsoft.back.mapper.SysUserMapper;
 import com.sipingsoft.core.util.EhcacheUtil;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -23,6 +14,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 
 /**
@@ -60,7 +53,7 @@ public class UserRealm extends AuthorizingRealm {
      * 登录
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken){
         SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", "user");
         if (user == null) {
             UsernamePasswordToken token = (UsernamePasswordToken) authToken;
@@ -78,7 +71,8 @@ public class UserRealm extends AuthorizingRealm {
             //加入缓存
             EhcacheUtil.getInstance().putEhcacheInfo("authenticationCache", "user", user);
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getUsername()), super.getName());
+        SimpleAuthenticationInfo info;
+        info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getUsername()), super.getName());
         return info;
     }
 

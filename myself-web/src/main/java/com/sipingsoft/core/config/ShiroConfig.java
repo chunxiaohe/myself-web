@@ -1,7 +1,13 @@
 package com.sipingsoft.core.config;
 
 import com.sipingsoft.core.shiro.ShiroSessionDao;
+import com.sipingsoft.core.shiro.ShiroSessionListener;
+import com.sipingsoft.core.shiro.UserRealm;
 import com.sipingsoft.core.util.ApplicationContextUtil;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -9,22 +15,14 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.context.annotation.Bean;
-
-import com.sipingsoft.core.shiro.ShiroSessionListener;
-import com.sipingsoft.core.shiro.UserRealm;
 
 
 /**
@@ -136,6 +134,10 @@ public class ShiroConfig {
         //博客请求不需要验证
         filterMap.put("/blog/api/**","anon");
         filterMap.put("/blog/page/**","anon");
+        //微信请求不不要验证登录
+        filterMap.put("/wechat/**","anon");
+        filterMap.put("/page/wechat/**","anon");
+
 
         //使用记住我时必须是user,表示登录和记住我均可访问,不然rememberMe不生效
 		//filterMap.put("/**", "user");

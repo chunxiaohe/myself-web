@@ -1,7 +1,6 @@
 package com.sipingsoft.core.timer;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -11,7 +10,7 @@ import java.io.FileNotFoundException;
  * @author HeChunXiao
  * @since 2018-11-02 下午 3:26
  */
-@Component
+//@Component
 public class SecurityCodeTimer {
 
 
