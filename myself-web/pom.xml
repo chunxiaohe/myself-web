@@ -153,11 +153,11 @@
         </dependency>
 
         <!-- 微信开发javaSDK (订阅号/服务号) -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-mp</artifactId>
             <version>3.3.0</version>
-        </dependency>
+        </dependency>-->
 
 	</dependencies>
 
