@@ -83,8 +83,7 @@ public class FileUtil {
      * ZIP下载
      * @param response
      */
-    public static void downLoadZip(HttpServletResponse response,String  downloadPath,String fileName) {
-        try {
+    public static void downLoadZip(HttpServletResponse response,String  downloadPath,String fileName) throws IOException {
             File file = new File(downloadPath);
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Content-Disposition",
@@ -109,9 +108,6 @@ public class FileUtil {
             myout.flush();
             buff.close();
             file.delete();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
 

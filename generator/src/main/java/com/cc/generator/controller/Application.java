@@ -94,7 +94,7 @@ public class Application {
      * @param response
      * @param tableName 表名
      */
-    public void downloadFile(HttpServletResponse response, String tableName) {
+    public void downloadFile(HttpServletResponse response, String tableName) throws IOException {
         String basePath = BaseDataUtil.getBasePath(tableName).toString();
         String downloadPath = basePath.substring(0, basePath.indexOf("code")) + tableName + ".zip";
         FileUtil.downLoadZip(response, downloadPath, tableName + ".zip");
