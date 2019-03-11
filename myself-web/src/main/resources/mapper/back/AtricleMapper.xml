@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sipingsoft.back.mapper.ArticleMapper">
+<mapper namespace="com.cc.back.mapper.ArticleMapper">
 
-  <resultMap id="BaseResultMap" type="com.sipingsoft.back.entity.Article">
+  <resultMap id="BaseResultMap" type="com.cc.back.entity.Article">
       <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_class_id" jdbcType="INTEGER" property="articleClassId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -20,7 +20,7 @@
       <result property="preview" column="preview" jdbcType="VARCHAR"/>
       <result property="previewName" column="preview_name" jdbcType="VARCHAR"/>
       <result property="realName" column="real_name" jdbcType="VARCHAR"/>
-    <association property="articleClass" javaType="com.sipingsoft.back.entity.ArticleClass">
+    <association property="articleClass" javaType="com.cc.back.entity.ArticleClass">
         <result column="type_name" property="typeName"/>
     </association>
   </resultMap>
