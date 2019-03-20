@@ -5,6 +5,7 @@ import com.cc.back.entity.ArticleClass;
 import com.cc.back.service.ArticleClassService;
 import com.cc.core.entity.PageResponse;
 import com.cc.core.entity.ResponseMessage;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

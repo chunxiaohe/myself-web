@@ -40,7 +40,7 @@ public class UserRealm extends AuthorizingRealm {
             //无缓存
             SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
             permissions = shiroReamService.findPermissions(sysUser.getUserId().intValue());
-            permissions.forEach(s -> System.out.println(s));
+           /* permissions.forEach(s -> System.out.println(s));*/
             //加入缓存
             EhcacheUtil.getInstance().putEhcacheInfo("authorizationCache", "permissions", permissions);
         }
@@ -66,6 +66,7 @@ public class UserRealm extends AuthorizingRealm {
             }
             if (user.getStatus() != 1) {
                 //账号锁定
+                //System.out.println("123");
                 throw new LockedAccountException();
             }
             //加入缓存
