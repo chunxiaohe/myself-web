@@ -39,7 +39,7 @@
     </insert>
 
     <!-- 选择性更新 -->
-    <update id="updateByPkSelective" parameterType="com.sipingsoft.admin.web.sys.bean.entity.${ClassName}">
+    <update id="updateByPkSelective" parameterType="com.cc.admin.web.sys.bean.entity.${ClassName}">
         UPDATE ${TableName}
         <set>
           <!-- 更新的字段 -->

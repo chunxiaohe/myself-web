@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication
-@MapperScan(value = {"com.sipingsoft.back.**.mapper","com.sipingsoft.blog.**.mapper"})
+@MapperScan(value = {"com.cc.back.**.mapper","com.cc.blog.**.mapper"})
 @EnableScheduling
 public class MyselfWebApplication extends SpringBootServletInitializer{
 
