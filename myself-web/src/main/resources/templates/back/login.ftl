@@ -29,8 +29,6 @@
             <input type="password" name="password" class="form-control" placeholder="密码">
             <input type="text" name="code" class="form-control" placeholder="验证码" style="float: left">
             <img :src="validataCodepath" @click="updateCode" style="cursor: pointer;text-align: center;margin-left: 40px;">
-            <input type="hidden" :value="picName" name="picName" id="picName">
-            <input type="hidden" :value="randomNum" name="randomNum">
             <button class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>
             </button>

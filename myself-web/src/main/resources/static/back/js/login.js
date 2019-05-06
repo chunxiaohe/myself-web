@@ -12,8 +12,6 @@ var vm = new Vue({
             that._getSecurityCode();
             //展示提示信息
             that._verify();
-            //更新验证码
-            //that._updateSecurityCode();
 
         })
     },
@@ -27,11 +25,19 @@ var vm = new Vue({
             }
         },
         _getSecurityCode() {
-            let randomNum = Math.random()*10000;
-            vm.validataCodepath=$("#webRoot").val() + "/back/login/createCode?randomNum="+randomNum;
+            console.log(1)
+            console.log($("#webRoot").val() + "/back/login/createCode")
+            vm.validataCodepath=$("#webRoot").val() + "/back/login/createCode";
         },
         updateCode(){
-            vm._getSecurityCode();
+            /*var a = document.createElement("a");
+            a.id = "updateCode";
+            a.href = $("#webRoot").val() + "/back/login/createCode";
+            document.body.appendChild(a);
+            var abc =  document.getElementById("updateCode").click();
+            document.body.removeChild(document.getElementById("updateCode"));
+            console.log(abc)*/
+            this._getSecurityCode()
         }
     }
 })
