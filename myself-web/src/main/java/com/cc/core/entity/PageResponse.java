@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class PageResponse<T> implements Serializable {
 
+
     //总页数
     private Integer total;
 

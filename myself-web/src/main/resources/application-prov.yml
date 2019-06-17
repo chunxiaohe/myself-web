@@ -36,9 +36,9 @@ spring:
 
 com:
   sipingsoft:
-    static-root: http://94.191.12.180/static
-    web-root:  http://94.191.12.180
-    image-path:  http://94.191.12.180/image
+    static-root: http://www.ccg7362.com/static
+    web-root:  http://www.ccg7362.com
+    image-path:  http://www.ccg7362.com/image
 
 #支付图片存储路径
 paytype-path: /usr/local/soft/tomcat8.5.34/apache-tomcat-8.5.34/webapps/payType/

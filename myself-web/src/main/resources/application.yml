@@ -8,7 +8,7 @@ server:
 #运行环境
 spring:
   profiles:
-    active: prov
+    active: dev
   freemarker:
     cache: false
     # jackson时间格式化

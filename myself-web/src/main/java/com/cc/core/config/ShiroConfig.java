@@ -117,7 +117,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(securityManager);
         //网站登录的主页
-        factoryBean.setLoginUrl("/blog/page/index");
+        factoryBean.setLoginUrl("/back/page/login");
         //没有权限时跳转的地址
         factoryBean.setUnauthorizedUrl("/");
 
