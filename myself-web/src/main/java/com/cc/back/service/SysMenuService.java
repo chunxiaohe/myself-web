@@ -15,7 +15,7 @@ import com.cc.core.entity.ResponseMessage;
  */
 public interface SysMenuService extends IService<SysMenu> {
 
-	ResponseMessage<SysMenuNode> getMenuList();
+	ResponseMessage<SysMenuNode> getMenuList(String id);
 
     /**
      *

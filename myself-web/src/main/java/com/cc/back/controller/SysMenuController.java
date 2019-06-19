@@ -4,6 +4,7 @@ package com.cc.back.controller;
 import com.cc.back.entity.SysMenuNode;
 import com.cc.back.service.SysMenuService;
 import com.cc.core.entity.ResponseMessage;
+import com.cc.core.shiro.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class SysMenuController {
 	
 	@GetMapping("/menu/getMyselfMenuList")
 	public ResponseMessage<SysMenuNode> getMenuList(){
-		return sysMenuService.getMenuList();
+		return sysMenuService.getMenuList(ShiroUtils.getLoginUser().getUserId().toString());
 	}
 }
 

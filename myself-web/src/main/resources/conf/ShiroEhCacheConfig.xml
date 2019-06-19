@@ -5,10 +5,10 @@
     <diskStore path="D:\ws"/>
 		<!-- maxElementsInMemory 最大缓存元素个数
 		eternal 缓存是否永久有效，一般都是false。
-		timeToIdleSeconds 最长空闲时间
-		timeToLiveSeconds 最长生命周期
+		timeToIdleSeconds 最长空闲时间(0为无穷大,说明不过期) eternal=false时有效
+		timeToLiveSeconds 最长生命周期 (eternal=false时有效)
 		overflowToDisk 是否持久化到磁盘
-		maxElementsOnDisk 磁盘上放的最大元素个数
+		maxElementsOnDisk 磁盘上放的最大元素个数(o标示无穷大)
 		diskPersistent 磁盘上是否永久有效
 		diskExpiryThreadIntervalSeconds 清理周期
 		memoryStoreEvictionPolicy 清理规则，LRU最近最少使用 FIFO先进先出 -->

@@ -55,7 +55,9 @@
     <where>
         art.is_delete = 1
         <if test="article.title != null and article.title  != '' ">
-            AND      art.title = #{article.title}
+            AND
+            <bind name="titleLike" value=" '%'+ article.title + '%' "/>
+            art.title like #{titleLike}
         </if>
         <if test="article.articleClassId != null and article.articleClassId  != ''">
             AND art.article_class_id = #{article.articleClassId}
@@ -79,7 +81,9 @@
       <where>
             is_delete = 1
           <if test="article.title != null and article.title  != '' ">
-              AND title = #{article.title}
+              AND
+              <bind name="titleLike" value=" '%'+ article.title + '%' "/>
+              art.title like #{titleLike}
           </if>
           <if test="article.articleClassId != null and article.articleClassId  != ''">
               AND article_class_id = #{article.articleClassId}

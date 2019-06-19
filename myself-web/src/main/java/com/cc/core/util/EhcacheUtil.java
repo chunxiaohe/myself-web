@@ -4,6 +4,7 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 缓存消息工具类
@@ -11,10 +12,9 @@ import org.apache.shiro.cache.ehcache.EhCacheManager;
  * @author HeChunXiao
  * @since 2018-10-30 上午 9:42
  */
-
 public class EhcacheUtil {
 
-
+    @Autowired
     private EhCacheManager ehCacheManager;
 
     private CacheManager cacheManager;

@@ -2,7 +2,7 @@ package com.cc.back.controller;
 
 import com.cc.core.entity.ResponseMessage;
 import com.cc.core.exception.RandomCodeException;
-import com.cc.core.util.SecuritryCodeUtil;
+import com.cc.core.util.SecurityCodeUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -74,7 +74,7 @@ public class LoginController {
     @GetMapping("/back/login/createCode")
     @ResponseBody
     public void createCode(ShiroHttpServletRequest request, ShiroHttpServletResponse response) throws IOException {
-        SecuritryCodeUtil.genaratorVerificationCode(request,response);
+        SecurityCodeUtil.genaratorVerificationCode(request,response);
     }
 
 
@@ -102,14 +102,14 @@ public class LoginController {
      * @throws FileNotFoundException 文件不存在异常
      */
     private boolean checkRandomCode(String code, ShiroHttpServletRequest request) throws RandomCodeException, FileNotFoundException {
-        if (code == null) {
-            throw new RandomCodeException("验证码不能为空");
-        } else {
-            String sessionCode = request.getSession().getAttribute("randomCode").toString();
-            if (!sessionCode.toUpperCase().equals(code.toUpperCase())) {
-                throw new RandomCodeException("验证码错误");
-            }
-        }
+        //if (code == null) {
+        //    throw new RandomCodeException("验证码不能为空");
+        //} else {
+        //    String sessionCode = request.getSession().getAttribute("randomCode").toString();
+        //    if (!sessionCode.toUpperCase().equals(code.toUpperCase())) {
+        //        throw new RandomCodeException("验证码错误");
+        //    }
+        //}
         return true;
     }
 }

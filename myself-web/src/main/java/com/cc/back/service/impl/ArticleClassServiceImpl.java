@@ -15,6 +15,7 @@ import com.cc.core.util.SimpleDateFormatUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,7 @@ import java.util.Map;
  * @since 2018-12-13
  */
 @Service
+@Transactional(rollbackFor = {Exception.class,RuntimeException.class})
 public class ArticleClassServiceImpl extends ServiceImpl<ArticleClassMapper, ArticleClass> implements ArticleClassService {
 
     @Autowired

@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author HeChunXiao
  * @since 2018-11-01 下午 2:10
  */
-public class SecuritryCodeUtil {
+public class SecurityCodeUtil {
 
     /**
      * 定义图片的宽

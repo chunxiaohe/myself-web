@@ -54,9 +54,9 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken){
-        SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", "user");
+        UsernamePasswordToken token = (UsernamePasswordToken) authToken;
+        SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", token.getUsername());
         if (user == null) {
-            UsernamePasswordToken token = (UsernamePasswordToken) authToken;
             //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
             QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(SysUser::getUsername, token.getUsername());
@@ -69,7 +69,7 @@ public class UserRealm extends AuthorizingRealm {
                 throw new LockedAccountException();
             }
             //加入缓存
-            EhcacheUtil.getInstance().putEhcacheInfo("authenticationCache", "user", user);
+            EhcacheUtil.getInstance().putEhcacheInfo("authenticationCache", token.getUsername(), user);
         }
         SimpleAuthenticationInfo info;
         info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getUsername()), super.getName());

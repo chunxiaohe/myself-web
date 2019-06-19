@@ -122,7 +122,7 @@
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>-->
+		</dependency> -->
 		<!-- redis -->
 		<!-- 缓存 -->
 		 <dependency>
@@ -130,6 +130,11 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
 		<!-- 缓存 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

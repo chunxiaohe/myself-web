@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+//import org.apache.shiro.cache.ehcache.EhCacheManager;
+
 
 /**
  * shiro配置
@@ -52,7 +54,7 @@ public class ShiroConfig {
         //sessionDao.setActiveSessionsCacheName("activeSessionCache");
         //sessionManager.setSessionDAO(sessionDao);
         //session缓存
-        sessionManager.setCacheManager(ehCacheManager());
+       // sessionManager.setCacheManager(ehCacheManager());
         return sessionManager;
     }
 
@@ -89,7 +91,7 @@ public class ShiroConfig {
     @Bean(name = "ehCacheManager")
     public EhCacheManager ehCacheManager() {
         EhCacheManager ehCacheManager = new EhCacheManager();
-        ehCacheManager.setCacheManagerConfigFile("classpath:config/ShiroEhCacheConfig.xml");
+        ehCacheManager.setCacheManagerConfigFile("classpath:conf/ShiroEhCacheConfig.xml");
         return ehCacheManager;
     }
 
@@ -97,17 +99,21 @@ public class ShiroConfig {
      * 配置核心安全事务管理器(注册各Manager)
      */
     @Bean
-    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager, CookieRememberMeManager cookieRememberMeManager,
-                                           EhCacheManager ehCacheManager) {
+    public SecurityManager securityManager(UserRealm userRealm, SessionManager sessionManager, CookieRememberMeManager cookieRememberMeManager
+                                     ) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //注册自定义的Realm
+        userRealm.setCachingEnabled(true);
+        userRealm.setAuthorizationCachingEnabled(true);
+        userRealm.setAuthenticationCacheName("authenticationCache");
+        userRealm.setAuthorizationCachingEnabled(true);
+        userRealm.setAuthorizationCacheName("authorizationCache");
         securityManager.setRealm(userRealm);
         //注册sesionManager
         securityManager.setSessionManager(sessionManager);
         //注册缓存manager
         securityManager.setCacheManager(ehCacheManager());
         securityManager.setRememberMeManager(cookieRememberMeManager);
-        securityManager.setCacheManager(ehCacheManager);
         return securityManager;
     }
 
@@ -117,7 +123,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(securityManager);
         //网站登录的主页
-        factoryBean.setLoginUrl("/back/page/login");
+        factoryBean.setLoginUrl("/blog/page/index");
         //没有权限时跳转的地址
         factoryBean.setUnauthorizedUrl("/");
 
@@ -194,5 +200,6 @@ public class ShiroConfig {
         ApplicationContextUtil applicationContextUtil = new ApplicationContextUtil();
         return applicationContextUtil;
     }
+
 
 }
