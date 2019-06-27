@@ -14,6 +14,10 @@ import com.cc.core.util.SimpleDateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +41,9 @@ public class PayTypeServiceImpl extends ServiceImpl<PayTypeMapper,PayType> imple
     private PayTypeMapper payTypeMapper;
     @Value("${paytype-path}")
     private String payTypePath;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
     /**
      * 支付方式列表
@@ -148,7 +155,41 @@ public class PayTypeServiceImpl extends ServiceImpl<PayTypeMapper,PayType> imple
         payType.setUpdateDate(sdf.format(date));
         SysUser sysUser = ShiroUtils.getLoginUser();
         payType.setUpdateBy(sysUser.getUserId().intValue());
-        payTypeMapper.updateById(payType);
+
+
+
+
+
+
+
+
+
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus status) {
+                payTypeMapper.updateById(payType);
+            }
+        });
+
+
+
+
+        Integer val = transactionTemplate.execute(new TransactionCallback<Integer>() {
+            @Override
+            public Integer doInTransaction(TransactionStatus status) {
+                int val = payTypeMapper.updateById(payType);
+                return val;
+            }
+        });
+
+
+        Integer val2 = transactionTemplate.execute(status -> {
+            int val1 = payTypeMapper.updateById(payType);
+            return  val1;
+        });
+
+
         return new ResponseMessage<>(200,"操作成功");
     }
+
 }

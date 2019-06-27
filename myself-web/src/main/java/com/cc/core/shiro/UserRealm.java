@@ -57,7 +57,7 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authToken;
         SysUser user = (SysUser) EhcacheUtil.getInstance().getEhcacheInfo("authenticationCache", token.getUsername());
         if (user == null) {
-            //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1).toString();//密码加密
+            //String pwd = new SimpleHash("MD5",token.getPassword(),token.getUsername(),1024).toString();//密码加密
             QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(SysUser::getUsername, token.getUsername());
             user = sysUserMapper.selectOne(queryWrapper);
